@@ -167,7 +167,50 @@ h1 { font-size: 1.8em; color: var(--navy); margin-bottom: 20px; }
     border-bottom: 2px solid #001f3f;
     padding-bottom: 10px;
 }
+/* Container for the mini tiles - Now horizontal */
+.tile-grid {
+    display: flex;
+    /* Removed flex-wrap: wrap; to keep it a single horizontal line */
+    gap: 12px;
+    margin-top: 15px;
+    overflow-x: auto; /* Adds horizontal scrolling if items overflow */
+    padding-bottom: 10px; /* Gives space for scrollbar on desktop */
+}
 
+/* Individual Tile Styling */
+.product-tile {
+    /* Removed flex basis calculation, use a fixed width for horizontal */
+    flex-shrink: 0; /* Prevents tiles from shrinking too much */
+    width: 140px; /* Fixed width for horizontal scrolling */
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Placeholder for your future images */
+.tile-img-placeholder {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #eee;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: #999;
+    margin-bottom: 8px;
+}
+
+.product-tile p {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 0;
+    color: #333;
+    line-height: 1.2;
+}
 footer {
     text-align: center;
     padding: 20px;
