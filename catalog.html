@@ -74,7 +74,7 @@
             <!-- Product Grid -->
             <div class="product-grid">
                 <!-- Product Card 1: Basic Turnkit (Use placeholder image) -->
-                <div class="product-card">
+                <div class="product-card interior">
                     <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
                     <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
                     <div class="product-info">
@@ -86,7 +86,7 @@
                 </div>
 
                 <!-- Product Card 2: Smoke Detector -->
-                <div class="product-card">
+                <div class="product-card electrical">
                      <!-- Placeholder image -->
                     <img src="via.placeholder.com" alt="Smoke Detector" class="product-img">
                     <div class="product-info">
@@ -98,7 +98,7 @@
                 </div>
 
                 <!-- Product Card 3: GFCI Outlet -->
-                <div class="product-card">
+                <div class="product-card plumbing">
                      <!-- Placeholder image -->
                     <img src="via.placeholder.com" alt="GFCI Outlet" class="product-img">
                     <div class="product-info">
@@ -117,21 +117,32 @@
     </footer>
    <!-- 2. MOVE THIS SCRIPT TO THE VERY BOTTOM, JUST BEFORE </body> -->
 <script>
-    // This code now waits until the element exists in the browser
     document.getElementById('categorySelect').addEventListener('change', function() {
-        // Hide all content blocks
-        const contents = document.querySelectorAll('.category-content');
-        contents.forEach(div => div.style.display = 'none');
+        const selectedValue = this.value;
 
-        // Show the one matching the selected value
-        const selectedId = this.value;
-        if (selectedId) {
-            const targetElement = document.getElementById(selectedId);
-            if (targetElement) {
-                targetElement.style.display = 'block';
-            }
+        // 1. Handle Static Description Blocks
+        // Hide every block first
+        const descriptionBlocks = document.querySelectorAll('.category-content');
+        descriptionBlocks.forEach(div => div.style.display = 'none');
+
+        // Show the one that matches the dropdown value
+        const activeDescription = document.getElementById(selectedValue);
+        if (activeDescription) {
+            activeDescription.style.display = 'block';
         }
+
+        // 2. Handle Product Grid Filtering
+        const allProducts = document.querySelectorAll('.product-card');
+        allProducts.forEach(product => {
+            // Show if it matches the category class, or show all if nothing is selected
+            if (selectedValue === "" || product.classList.contains(selectedValue)) {
+                product.style.display = 'block';
+            } else {
+                product.style.display = 'none';
+            }
+        });
     });
 </script>
+
 </body>
 </html>
