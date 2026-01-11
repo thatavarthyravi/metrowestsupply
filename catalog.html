@@ -7,19 +7,7 @@
     <!-- Link to the external stylesheet -->
     <link rel="stylesheet" href="styles.css">
 </head>
-    <script>
-        document.getElementById('category').addEventListener('change', function() {
-        // 1. Hide all content blocks
-        const contents = document.querySelectorAll('.category-content');
-        contents.forEach(div => div.style.display = 'none');
-
-        // 2. Show the one matching the selected value
-        const selectedId = this.value;
-        if (selectedId) {
-        document.getElementById(selectedId).style.display = 'block';
-        }
-        });
-    </script>
+    
 <body>
 
     <!-- Main White Container that holds the content -->
@@ -47,13 +35,15 @@
             <!-- Filter/Search Bar -->
             <div class="filter-bar">
                 <input type="search" placeholder="Search...">
-                <select name="category">
+                <!-- 1. ADD THE ID "categorySelect" TO YOUR SELECT TAG -->
+                <select name="category" id="categorySelect">
                     <option value="" disabled selected>Select a Category</option>
                     <option value="interior">Interior Repair & Finish</option>
                     <option value="electrical">Electrical & Fixtures</option>
                     <option value="plumbing">Plumbing & Maintenance Consumables</option>
                     <option value="filters">Filters, Safety & Turnover Essentials</option>                
                 </select>
+
                 <select name="price">
                     <option value="">Sell by</option>
                 </select>
@@ -125,6 +115,23 @@
     <footer>
         UT Unit Turn Supply
     </footer>
-   
+   <!-- 2. MOVE THIS SCRIPT TO THE VERY BOTTOM, JUST BEFORE </body> -->
+<script>
+    // This code now waits until the element exists in the browser
+    document.getElementById('categorySelect').addEventListener('change', function() {
+        // Hide all content blocks
+        const contents = document.querySelectorAll('.category-content');
+        contents.forEach(div => div.style.display = 'none');
+
+        // Show the one matching the selected value
+        const selectedId = this.value;
+        if (selectedId) {
+            const targetElement = document.getElementById(selectedId);
+            if (targetElement) {
+                targetElement.style.display = 'block';
+            }
+        }
+    });
+</script>
 </body>
 </html>
