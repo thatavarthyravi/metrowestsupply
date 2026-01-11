@@ -211,6 +211,69 @@ h1 { font-size: 1.8em; color: var(--navy); margin-bottom: 20px; }
     color: #333;
     line-height: 1.2;
 }
+/* Color Palette: Navy #001f3f | Orange #ff6600 */
+
+.why-hero {
+    background-color: #001f3f;
+    color: white;
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.why-hero h1 { font-size: 3rem; margin-bottom: 20px; }
+.orange-text { color: #ff6600; }
+.hero-subtext { max-width: 800px; margin: 0 auto 30px; font-size: 1.2rem; opacity: 0.9; }
+
+.value-grid-section { padding: 80px 20px; background: #fff; }
+.value-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.value-card {
+    padding: 40px;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    transition: transform 0.3s;
+    text-align: center;
+}
+
+.value-card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+.value-card .icon { font-size: 2.5rem; margin-bottom: 15px; }
+
+.brand-section { background: #f4f4f4; padding: 60px 20px; text-align: center; }
+.brand-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin: 40px 0;
+    opacity: 0.6;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.cta-bottom {
+    padding: 80px 20px;
+    text-align: center;
+    background-color: #001f3f;
+    color: white;
+}
+
+.btn-orange {
+    background-color: #ff6600;
+    color: white;
+    padding: 15px 35px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.btn-orange:hover { background-color: #e55b00; }
+
 footer {
     text-align: center;
     padding: 20px;
