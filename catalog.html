@@ -36,10 +36,10 @@
                 <input type="search" placeholder="Search...">
                 <select name="category">
                     <option value="" disabled selected>Select a Category</option>
-                    <option value="">Interior Repair & Finish</option>
-                    <option value="">Electrical & Fixtures</option>
-                    <option value="">Plumbing & Maintenance Consumables</option>
-                    <option value="">Filters, Safety & Turnover Essentials</option>
+                    <option value="interior">Interior Repair & Finish</option>
+                    <option value="electrical">Electrical & Fixtures</option>
+                    <option value="plumbing">Plumbing & Maintenance Consumables</option>
+                    <option value="filters">Filters, Safety & Turnover Essentials</option>                
                 </select>
                 <select name="price">
                     <option value="">Sell by</option>
@@ -47,6 +47,27 @@
                 <button class="btn-orange">Filter</button>
             </div>
 
+            <!-- Content areas (Hidden by default) -->
+            <div id="interior" class="category-content" style="display:none;">
+                <h3>Interior Details</h3>
+                <p>Static content for Interior Repair & Finish goes here.</p>
+            </div>
+
+            <div id="electrical" class="category-content" style="display:none;">
+                <h3>Electrical Details</h3>
+                <p>Static content for Electrical & Fixtures goes here.</p>
+            </div>
+
+            <div id="plumbing" class="category-content" style="display:none;">
+                <h3>Plumbing Details</h3>
+                <p>Static content for Plumbing & Maintenance goes here.</p>
+            </div>
+
+            <div id="filters" class="category-content" style="display:none;">
+                <h3>Filters & Safety</h3>
+                <p>Static content for Filters and Safety Essentials goes here.</p>
+            </div>
+            
             <!-- Product Grid -->
             <div class="product-grid">
                 <!-- Product Card 1: Basic Turnkit (Use placeholder image) -->
