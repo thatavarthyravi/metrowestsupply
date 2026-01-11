@@ -7,6 +7,19 @@
     <!-- Link to the external stylesheet -->
     <link rel="stylesheet" href="styles.css">
 </head>
+    <script>
+        document.getElementById('categorySelect').addEventListener('change', function() {
+        // 1. Hide all content blocks
+        const contents = document.querySelectorAll('.category-content');
+        contents.forEach(div => div.style.display = 'none');
+
+        // 2. Show the one matching the selected value
+        const selectedId = this.value;
+        if (selectedId) {
+        document.getElementById(selectedId).style.display = 'block';
+        }
+        });
+    </script>
 <body>
 
     <!-- Main White Container that holds the content -->
@@ -67,19 +80,7 @@
                 <h3>Filters & Safety</h3>
                 <p>Static content for Filters and Safety Essentials goes here.</p>
             </div>
-             <script>
-        document.getElementById('categorySelect').addEventListener('change', function() {
-        // 1. Hide all content blocks
-        const contents = document.querySelectorAll('.category-content');
-        contents.forEach(div => div.style.display = 'none');
-
-        // 2. Show the one matching the selected value
-        const selectedId = this.value;
-        if (selectedId) {
-        document.getElementById(selectedId).style.display = 'block';
-        }
-        });
-    </script>
+             
             <!-- Product Grid -->
             <div class="product-grid">
                 <!-- Product Card 1: Basic Turnkit (Use placeholder image) -->
