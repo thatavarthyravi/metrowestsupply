@@ -154,6 +154,19 @@ h1 { font-size: 1.8em; color: var(--navy); margin-bottom: 20px; }
     margin-bottom: 5px;
     font-size: 0.95rem;
 }
+.upgrade-note {
+    color: #ff6600;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    text-transform: uppercase;
+}
+
+.category-content h2 {
+    color: #001f3f;
+    border-bottom: 2px solid #001f3f;
+    padding-bottom: 10px;
+}
 
 footer {
     text-align: center;
