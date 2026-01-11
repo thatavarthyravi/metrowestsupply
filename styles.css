@@ -273,6 +273,37 @@ h1 { font-size: 1.8em; color: var(--navy); margin-bottom: 20px; }
 }
 
 .btn-orange:hover { background-color: #e55b00; }
+.principles-section {
+    background: #f9f9f9; /* Very light gray */
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.principles-section h2 {
+    margin-bottom: 30px;
+    color: #001f3f; /* Navy Blue */
+}
+
+.principles-section ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.principles-section li {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    flex: 1 1 200px; /* Responsive: min width 200px */
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
 
 footer {
     text-align: center;
