@@ -312,3 +312,41 @@ footer {
     color: var(--white);
     background-color: var(--navy);
 }
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    /* 1. Stack the "Why Us" grid vertically */
+    .value-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px;
+    }
+
+    /* 2. Make Hero Text smaller so it doesn't wrap awkwardly */
+    .why-hero h1 {
+        font-size: 1.8rem;
+    }
+
+    /* 3. Ensure the Bundle Tiles allow for easy thumb-scrolling */
+    .tile-grid {
+        gap: 10px;
+        padding-bottom: 20px; /* Space for the thumb */
+    }
+
+    .product-tile {
+        width: 130px; /* Slightly narrower for smaller screens */
+    }
+
+    /* 4. Fix Product Grid to 2 columns instead of 3 or 4 */
+    .product-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    /* 5. Make the Filter Bar stack vertically */
+    .filter-bar {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
