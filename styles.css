@@ -304,6 +304,15 @@ h1 { font-size: 1.8em; color: var(--navy); margin-bottom: 20px; }
     font-size: 0.95rem;
     line-height: 1.4;
 }
+.tile-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;    /* Keeps every image a perfect square */
+    object-fit: contain;    /* Fits the whole product inside without cropping */
+    background: #fff;       /* Adds a white background if the image is transparent */
+    padding: 5px;           /* Gives the product some breathing room */
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
 
 footer {
     text-align: center;
