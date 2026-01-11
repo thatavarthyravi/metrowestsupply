@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalog | UT Unit Turn Supply</title>
+    <!-- Link to the external stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+    
+<body>
+
+    <!-- Main White Container that holds the content -->
+    <div class="container">
+        
+        <!-- Top Navy Blue Header -->
+        <header>
+            <div class="header-left">
+                <!-- Use your logo.png here -->
+                <img src="logo.png" alt="UT Logo" class="logo-small">
+                <span>Unit Turn Supply</span>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="#">Causes</a>
+                <a href="catalog.html">Bundles</a>
+                <span>&#9776;</span> 
+            </nav>
+        </header>
+
+        <!-- Page Content Area (White background) -->
+        <div class="page-content">
+            <h1>Browse Our Bundles (These are examples, not fixed kits.
+ Every team ends up standardizing slightly differently.)</h1>
+
+            <!-- Filter/Search Bar -->
+            <div class="filter-bar">
+                <input type="search" placeholder="Search...">
+                <!-- 1. ADD THE ID "categorySelect" TO YOUR SELECT TAG -->
+                <select name="category" id="categorySelect">
+                    <option value="" disabled selected>Select a Bundle</option>
+                    <option value="bundle1">BUNDLE 1 — Basic Unit Turn (1–2 BED)</option>
+                    <option value="bundle2">BUNDLE 2 — Standard Turn + Safety (2–3 BED)</option>
+                    <option value="bundle3">BUNDLE 3 — Premium Turn / Light Renovation</option>
+                    <option value="bundlecustom">Custom Bundle - Pick from Entire Catalog</option>                
+                </select>
+
+                <select name="price">
+                    <option value="">Sell by</option>
+                </select>
+                <button class="btn-orange">Filter</button>
+            </div>
+
+            <!-- Content areas (Hidden by default) -->
+            <div id="interior" class="category-content" style="display:none;">
+                <h3>Interior Details</h3>
+                <p>Static content for Interior Repair & Finish goes here.</p>
+            </div>
+
+            <div id="electrical" class="category-content" style="display:none;">
+                <h3>Electrical Details</h3>
+                <p>Static content for Electrical & Fixtures goes here.</p>
+            </div>
+
+            <div id="plumbing" class="category-content" style="display:none;">
+                <h3>Plumbing Details</h3>
+                <p>Static content for Plumbing & Maintenance goes here.</p>
+            </div>
+
+            <div id="filters" class="category-content" style="display:none;">
+                <h3>Filters & Safety</h3>
+                <p>Static content for Filters and Safety Essentials goes here.</p>
+            </div>
+             
+            <!-- Product Grid -->
+            <div class="product-grid">
+                <div class="product-card interior">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>All-purpose interior paint (5-gal, contractor line)</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card interior">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>Ceiling paint (5-gal)</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card interior">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>Lightweight drywall compound (3.5 gal)</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card interior">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>Drywall repair patch kits</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card interior">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>Paint rollers (bulk pack)</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card interior">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>Paint trays & liners</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card interior">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>Paint brushes (2”–3”, contractor grade)</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card interior">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>Painter’s tape (1.5” & 2”)</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card interior">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>Acrylic latex caulk (white)</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card interior">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>Adhesive / construction sealant</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+                <div class="product-card electrical”>
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>LED A19 bulbs (soft white, bulk)</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card electrical">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>LED flush-mount ceiling lights (basic SKU)</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card electrical">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>Decora switches (single pole)</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card electrical">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>Decora outlets (15A)</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card electrical">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>Wall plates (white, 1–2 gang)</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card electrical">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>Smoke detectors (10-year sealed battery)</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card electrical">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>CO detectors</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card electrical">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>GFCI outlet (bath/kitchen)</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+                <div class="product-card plumbing”>
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>Toilet repair kit (universal)</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card plumbing">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>Toilet supply lines (12” / 20”)</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card plumbing">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>Faucet aerators (multi-pack)</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card plumbing">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>PTFE thread seal tape</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card plumbing">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>Angle stop valves (¼ turn)</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card plumbing">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>Sink drain trap kits</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card plumbing">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>Silicone sealant (clear)</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card filters">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>HVAC filters (16×25×1, 20×25×1 – bulk)</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card filters">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>Range hood filters</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card filters">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>Door stops (wall & hinge)</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card filters">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>Fire extinguishers (ABC, small)</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+<div class="product-card filters">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>Cleaning starter kit (broom, mop, chemicals)</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+                <!-- Product Card 1: Basic Turnkit (Use placeholder image) -->
+                <div class="product-card interior">
+                    <!-- Placeholder image - in a real site this would be src="images/turnkit.jpg" -->
+                    <img src="via.placeholder.com" alt="Basic Turnkit" class="product-img">
+                    <div class="product-info">
+                        <h3>Basic Unit Turnkit</h3>
+                        <p>Everything in Box: Yes</p>
+                        <span class="product-price">$55.29</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+
+                <!-- Product Card 2: Smoke Detector -->
+                <div class="product-card electrical">
+                     <!-- Placeholder image -->
+                    <img src="via.placeholder.com" alt="Smoke Detector" class="product-img">
+                    <div class="product-info">
+                        <h3>Smoke Detector (10 Year)</h3>
+                        <p>Wireless, 10-year battery life</p>
+                        <span class="product-price">$5.38</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+
+                <!-- Product Card 3: GFCI Outlet -->
+                <div class="product-card plumbing">
+                     <!-- Placeholder image -->
+                    <img src="via.placeholder.com" alt="GFCI Outlet" class="product-img">
+                    <div class="product-info">
+                        <h3>GFCI OMRG 004</h3>
+                        <p>Standard safety outlet</p>
+                        <span class="product-price">$5.19</span>
+                        <a href="#" class="btn-orange">Browse</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End of Container -->
+
+    <footer>
+        UT Unit Turn Supply
+    </footer>
+   <!-- 2. MOVE THIS SCRIPT TO THE VERY BOTTOM, JUST BEFORE </body> -->
+<script>
+    document.getElementById('categorySelect').addEventListener('change', function() {
+        const selectedValue = this.value;
+
+        // 1. Handle Static Description Blocks
+        // Hide every block first
+        const descriptionBlocks = document.querySelectorAll('.category-content');
+        descriptionBlocks.forEach(div => div.style.display = 'none');
+
+        // Show the one that matches the dropdown value
+        const activeDescription = document.getElementById(selectedValue);
+        if (activeDescription) {
+            activeDescription.style.display = 'block';
+        }
+
+        // 2. Handle Product Grid Filtering
+        const allProducts = document.querySelectorAll('.product-card');
+        allProducts.forEach(product => {
+            // Show if it matches the category class, or show all if nothing is selected
+            if (selectedValue === "" || product.classList.contains(selectedValue)) {
+                product.style.display = 'block';
+            } else {
+                product.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
