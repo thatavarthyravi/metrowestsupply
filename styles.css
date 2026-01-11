@@ -1,0 +1,130 @@
+/* Updated styles.css */
+:root {
+    --navy: #1a2a44;
+    --light-blue: #007bff; 
+    --orange: #ff6600;
+    --white: #ffffff;
+    --text-color: #333;
+    --light-grey: #f4f4f4;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    line-height: 1.6;
+    color: var(--text-color);
+    background: linear-gradient(135deg, #07386d 0%, #007bff 100%);
+    padding: 0;
+}
+
+.container {
+    max-width: 950px;
+    margin: 40px auto;
+    background: var(--white);
+    padding: 0;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+header {
+    background-color: var(--navy);
+    color: var(--white);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo-small {
+    width: 20px;
+    margin-right: 8px;
+}
+
+nav a {
+    color: var(--white);
+    text-decoration: none;
+    margin-left: 15px;
+    font-size: 0.9em;
+}
+
+/* Page Title Styling */
+.page-content { padding: 30px 40px; }
+h1 { font-size: 1.8em; color: var(--navy); margin-bottom: 20px; }
+
+/* Filter Bar Styling */
+.filter-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    align-items: center;
+}
+.filter-bar input, .filter-bar select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+.filter-bar input { flex-grow: 1; max-width: 300px; }
+.btn-orange {
+    background-color: var(--orange);
+    color: var(--white);
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    display: inline-block;
+    border: none; /* Ensure buttons don't look like inputs */
+    cursor: pointer;
+}
+
+/* Product Grid & Card Styling */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+.product-card {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden; /* Ensures image corners match card corners */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    text-align: center;
+}
+.product-img {
+    width: 100%;
+    height: auto;
+    background-color: var(--light-grey); /* Placeholder background */
+}
+.product-info {
+    padding: 15px;
+}
+.product-info h3 {
+    font-size: 1em;
+    margin: 0 0 5px;
+    color: var(--text-color);
+}
+.product-info p {
+    font-size: 0.8em;
+    color: #999;
+    margin: 0 0 10px;
+}
+.product-price {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--navy);
+    margin-bottom: 15px;
+    display: block;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.8em;
+    color: var(--white);
+    background-color: var(--navy);
+}
