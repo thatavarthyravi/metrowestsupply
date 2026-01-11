@@ -1,4 +1,4 @@
-/* New styles.css based on the image design */
+/* styles.css */
 :root {
     --navy: #1a2a44;
     --light-blue: #007bff; 
@@ -9,85 +9,120 @@
 }
 
 body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif; /* A clean, common sans-serif font */
     margin: 0;
     line-height: 1.6;
     color: var(--text-color);
-    /* Mimics the blue gradient background from the image */
-    background: linear-gradient(135deg, var(--navy) 0%, var(--light-blue) 100%);
+    /* Exactly replicates the blue gradient background from the image */
+    background: linear-gradient(135deg, #07386d 0%, #007bff 100%);
     padding: 0;
 }
 
 .container {
-    max-width: 900px;
+    max-width: 950px;
     margin: 40px auto;
     background: var(--white);
-    padding: 40px;
-    border-radius: 8px; /* Softer corners like the image */
+    padding: 0; /* Content padding is inside sections */
+    border-radius: 8px; 
     box-shadow: 0 5px 20px rgba(0,0,0,0.2);
 }
 
 header {
-    text-align: center;
-    padding-bottom: 20px;
-    border-bottom: none; /* Remove the old orange border */
+    background-color: var(--navy);
+    color: var(--white);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.logo-placeholder {
-    max-width: 250px;
-    height: auto;
-    margin-bottom: 10px;
+.header-left {
+    display: flex;
+    align-items: center;
 }
 
-h1, h2, h3 { color: var(--navy); }
-h1 { font-size: 2.2em; border-bottom: 2px solid var(--orange); display: inline-block; padding-bottom: 5px; }
+.logo-small {
+    width: 20px; /* Small icon size in header */
+    margin-right: 8px;
+}
 
-/* Navigation Styles (Top right like the image) */
-nav { text-align: right; margin-bottom: 20px; }
 nav a {
     color: var(--white);
     text-decoration: none;
-    margin-left: 20px;
-    font-weight: bold;
-}
-nav a:hover {
-    color: var(--orange);
-    border-bottom: 2px solid var(--orange);
+    margin-left: 15px;
+    font-size: 0.9em;
 }
 
-/* Button Styles (The orange buttons) */
+/* Hero Section (Blue Background Part of the Index Page) */
+.hero-section {
+    background-color: var(--light-blue);
+    color: var(--white);
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hero-text h1 {
+    font-size: 2.2em;
+    margin: 0 0 10px;
+    color: var(--white);
+}
+
+.hero-text p {
+    font-size: 0.8em;
+    line-height: 1.4;
+    max-width: 300px;
+    color: #cceeff;
+}
+
+.main-logo {
+    width: 150px; /* The large 'UT' logo */
+    height: auto;
+}
+
+/* Orange Buttons */
 .btn-orange {
     background-color: var(--orange);
     color: var(--white);
     padding: 10px 20px;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 4px;
     font-weight: bold;
     display: inline-block;
+    margin-right: 10px;
     margin-top: 15px;
-    transition: background-color 0.3s;
-}
-.btn-orange:hover {
-    background-color: #e65c00; /* slightly darker orange on hover */
+    font-size: 0.8em;
 }
 
-/* Card Styles for Products/Info Sections */
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
+/* Feature Grid Section (White background part) */
+.feature-grid-section {
+    padding: 30px 40px;
+    background: var(--white);
 }
-.card {
-    background: var(--light-grey);
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.feature-item h3 {
+    color: var(--navy);
+    font-size: 1em;
+    margin-bottom: 5px;
+}
+
+.feature-item p {
+    font-size: 0.75em;
+    line-height: 1.3;
+    color: #666;
 }
 
 footer {
     text-align: center;
-    margin-top: 40px;
+    padding: 20px;
     font-size: 0.8em;
-    color: var(--white); /* White text on blue background */
+    color: var(--white);
+    background-color: var(--navy);
 }
