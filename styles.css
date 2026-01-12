@@ -211,6 +211,17 @@ h1 { font-size: 1.8em; color: var(--navy); margin-bottom: 20px; }
     color: #333;
     line-height: 1.2;
 }
+.tile-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;    /* Forces a perfect square */
+    object-fit: contain;    /* Fits the whole image inside without cropping */
+    background: #fff;       /* Adds white background if image is transparent */
+    padding: 5px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    display: block;
+}
+
 /* Color Palette: Navy #001f3f | Orange #ff6600 */
 
 .why-hero {
