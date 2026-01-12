@@ -207,6 +207,49 @@ nav a {
 
 .tag-row { margin-top: auto; padding-top: 15px; }
 .tag { font-size: 0.75rem; color: #ff6600; margin-right: 8px; font-weight: bold; }
+/* Styling for the JSON-rendered Bundle Cards */
+.bundle-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 30px;
+}
+
+.price-tag {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: var(--navy);
+    margin: 10px 0;
+}
+
+.price-tag span {
+    font-size: 1rem;
+    color: #888;
+    font-weight: normal;
+}
+
+.includes-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    flex-grow: 1; /* Pushes buttons to the bottom of the card */
+}
+
+.includes-list li {
+    font-size: 0.85rem;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--light-grey);
+    color: #555;
+    display: flex;
+    align-items: flex-start;
+}
+
+.includes-list li::before {
+    content: "✓";
+    color: var(--orange);
+    margin-right: 10px;
+    font-weight: bold;
+}
 
 footer {
     text-align: center;
