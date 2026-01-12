@@ -14,24 +14,16 @@
         .form-group { flex: 1; display: flex; flex-direction: column; }
         .form-group label { font-weight: bold; margin-bottom: 8px; color: #001f3f; font-size: 0.9rem; }
         .form-group input, .form-group select, .form-group textarea { padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; outline-color: #ff6600; }
-        
-        /* Selection Box Styling */
         .selection-box { background: #fdfdfd; padding: 20px; border: 2px dashed #001f3f; border-radius: 8px; margin-bottom: 20px; }
         .btn-orange { background-color: #ff6600; color: white; border: none; padding: 12px 25px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.3s; }
         .btn-orange:hover { background-color: #e55b00; }
-        
-        /* Cart Styling */
         #cart-container { margin: 25px 0; padding: 20px; background: #fff; border: 1px solid #001f3f; border-radius: 8px; }
         #cart-list { list-style: none; padding: 0; margin: 0; }
         .cart-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
-        .cart-item:last-child { border-bottom: none; }
         #total-badge { background: #ff6600; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; }
-        
         #success-message { display: none; text-align: center; padding: 40px; }
-        @media (max-width: 600px) {
-            .order-container { margin: 10px; padding: 20px; }
-            .form-row { flex-direction: column; gap: 15px; }
-        }
+        optgroup { font-weight: bold; color: #001f3f; background: #f4f4f4; }
+        @media (max-width: 600px) { .order-container { margin: 10px; padding: 20px; } .form-row { flex-direction: column; gap: 15px; } }
     </style>
 </head>
 <body>
@@ -39,25 +31,43 @@
     <div class="order-container">
         <div class="form-header" id="form-header">
             <h1>Submit Order Request</h1>
-            <p>Standardized turnover kits delivered same-day to your jobsite.</p>
+            <p>Select specific sub-bundles to build your custom jobsite delivery.</p>
         </div>
 
         <form id="orderForm" action="https://formspree.io/f/xlggeeog" method="POST">
             
-            <!-- Selection Area (The "Add to Cart" block) -->
             <div class="selection-box">
                 <div class="form-row">
                     <div class="form-group" style="flex: 2;">
-                        <label>Select a Bundle</label>
+                        <label>Select a Sub-Bundle</label>
                         <select id="bundle-selector">
-                            <option value="" disabled selected>Choose a bundle...</option>
-                            <option value="Bundle 1 - Interior">Bundle 1 - Interior Repair & Finish</option>
-                            <option value="Bundle 2 - Electrical">Bundle 2 - Electrical & Fixtures</option>
-                            <option value="Bundle 3 - Plumbing">Bundle 3 - Plumbing & Maintenance</option>
+                            <option value="" disabled selected>Choose an item...</option>
+                            
+                            <optgroup label="BUNDLE 1 - Basic Essentials">
+                                <option value="B1: Paint & Wall Repair">1.1 Paint & Wall Repair</option>
+                                <option value="B1: Painting Accessories">1.2 Painting Accessories</option>
+                                <option value="B1: Basic Electrical">1.3 Basic Electrical Consumables</option>
+                                <option value="B1: HVAC & Cleanup">1.4 HVAC & Cleanup</option>
+                            </optgroup>
+
+                            <optgroup label="BUNDLE 2 - Standard Upgrade">
+                                <option value="B2: Safety & Compliance">2.1 Safety & Code Compliance</option>
+                                <option value="B2: Fixture Upgrades">2.2 Fixtures & Electrical Upgrades</option>
+                                <option value="B2: Plumbing Repair">2.3 Plumbing Repair Essentials</option>
+                            </optgroup>
+
+                            <optgroup label="BUNDLE 3 - Premium Renovation">
+                                <option value="B3: Premium Fixtures">3.1 Premium Fixture Upgrades</option>
+                                <option value="B3: Plumbing Hardware">3.2 Plumbing Hardware & Finish</option>
+                            </optgroup>
+
+                            <optgroup label="OTHER">
+                                <option value="Custom Order">Custom Request (Describe in Notes)</option>
+                            </optgroup>
                         </select>
                     </div>
                     <div class="form-group" style="flex: 1;">
-                        <label>Qty (Max 10 Total)</label>
+                        <label>Qty</label>
                         <input type="number" id="qty-selector" min="1" max="10" value="1">
                     </div>
                     <div class="form-group" style="flex: 0.5; justify-content: flex-end;">
@@ -65,22 +75,19 @@
                     </div>
                 </div>
                 <p id="limit-warning" style="display:none; color: #cc0000; font-size: 0.85rem; margin-top: 10px; font-weight: bold;">
-                    ⚠️ Max 10 bundles per online request. For larger orders, please call us directly.
+                    ⚠️ Max 10 bundles per online request. For larger orders, please call us.
                 </p>
             </div>
 
-            <!-- Dynamic Order Summary -->
             <div id="cart-container" style="display: none;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                     <label style="font-weight: bold; color: #001f3f; margin: 0;">Order Summary</label>
                     <span id="total-badge">0 Items</span>
                 </div>
                 <ul id="cart-list"></ul>
-                <!-- Hidden input that sends the list to your email -->
                 <input type="hidden" name="final_order_list" id="final-order-input" required>
             </div>
 
-            <!-- Contact Details -->
             <div class="form-row">
                 <div class="form-group">
                     <label>Contact Name</label>
@@ -94,7 +101,7 @@
 
             <div class="form-group" style="margin-bottom: 20px;">
                 <label>Jobsite Delivery Address</label>
-                <textarea name="address" rows="2" required placeholder="Unit #, Building, Street, City, State, Zip"></textarea>
+                <textarea name="address" rows="2" required placeholder="Unit #, Street, City, State, Zip"></textarea>
             </div>
 
             <div class="form-group" style="margin-bottom: 20px;">
@@ -104,7 +111,7 @@
 
             <div class="form-group">
                 <label>Additional Notes</label>
-                <textarea name="notes" rows="3" placeholder="e.g. Gate code is 1234. Leave at unit front door."></textarea>
+                <textarea name="notes" rows="3" placeholder="e.g. Need high-gloss paint specifically. Gate code 1234."></textarea>
             </div>
 
             <div style="text-align: center; margin-top: 30px;">
@@ -114,10 +121,9 @@
             </div>
         </form>
 
-        <!-- Success Message -->
         <div id="success-message">
             <div style="font-size: 4rem; margin-bottom: 20px;">✅</div>
-            <h2 style="color: #001f3f;">Order Sent Successfully!</h2>
+            <h2>Order Sent Successfully!</h2>
             <p>We've received your request. Check your inbox shortly for an invoice and delivery confirmation.</p>
             <a href="index.html" class="btn-orange" style="display: inline-block; margin-top: 30px; text-decoration: none; width: auto;">Return to Home</a>
         </div>
@@ -137,38 +143,29 @@
         let cart = [];
         const MAX_TOTAL = 10;
 
-        // Add Item to Order
         addBtn.addEventListener('click', () => {
             const bundle = bundleSelect.value;
             const qty = parseInt(qtyInput.value);
-
-            if (!bundle) {
-                alert("Please select a bundle first.");
-                return;
-            }
+            if (!bundle) { alert("Please select an item first."); return; }
 
             let currentTotal = cart.reduce((sum, item) => sum + item.qty, 0);
-
             if (currentTotal + qty > MAX_TOTAL) {
                 limitWarning.style.display = "block";
-                alert("Online limit is 10 bundles. For larger orders, please call us.");
+                alert("Online limit is 10 units. Please call for bulk orders.");
                 return;
             }
 
             limitWarning.style.display = "none";
             cart.push({ bundle, qty });
             renderCart();
-            
             bundleSelect.selectedIndex = 0;
             qtyInput.value = 1;
         });
 
-        // Update the visual list
         function renderCart() {
             cartList.innerHTML = '';
             let totalItems = 0;
             let summaryText = "";
-
             if (cart.length > 0) {
                 cartContainer.style.display = 'block';
                 cart.forEach((item, index) => {
@@ -188,29 +185,20 @@
             }
         }
 
-        // Global function to remove item
         window.removeItem = (index) => {
             cart.splice(index, 1);
-            limitWarning.style.display = "none";
             renderCart();
         };
 
-        // Formspree Submission
         form.addEventListener("submit", function(e) {
             e.preventDefault();
-            if (cart.length === 0) {
-                alert("Please add at least one bundle to your order summary.");
-                return;
-            }
-
+            if (cart.length === 0) { alert("Add at least one item to your order summary."); return; }
             const submitBtn = document.getElementById("submit-btn");
             submitBtn.innerText = "Sending Request...";
             submitBtn.disabled = true;
-
-            const data = new FormData(form);
             fetch(form.action, {
                 method: 'POST',
-                body: data,
+                body: new FormData(form),
                 headers: { 'Accept': 'application/json' }
             }).then(response => {
                 if (response.ok) {
@@ -219,13 +207,10 @@
                     document.getElementById("success-message").style.display = "block";
                     window.scrollTo(0, 0);
                 } else {
-                    alert("Error. Please try again or email us directly.");
+                    alert("Error. Please try again.");
                     submitBtn.disabled = false;
                     submitBtn.innerText = "Confirm Order Request";
                 }
-            }).catch(() => {
-                alert("Critical error. Check your connection.");
-                submitBtn.disabled = false;
             });
         });
     </script>
