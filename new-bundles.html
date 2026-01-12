@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bundle Spec Sheets | Unit Turn Supply</title>
+    <link rel="stylesheet" href="styles2.css">
+    <!-- PDF Generation Library -->
+    <script src="cdnjs.cloudflare.com"></script>
+    
+    <style>
+        /* Existing Styles (Keep your previous styles here) */
+        .page-header { text-align: center; padding: 50px 20px; background: #001f3f; color: white; }
+        .bundle-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
+        .bundle-card { background: white; border: 1px solid #ddd; border-radius: 12px; padding: 30px; display: flex; flex-direction: column; position: relative; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .featured-tag { position: absolute; top: -12px; right: 20px; background: #ff6600; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; }
+        .sku-label { font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+        .price-tag { font-size: 2rem; font-weight: bold; color: #001f3f; margin: 15px 0; }
+        .price-tag span { font-size: 1rem; color: #666; }
+        .includes-list { margin: 20px 0; padding: 0; list-style: none; flex-grow: 1; }
+        .includes-list li { padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.9rem; color: #444; }
+        .includes-list li:before { content: "✓"; color: #ff6600; margin-right: 10px; font-weight: bold; }
+        .card-actions { display: flex; gap: 10px; margin-top: 20px; }
+        .btn-pdf { background: #eee; color: #333; border: none; padding: 10px; border-radius: 5px; cursor: pointer; flex: 1; font-weight: bold; }
+        .btn-order { background: #ff6600; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; flex: 2; font-weight: bold; text-decoration: none; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <header class="page-header">
+        <h1>Unit Turn Bundle Catalog</h1>
+        <p>Standardized kits for professional property management.</p>
+        <a href="index.html" style="color: #ff6600; text-decoration: none; font-weight: bold;">← Back to Home</a>
+    </header>
+
+    <div class="bundle-grid" id="bundleContainer">
+        <!-- Bundles will be injected here automatically -->
+    </div>
+
+    <script>
+        let bundleData = []; // Will be filled by fetch
+
+        // 1. ASYNC FETCH FUNCTION
+        async function loadBundles() {
+            try {
+                // Correct reference to your data folder
+                const response = await fetch('data/products.json'); 
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                bundleData = await response.json();
+                renderBundles(); // Draw cards once data is ready
+            } catch (error) {
+                console.error("Failed to load products.json:", error);
+                document.getElementById('bundleContainer').innerHTML = 
+                    `<p style="color:red; text-align:center;">Error loading catalog. Please try again later.</p>`;
+            }
+        }
+
+        // 2. RENDER CARDS FUNCTION
+        function renderBundles() {
+            const container = document.getElementById('bundleContainer');
+            container.innerHTML = ""; // Clear loader
+
+            bundleData.forEach((bundle, index) => {
+                const card = document.createElement('div');
+                card.className = 'bundle-card';
+                card.id = `bundle-${index}`;
+
+                card.innerHTML = `
+                    ${bundle.featured ? '<div class="featured-tag">POPULAR</div>' : ''}
+                    <span class="sku-label">${bundle.sku}</span>
+                    <h2>${bundle.name}</h2>
+                    <p style="font-size: 0.85rem; color: #666;">${bundle.short_desc}</p>
+                    <div class="price-tag">$${bundle.price_usd}<span> / kit</span></div>
+                    <ul class="includes-list">
+                        ${bundle.includes.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                    <div class="card-actions">
+                        <button class="btn-pdf" onclick="generatePDF(${index})">Download PDF</button>
+                        <a href="order-form.html" class="btn-order">Order Now</a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // 3. PDF GENERATION LOGIC
+        function generatePDF(index) {
+            const element = document.getElementById(`bundle-${index}`);
+            const bundleName = bundleData[index].name;
+            const actions = element.querySelector('.card-actions');
+            
+            actions.style.display = 'none'; // Hide buttons in PDF
+
+            const opt = {
+                margin: 1,
+                filename: `${bundleName}-Spec.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                actions.style.display = 'flex'; // Restore buttons
+            });
+        }
+
+        // Start the process
+        loadBundles();
+    </script>
+</body>
+</html>
