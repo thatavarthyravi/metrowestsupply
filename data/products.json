@@ -1,0 +1,58 @@
+[
+  {
+    "sku": "BUNDLE-BASIC-16251",
+    "type": "bundle",
+    "featured": true,
+    "name": "Basic Unit Turn Kit (1–2 Bed)",
+    "short_desc": "Patch, paint, Decora electrical, LED bulbs, and HVAC filters for standard turns.",
+    "category": "Bundles",
+    "brand": "Multi-brand (contractor grade)",
+    "supplier_type": "Paint, electrical, plumbing distributors",
+    "price_usd": 649,
+    "includes": [
+      "DAP Alex Plus white caulk (10.1 oz) ×4",
+      "USG Sheetrock Plus 3 joint compound (3.5 qt)",
+      "Leviton Decora white single-pole switches ×4",
+      "Leviton white duplex receptacles ×6",
+      "Philips LED A19 60W soft white bulbs ×10",
+      "3M Filtrete 16×25×1 MERV 8 filters ×2"
+    ],
+    "tags": ["basic", "turnover", "decora", "16x25x1"]
+  },
+  {
+    "sku": "BUNDLE-STANDARD-16251",
+    "type": "bundle",
+    "featured": true,
+    "name": "Standard Turn + Safety Kit (2–3 Bed)",
+    "short_desc": "Adds smoke, CO, and GFCI protection for code-compliant unit turns.",
+    "category": "Bundles",
+    "brand": "Multi-brand (code compliant)",
+    "supplier_type": "Electrical and safety wholesalers",
+    "price_usd": 949,
+    "includes": [
+      "Everything in Basic Unit Turn Kit",
+      "Kidde 10-year sealed smoke alarms ×2",
+      "First Alert CO plug-in alarm ×1",
+      "Leviton Decora white self-test GFCI outlet ×1"
+    ],
+    "tags": ["standard", "safety", "code", "pm"]
+  },
+  {
+    "sku": "BUNDLE-PREMIUM-16251",
+    "type": "bundle",
+    "featured": true,
+    "name": "Premium Turn + Hardware Refresh Kit",
+    "short_desc": "Visible hardware and bath refresh on top of full safety and turnover coverage.",
+    "category": "Bundles",
+    "brand": "Multi-brand (mid-tier)",
+    "supplier_type": "Plumbing, hardware, electrical distributors",
+    "price_usd": 1499,
+    "includes": [
+      "Everything in Standard Turn + Safety Kit",
+      "Kwikset Tylo SmartKey keyed entry knob ×1",
+      "Leviton Decora white wallplates ×10",
+      "Moen Adler 4-inch centerset bathroom faucet ×1"
+    ],
+    "tags": ["premium", "hardware", "refresh"]
+  }
+]
