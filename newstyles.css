@@ -250,6 +250,33 @@ nav a {
     margin-right: 10px;
     font-weight: bold;
 }
+.card-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-pdf {
+    background-color: var(--light-grey);
+    color: var(--navy);
+    border: 1px solid #ddd;
+    padding: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    flex: 1;
+    font-size: 0.8rem;
+    transition: 0.2s;
+}
+
+.btn-pdf:hover { background-color: #e0e0e0; }
+
+/* Re-using your existing btn-orange for the order button */
+.card-actions .btn-orange {
+    margin-top: 0; /* Remove top margin for alignment */
+    flex: 1.5;
+    text-align: center;
+}
 
 footer {
     text-align: center;
