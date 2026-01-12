@@ -220,6 +220,7 @@ h1 { font-size: 1.8em; color: var(--navy); margin-bottom: 20px; }
     border-radius: 4px;
     margin-bottom: 8px;
     display: block;
+    height: 120px;     /* Set a fixed height */
 }
 
 /* Color Palette: Navy #001f3f | Orange #ff6600 */
