@@ -66,6 +66,17 @@
                     </select>
                 </div>
             </div>
+<!-- Bundle Preview Area -->
+<div id="bundle-preview" style="display:none; background: #f0f8ff; border: 1px solid #b3e0ff; padding: 15px; border-radius: 6px; margin-bottom: 20px; font-size: 0.9rem;">
+    <h4 style="margin-top: 0; color: #0077cc;">📦 Bundle Includes:</h4>
+    <div id="preview-text"></div>
+</div>
+
+<!-- Custom Order Note (Hidden by default) -->
+<div id="custom-note" style="display:none; background: #fff0f5; border: 1px solid #ffe6f0; padding: 15px; border-radius: 6px; margin-bottom: 20px;">
+    <h4 style="margin-top: 0; color: #cc0066;">✏️ Custom Order Instructions</h4>
+    <p style="font-size: 0.85rem; margin-bottom: 0;">Please list the specific items and quantities you need in the <strong>Additional Notes</strong> section below. We will contact you to confirm your custom order details.</p>
+</div>
 
             <!-- Name & Company Row -->
             <div class="form-row">
@@ -115,37 +126,87 @@
     </div>
 
     <script>
-        const form = document.getElementById("orderForm");
-        const successMsg = document.getElementById("success-message");
-        const formHeader = document.getElementById("form-header");
-        const submitBtn = document.getElementById("submit-btn");
+        
+    // 1. SELECT ELEMENTS
+    const form = document.getElementById("orderForm");
+    const bundleSelect = document.querySelector('select[name="bundle_type"]');
+    const previewArea = document.getElementById("bundle-preview");
+    const previewText = document.getElementById("preview-text");
+    const customNote = document.getElementById("custom-note");
+    const notesField = document.querySelector('textarea[name="notes"]');
+    const submitBtn = document.getElementById("submit-btn");
+    const successMsg = document.getElementById("success-message");
+    const formHeader = document.getElementById("form-header");
 
-        form.addEventListener("submit", function(e) {
-            e.preventDefault(); // Stop page reload
-            submitBtn.innerText = "Processing Order...";
-            submitBtn.disabled = true;
+    // 2. BUNDLE DATA (Used for live preview)
+    const bundleDetails = {
+        "Bundle 1 - Interior": "Includes: Wall/Ceiling Paint (5-gal), Drywall Compound, Patch Kits, Caulk, Rollers, Brushes, and Painter's Tape.",
+        "Bundle 2 - Electrical": "Includes everything in Bundle 1 PLUS: Smoke/CO Detectors, Fire Extinguisher, LED Ceiling Lights, and GFCI Outlets.",
+        "Bundle 3 - Plumbing": "Includes everything in Bundle 2 PLUS: Designer Faucets, Modern Vanity Lights, Sink Trap Kits, and Premium Sealants."
+    };
 
-            const data = new FormData(form);
+    // 3. HANDLE BUNDLE SELECTION CHANGES
+    bundleSelect.addEventListener('change', function() {
+        const val = this.value;
 
-            fetch(form.action, {
-                method: 'POST',
-                body: data,
-                headers: { 'Accept': 'application/json' }
-            }).then(response => {
-                if (response.ok) {
-                    form.style.display = "none";
-                    formHeader.style.display = "none";
-                    successMsg.style.display = "block";
-                } else {
-                    alert("Submission error. Please check your internet or try again later.");
-                    submitBtn.innerText = "Confirm Order Request";
-                    submitBtn.disabled = false;
-                }
-            }).catch(error => {
-                alert("Critical error. Please email us directly.");
+        // Reset views
+        previewArea.style.display = "none";
+        customNote.style.display = "none";
+        notesField.required = false;
+        notesField.placeholder = "e.g. Call my cell upon arrival, gate code is 1234.";
+
+        if (val === "Custom Order") {
+            // Show custom instructions and make notes mandatory
+            customNote.style.display = "block";
+            notesField.required = true;
+            notesField.placeholder = "REQUIRED: Please list the items and quantities you need here...";
+            notesField.focus();
+        } else if (bundleDetails[val]) {
+            // Show what's in the standard bundle
+            previewText.innerHTML = "<strong>" + val + "</strong> " + bundleDetails[val];
+            previewArea.style.display = "block";
+        }
+    });
+
+    // 4. HANDLE FORM SUBMISSION (AJAX)
+    form.addEventListener("submit", function(e) {
+        e.preventDefault(); // Stop page reload
+        
+        submitBtn.innerText = "Processing Order...";
+        submitBtn.disabled = true;
+
+        const data = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+        }).then(response => {
+            if (response.ok) {
+                // Hide form and header, show success message
+                form.style.display = "none";
+                formHeader.style.display = "none";
+                successMsg.style.display = "block";
+                window.scrollTo(0, 0); // Scroll to top to see success message
+            } else {
+                response.json().then(data => {
+                    if (Object.hasOwn(data, 'errors')) {
+                        alert(data["errors"].map(error => error["message"]).join(", "));
+                    } else {
+                        alert("Submission error. Please check your connection.");
+                    }
+                });
+                submitBtn.innerText = "Confirm Order Request";
                 submitBtn.disabled = false;
-            });
+            }
+        }).catch(error => {
+            alert("Critical error: " + error.message);
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Confirm Order Request";
         });
-    </script>
+    });
+</script>
+
+    
 </body>
 </html>
