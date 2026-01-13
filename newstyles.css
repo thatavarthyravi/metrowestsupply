@@ -277,7 +277,36 @@ nav a {
     flex: 1.5;
     text-align: center;
 }
+/* latest update start */
+@media (max-width: 768px) {
+    .container {
+        margin: 10px; /* Reduces outside margin on phones */
+        width: auto;
+    }
 
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-text p {
+        max-width: 100%;
+    }
+
+    .main-logo {
+        width: 100px;
+        margin-top: 20px;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr; /* Stack features vertically */
+    }
+
+    .card-actions {
+        flex-direction: column; /* Stack PDF and Order buttons on small phones */
+    }
+}
+/* latest update end */
 footer {
     text-align: center;
     padding: 20px;
