@@ -188,93 +188,98 @@
         <p>&copy; 2025 Unit Turn Supply. All rights reserved.</p>
     </footer>
 
-    <script>
-        const fullKitsContainer = document.getElementById('full-kits-container');
-        const modulesContainer = document.getElementById('modules-container');
-        const cartList = document.getElementById('cart-list');
-        const cartContainer = document.getElementById('cart-container');
-        const finalInput = document.getElementById('final-order-input');
-        const totalBadge = document.getElementById('total-badge');
-        const form = document.getElementById('orderForm');
+   <script>
+    const fullKitsContainer = document.getElementById('full-kits-container');
+    const modulesContainer = document.getElementById('modules-container');
+    const cartList = document.getElementById('cart-list');
+    const cartContainer = document.getElementById('cart-container');
+    const finalInput = document.getElementById('final-order-input');
+    const totalBadge = document.getElementById('total-badge');
+    const form = document.getElementById('orderForm');
 
-        let cart = [];
+    let cart = {};
 
-        // LOAD DATA
-        Promise.all([
-            fetch('data/products.json').then(res => res.json()),
-            fetch('data/miniproductbundles.json').then(res => res.json())
-        ]).then(([productsData, miniData]) => {
-            fullKitsContainer.innerHTML = '';
-            productsData.forEach((kit) => {
-                createItemRow(fullKitsContainer, kit.name, `$${kit.price_usd}`, 'Full Kit');
-            });
+    // 1. Fetch and Render Data
+    Promise.all([
+        fetch('data/products.json').then(res => res.json()).catch(() => []),
+        fetch('data/miniproductbundles.json').then(res => res.json()).catch(() => ({ bundles: [] }))
+    ]).then(([productsData, miniData]) => {
+        fullKitsContainer.innerHTML = '';
+        productsData.forEach(kit => {
+            createItemRow(fullKitsContainer, kit.name, "Full Kit");
+        });
 
-            modulesContainer.innerHTML = '';
+        modulesContainer.innerHTML = '';
+        if(miniData.bundles) {
             miniData.bundles.forEach(bundle => {
                 bundle.categories.forEach(cat => {
-                    const price = cat.items.reduce((s, i) => s + (i.typical_quantity * i.unit_cost_estimate), 0);
-                    createItemRow(modulesContainer, cat.category, `$${price.toFixed(2)}`, `from ${bundle.name}`);
+                    createItemRow(modulesContainer, cat.name, "Module");
                 });
             });
-        });
-
-        function createItemRow(parent, name, price, subtext) {
-            const row = document.createElement('div');
-            row.className = 'item-row';
-            const safeId = btoa(name).substring(0, 8); // Unique safe ID
-            row.innerHTML = `
-                <div style="text-align:left;">
-                    <strong style="display:block;">${name}</strong>
-                    <small style="color: #666;">${price} | ${subtext}</small>
-                </div>
-                <div style="display:flex; align-items:center;">
-                    <input type="number" value="1" min="1" class="qty-input" id="qty-${safeId}">
-                    <button type="button" class="btn-orange" style="margin:0; padding: 6px 12px; font-size: 0.8rem;" onclick="addToCart('${name}', '${safeId}')">Add</button>
-                </div>
-            `;
-            parent.appendChild(row);
         }
+    });
 
-        window.addToCart = (name, id) => {
-            const qty = parseInt(document.getElementById('qty-' + id).value);
-            cart.push({ name, qty });
-            renderCart();
-        };
+    // 2. Function to create the UI rows
+    function createItemRow(container, name, type) {
+        const div = document.createElement('div');
+        div.className = 'item-row';
+        div.innerHTML = `
+            <span style="font-weight:500;">${name} <small style="color:#888;">(${type})</small></span>
+            <div style="display:flex; align-items:center;">
+                <input type="number" class="qty-input" min="0" value="0" data-name="${name}">
+                <span>Qty</span>
+            </div>
+        `;
+        container.appendChild(div);
 
-        function renderCart() {
-            cartList.innerHTML = '';
-            let total = 0;
-            let manifest = "";
-            cart.forEach((item, index) => {
-                total += item.qty;
-                manifest += `${item.qty}x ${item.name} | `;
+        // Listen for quantity changes
+        div.querySelector('input').addEventListener('input', (e) => {
+            const qty = parseInt(e.target.value);
+            if (qty > 0) {
+                cart[name] = qty;
+            } else {
+                delete cart[name];
+            }
+            updateCartUI();
+        });
+    }
+
+    // 3. Update the Summary and Hidden Input
+    function updateCartUI() {
+        cartList.innerHTML = '';
+        let totalItems = 0;
+        let manifestText = "";
+
+        const items = Object.keys(cart);
+        if (items.length > 0) {
+            cartContainer.style.display = 'block';
+            items.forEach(name => {
+                const qty = cart[name];
+                totalItems += qty;
+                manifestText += `${name}: ${qty} units | `;
+                
                 const li = document.createElement('li');
                 li.className = 'cart-item';
-                li.innerHTML = `<span><strong>${item.qty}x</strong> ${item.name}</span>
-                                <button type="button" onclick="removeItem(${index})" style="color:red;border:none;background:none;cursor:pointer;">✕</button>`;
+                li.innerHTML = `<span>${name}</span> <strong>x${qty}</strong>`;
                 cartList.appendChild(li);
             });
-            cartContainer.style.display = cart.length ? 'block' : 'none';
-            totalBadge.innerText = `${total} Items`;
-            finalInput.value = manifest;
+        } else {
+            cartContainer.style.display = 'none';
         }
 
-        window.removeItem = (index) => { cart.splice(index, 1); renderCart(); };
+        totalBadge.innerText = `${totalItems} Items`;
+        finalInput.value = manifestText; // This is what Formspree sends
+    }
 
-        form.addEventListener("submit", function(e) {
+    // 4. Handle Form Submission
+    form.addEventListener('submit', async (e) => {
+        if (Object.keys(cart).length === 0) {
             e.preventDefault();
-            if (!cart.length) { alert("Please add at least one item."); return; }
-            const btn = document.getElementById("submit-btn");
-            btn.innerText = "Sending Request...";
-            btn.disabled = true;
-            fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
-                .then(res => { if (res.ok) { 
-                    form.style.display = "none"; 
-                    document.getElementById("form-header").style.display = "none"; 
-                    document.getElementById("success-message").style.display = "block"; 
-                    window.scrollTo(0,0); 
-                } });
-        });
-    </script>
+            alert("Please select at least one item before submitting.");
+        }
+        // Formspree handles the POST naturally from the 'action' attribute
+    });
+</script>
+
 </body>
 </html>
