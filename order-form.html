@@ -199,99 +199,73 @@
 
     let cart = {};
 
-    // 1. Fetch and Render Data
-    // LOAD DATA
-Promise.all([
-    fetch('data/products.json').then(res => res.json()).catch(() => []),
-    fetch('data/miniproductbundles.json').then(res => res.json()).catch(() => ({ bundles: [] }))
-]).then(([productsData, miniData]) => {
-    // Render Full Kits
-    fullKitsContainer.innerHTML = '';
-    productsData.forEach((kit) => {
-        // Ensure kit.name exists
-        const kitName = kit.name || "Unnamed Kit"; 
-        createItemRow(fullKitsContainer, kitName, 'Full Kit');
+    Promise.all([
+        fetch('data/products.json').then(res => res.json()).catch(() => []),
+        fetch('data/miniproductbundles.json').then(res => res.json()).catch(() => ({ bundles: [] }))
+    ]).then(([productsData, miniData]) => {
+        
+        // 1. Render Full Kits
+        fullKitsContainer.innerHTML = '';
+        productsData.forEach(kit => {
+            createItemRow(fullKitsContainer, kit.name, "Full Kit");
+        });
+
+        // 2. Render Sub-Modules (Categories)
+        modulesContainer.innerHTML = '';
+        miniData.bundles.forEach(bundle => {
+            // Add a Header for each Bundle group
+            const groupHeader = document.createElement('h4');
+            groupHeader.style = "margin: 20px 0 10px; color: #555; border-bottom: 1px solid #eee; padding-bottom: 5px;";
+            groupHeader.innerText = bundle.name;
+            modulesContainer.appendChild(groupHeader);
+
+            bundle.categories.forEach(cat => {
+                // FIX: Use cat.category because that is the key in your JSON
+                createItemRow(modulesContainer, cat.category, "Module");
+            });
+        });
     });
 
-    // Render Sub-Modules
-    modulesContainer.innerHTML = '';
-    if (miniData.bundles) {
-        miniData.bundles.forEach(bundle => {
-            if (bundle.categories) {
-                bundle.categories.forEach(cat => {
-                    // FIX: Check multiple possible name fields in your JSON
-                    const moduleName = cat.name || cat.title || cat.label || "Unknown Module";
-                    createItemRow(modulesContainer, moduleName, 'Module');
-                });
-            }
-        });
-    }
-}).catch(err => {
-    console.error("Error loading product data:", err);
-    modulesContainer.innerHTML = '<p style="color:red;">Error loading modules. Check console.</p>';
-});
-
-
-    // 2. Function to create the UI rows
-    function createItemRow(container, name, type) {
+    function createItemRow(container, displayName, type) {
         const div = document.createElement('div');
         div.className = 'item-row';
         div.innerHTML = `
-            <span style="font-weight:500;">${name} <small style="color:#888;">(${type})</small></span>
+            <span style="font-weight:500;">${displayName} <small style="color:#888;">(${type})</small></span>
             <div style="display:flex; align-items:center;">
-                <input type="number" class="qty-input" min="0" value="0" data-name="${name}">
-                <span>Qty</span>
+                <input type="number" class="qty-input" min="0" value="0" data-name="${displayName}">
+                <span style="font-size: 0.8rem; color: #666;">Qty</span>
             </div>
         `;
         container.appendChild(div);
 
-        // Listen for quantity changes
         div.querySelector('input').addEventListener('input', (e) => {
             const qty = parseInt(e.target.value);
-            if (qty > 0) {
-                cart[name] = qty;
-            } else {
-                delete cart[name];
-            }
+            if (qty > 0) { cart[displayName] = qty; } 
+            else { delete cart[displayName]; }
             updateCartUI();
         });
     }
 
-    // 3. Update the Summary and Hidden Input
     function updateCartUI() {
         cartList.innerHTML = '';
         let totalItems = 0;
-        let manifestText = "";
+        let manifest = [];
 
-        const items = Object.keys(cart);
-        if (items.length > 0) {
-            cartContainer.style.display = 'block';
-            items.forEach(name => {
-                const qty = cart[name];
-                totalItems += qty;
-                manifestText += `${name}: ${qty} units | `;
-                
-                const li = document.createElement('li');
-                li.className = 'cart-item';
-                li.innerHTML = `<span>${name}</span> <strong>x${qty}</strong>`;
-                cartList.appendChild(li);
-            });
-        } else {
-            cartContainer.style.display = 'none';
-        }
+        Object.keys(cart).forEach(name => {
+            const qty = cart[name];
+            totalItems += qty;
+            manifest.push(`${name} (x${qty})`);
+            
+            const li = document.createElement('li');
+            li.className = 'cart-item';
+            li.innerHTML = `<span>${name}</span> <strong>x${qty}</strong>`;
+            cartList.appendChild(li);
+        });
 
+        cartContainer.style.display = totalItems > 0 ? 'block' : 'none';
         totalBadge.innerText = `${totalItems} Items`;
-        finalInput.value = manifestText; // This is what Formspree sends
+        finalInput.value = manifest.join(', '); 
     }
-
-    // 4. Handle Form Submission
-    form.addEventListener('submit', async (e) => {
-        if (Object.keys(cart).length === 0) {
-            e.preventDefault();
-            alert("Please select at least one item before submitting.");
-        }
-        // Formspree handles the POST naturally from the 'action' attribute
-    });
 </script>
 
 </body>
