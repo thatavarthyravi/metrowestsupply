@@ -3,155 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Order | Unit Turn Supply</title>
+    <title>Master Order Form | Unit Turn Supply</title>
     <link rel="stylesheet" href="newstyles.css">
     <style>
         body { background-color: #f4f7f9; font-family: sans-serif; line-height: 1.6; }
-        .order-container { max-width: 900px; margin: 40px auto; padding: 40px; background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .form-header { text-align: center; margin-bottom: 30px; }
+        .order-container { max-width: 950px; margin: 40px auto; padding: 40px; background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         
-        /* The Selection Menu */
-        .selection-box { background: #fdfdfd; padding: 25px; border: 2px solid var(--navy); border-radius: 8px; margin-bottom: 25px; }
-        .bundle-group { margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 15px; }
-        .bundle-group:last-child { border-bottom: none; }
-        .bundle-group h3 { color: var(--navy); margin-bottom: 10px; font-size: 1.1rem; }
+        /* Section Styling */
+        .order-section { margin-bottom: 40px; }
+        .section-title { background: var(--navy); color: white; padding: 15px; border-radius: 8px 8px 0 0; margin: 0; font-size: 1.2rem; }
+        .selection-area { border: 2px solid var(--navy); border-radius: 0 0 8px 8px; padding: 20px; background: #fdfdfd; }
         
-        .category-row { 
+        /* Item Row Styling */
+        .item-row { 
             display: flex; justify-content: space-between; align-items: center; 
-            background: white; padding: 10px 15px; border: 1px solid #ddd; 
-            border-radius: 6px; margin-bottom: 8px; transition: 0.2s;
+            background: white; padding: 12px 18px; border: 1px solid #ddd; 
+            border-radius: 6px; margin-bottom: 10px; transition: 0.2s;
         }
-        .category-row:hover { border-color: var(--orange); background: #fffcf9; }
-        .cat-info { flex: 2; }
-        .cat-info strong { display: block; color: #333; }
-        .cat-info span { font-size: 0.8rem; color: #777; }
-        
-        .cat-actions { flex: 1; display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
-        .qty-mini { width: 50px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; text-align: center; }
-        .btn-add-sm { background: var(--orange); color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.8rem; }
+        .item-row:hover { border-color: var(--orange); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .item-info { flex: 2; }
+        .item-info strong { display: block; color: var(--navy); font-size: 1rem; }
+        .item-info span { font-size: 0.8rem; color: #666; }
+
+        .item-actions { flex: 1; display: flex; align-items: center; justify-content: flex-end; gap: 12px; }
+        .qty-input { width: 55px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; text-align: center; font-weight: bold; }
         
         /* Cart Summary */
-        #cart-container { margin: 25px 0; padding: 20px; background: #fff; border: 2px solid var(--orange); border-radius: 8px; }
-        #cart-list { list-style: none; padding: 0; margin: 0; }
-        .cart-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 0.9rem; }
-        #total-badge { background: var(--orange); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; }
+        #cart-container { margin: 30px 0; padding: 25px; background: #fff; border: 2px solid var(--orange); border-radius: 8px; }
+        .cart-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 0.95rem; }
+        #total-badge { background: var(--orange); color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; }
 
         #success-message { display: none; text-align: center; padding: 40px; }
-        @media (max-width: 600px) { .category-row { flex-direction: column; align-items: flex-start; } .cat-actions { width: 100%; margin-top: 10px; } }
+        @media (max-width: 768px) { .item-row { flex-direction: column; align-items: flex-start; } .item-actions { width: 100%; margin-top: 10px; } }
     </style>
 </head>
 <body>
 
     <div class="order-container">
-        <div class="form-header" id="form-header">
-            <h1>Customize Your Turn Kit</h1>
-            <p>Pick and choose the specific modules you need from our bundles.</p>
+        <div class="form-header" id="form-header" style="text-align: center; margin-bottom: 30px;">
+            <h1>Build Your Order</h1>
+            <p>Choose a Complete Kit for convenience or Mix & Match specific modules.</p>
         </div>
 
-        <form id="orderForm" action="https://formspree.io/f/xlggeeog" method="POST">
+        <form id="orderForm" action="formspree.io" method="POST">
             
-            <div class="selection-box">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
-                    <label style="font-weight: bold; color: var(--navy);">Menu: Select Modules</label>
-                    <a href="new-bundles.html" target="_blank" style="font-size: 0.8rem; color: var(--orange);">Review Item Details</a>
+            <!-- SECTION 1: FULL KITS -->
+            <div class="order-section">
+                <h2 class="section-title">Option A: Complete Unit Turn Kits</h2>
+                <div class="selection-area" id="full-kits-container">
+                    <p style="text-align: center;">Loading kits...</p>
                 </div>
-
-                <div id="bundle-menu-container">
-                    <!-- JavaScript will inject Bundle 1, 2, and 3 categories here -->
-                    <p style="text-align:center;">Loading modules...</p>
-                </div>
-                
-                <p id="limit-warning" style="display:none; color: #cc0000; font-size: 0.85rem; font-weight: bold; margin-top: 15px;">
-                    ⚠️ Online limit is 10 modules. Please call for bulk orders.
-                </p>
             </div>
 
+            <!-- SECTION 2: SUB-MODULES -->
+            <div class="order-section">
+                <h2 class="section-title" style="background: #555;">Option B: Individual Sub-Modules</h2>
+                <div class="selection-area" id="modules-container">
+                    <p style="text-align: center;">Loading modules...</p>
+                </div>
+            </div>
+
+            <!-- CART SUMMARY -->
             <div id="cart-container" style="display: none;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                    <label style="font-weight: bold; color: var(--navy);">Your Custom Kit Summary</label>
-                    <span id="total-badge">0 Modules</span>
+                    <label style="font-weight: bold; font-size: 1.1rem;">Order Summary</label>
+                    <span id="total-badge">0 Items</span>
                 </div>
-                <ul id="cart-list"></ul>
-                <input type="hidden" name="custom_kit_list" id="final-order-input" required>
+                <ul id="cart-list" style="list-style: none; padding: 0;"></ul>
+                <input type="hidden" name="MASTER_ORDER_LIST" id="final-order-input" required>
             </div>
 
-            <!-- Contact/Shipping Details -->
+            <!-- CONTACT DETAILS -->
             <div class="form-row" style="display: flex; gap: 15px; margin-bottom: 15px;">
-                <div class="form-group" style="flex:1;"><label>Name</label><input type="text" name="name" required></div>
+                <div class="form-group" style="flex:1;"><label>Contact Name</label><input type="text" name="name" required></div>
                 <div class="form-group" style="flex:1;"><label>Company</label><input type="text" name="company" required></div>
             </div>
-            <div class="form-group" style="margin-bottom: 15px;"><label>Delivery Address</label><textarea name="address" rows="2" required></textarea></div>
-            <div class="form-group" style="margin-bottom: 15px;"><label>Email</label><input type="email" name="_replyto" required></div>
-            <div class="form-group"><label>Notes</label><textarea name="notes" rows="2" placeholder="Any extra items or instructions..."></textarea></div>
+            <div class="form-group" style="margin-bottom: 15px;"><label>Delivery Address</label><textarea name="address" rows="2" required placeholder="Full jobsite address..."></textarea></div>
+            <div class="form-group" style="margin-bottom: 20px;"><label>Email</label><input type="email" name="_replyto" required></div>
 
-            <div style="text-align: center; margin-top: 30px;">
-                <button type="submit" id="submit-btn" class="btn-orange" style="width: 100%; font-size: 1.2rem;">Submit Order Request</button>
-            </div>
+            <button type="submit" id="submit-btn" class="btn-orange" style="width: 100%; font-size: 1.3rem; padding: 18px;">Submit Order Request</button>
         </form>
 
         <div id="success-message">
-            <div style="font-size: 4rem; margin-bottom: 20px;">✅</div>
-            <h2>Order Sent Successfully!</h2>
-            <p>We'll email your custom invoice and delivery ETA shortly.</p>
+            <div style="font-size: 4rem;">✅</div>
+            <h2>Order Request Received</h2>
+            <p>We are processing your custom manifest. Expect an invoice and ETA via email shortly.</p>
             <a href="index.html" class="btn-orange" style="text-decoration: none; display: inline-block; margin-top: 20px;">Return Home</a>
         </div>
     </div>
 
     <script>
-        const menuContainer = document.getElementById('bundle-menu-container');
+        const fullKitsContainer = document.getElementById('full-kits-container');
+        const modulesContainer = document.getElementById('modules-container');
         const cartList = document.getElementById('cart-list');
         const cartContainer = document.getElementById('cart-container');
         const finalInput = document.getElementById('final-order-input');
         const totalBadge = document.getElementById('total-badge');
-        const limitWarning = document.getElementById('limit-warning');
         const form = document.getElementById('orderForm');
 
         let cart = [];
-        const MAX_TOTAL = 10;
 
-        // 1. FETCH AND BUILD THE MENU
-        fetch('data/miniproductbundles.json')
-            .then(res => res.json())
-            .then(data => {
-                menuContainer.innerHTML = ''; // Clear loader
-                data.bundles.forEach(bundle => {
-                    const group = document.createElement('div');
-                    group.className = 'bundle-group';
-                    group.innerHTML = `<h3>${bundle.name}</h3>`;
-                    
-                    bundle.categories.forEach(cat => {
-                        const row = document.createElement('div');
-                        row.className = 'category-row';
-                        const estPrice = cat.items.reduce((s, i) => s + (i.typical_quantity * i.unit_cost_estimate), 0);
-                        
-                        row.innerHTML = `
-                            <div class="cat-info">
-                                <strong>${cat.category}</strong>
-                                <span>Est. $${estPrice.toFixed(2)} | ${cat.items.length} item types</span>
-                            </div>
-                            <div class="cat-actions">
-                                <input type="number" value="1" min="1" max="10" class="qty-mini" id="qty-${cat.category.replace(/\s+/g, '')}">
-                                <button type="button" class="btn-add-sm" onclick="addToCart('${cat.category}', '${bundle.bundle_id}', '${cat.category.replace(/\s+/g, '')}')">+ Add</button>
-                            </div>
-                        `;
-                        group.appendChild(row);
-                    });
-                    menuContainer.appendChild(group);
-                });
+        // 1. FETCH BOTH DATA SOURCES
+        Promise.all([
+            fetch('data/products.json').then(res => res.json()),
+            fetch('data/miniproductbundles.json').then(res => res.json())
+        ]).then(([productsData, miniData]) => {
+            
+            // Build Full Kits (Option A)
+            fullKitsContainer.innerHTML = '';
+            productsData.forEach((kit, index) => {
+                createItemRow(fullKitsContainer, kit.name, `$${kit.price_usd}`, `Full SKU: ${kit.sku}`, 'Full Kit');
             });
 
+            // Build Sub-Modules (Option B)
+            modulesContainer.innerHTML = '';
+            miniData.bundles.forEach(bundle => {
+                bundle.categories.forEach(cat => {
+                    const price = cat.items.reduce((s, i) => s + (i.typical_quantity * i.unit_cost_estimate), 0);
+                    createItemRow(modulesContainer, cat.category, `$${price.toFixed(2)}`, `Part of ${bundle.name}`, 'Module');
+                });
+            });
+        });
+
+        function createItemRow(parent, name, price, subtext, type) {
+            const row = document.createElement('div');
+            row.className = 'item-row';
+            const safeId = name.replace(/\s+/g, '');
+            row.innerHTML = `
+                <div class="item-info">
+                    <strong>${name}</strong>
+                    <span>${price} | ${subtext}</span>
+                </div>
+                <div class="item-actions">
+                    <input type="number" value="1" min="1" class="qty-input" id="qty-${safeId}">
+                    <button type="button" class="btn-orange" style="margin:0; padding: 8px 15px;" onclick="addToCart('${name}', '${type}', '${safeId}')">+ Add</button>
+                </div>
+            `;
+            parent.appendChild(row);
+        }
+
         // 2. CART FUNCTIONS
-        window.addToCart = (catName, bundleId, inputId) => {
+        window.addToCart = (name, type, inputId) => {
             const qty = parseInt(document.getElementById('qty-' + inputId).value);
-            let currentTotal = cart.reduce((sum, item) => sum + item.qty, 0);
-
-            if (currentTotal + qty > MAX_TOTAL) {
-                limitWarning.style.display = 'block';
-                return;
-            }
-
-            limitWarning.style.display = 'none';
-            cart.push({ name: catName, bundle: bundleId, qty: qty });
+            cart.push({ name, type, qty });
             renderCart();
         };
 
@@ -161,15 +155,15 @@
             let summary = "";
             cart.forEach((item, index) => {
                 total += item.qty;
-                summary += `${item.qty}x ${item.name} (${item.bundle}) | `;
+                summary += `[${item.type}] ${item.qty}x ${item.name} | `;
                 const li = document.createElement('li');
                 li.className = 'cart-item';
-                li.innerHTML = `<span><strong>${item.qty}x</strong> ${item.name} <small>(${item.bundle})</small></span>
-                                <button type="button" onclick="removeItem(${index})" style="color:red;border:none;background:none;cursor:pointer;">Remove</button>`;
+                li.innerHTML = `<span><strong>${item.qty}x</strong> ${item.name} <small style="color: #888;">(${item.type})</small></span>
+                                <button type="button" onclick="removeItem(${index})" style="color:red;border:none;background:none;cursor:pointer;font-weight:bold;">✕</button>`;
                 cartList.appendChild(li);
             });
             cartContainer.style.display = cart.length ? 'block' : 'none';
-            totalBadge.innerText = `${total} Modules`;
+            totalBadge.innerText = `${total} Total Units`;
             finalInput.value = summary;
         }
 
@@ -178,7 +172,7 @@
         // 3. SUBMISSION
         form.addEventListener("submit", function(e) {
             e.preventDefault();
-            if (!cart.length) { alert("Please add at least one module."); return; }
+            if (!cart.length) { alert("Please add at least one item to your order."); return; }
             const btn = document.getElementById("submit-btn");
             btn.innerText = "Sending Request...";
             btn.disabled = true;
