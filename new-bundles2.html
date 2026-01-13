@@ -76,41 +76,55 @@
         }
 
         // Detailed View with Total Cost Calculation
-        function renderDetailedBundles(bundles) {
-            container.innerHTML = "";
-            bundles.forEach((bundle, index) => {
-                let bundleTotal = 0;
-                const card = document.createElement('div');
-                card.className = 'bundle-card';
-                card.id = `bundle-${index}`;
-                
-                let categoriesHtml = bundle.categories.map(cat => {
-                    let catHtml = `<div class="category-group"><strong style="color:var(--orange);">${cat.category}</strong><table class="item-table"><thead><tr><th>Product</th><th>Qty</th><th>Est. Cost</th></tr></thead><tbody>`;
-                    
-                    cat.items.forEach(i => {
-                        const lineTotal = i.typical_quantity * i.unit_cost_estimate;
-                        bundleTotal += lineTotal;
-                        catHtml += `<tr><td>${i.product}</td><td>${i.typical_quantity}</td><td>$${lineTotal.toFixed(2)}</td></tr>`;
-                    });
+        // Detailed View with Category-Level Totals
+function renderDetailedBundles(bundles) {
+    container.innerHTML = "";
+    bundles.forEach((bundle, index) => {
+        let bundleGrandTotal = 0;
+        const card = document.createElement('div');
+        card.className = 'bundle-card';
+        card.id = `bundle-${index}`;
+        
+        let categoriesHtml = bundle.categories.map(cat => {
+            let categorySubtotal = 0;
+            
+            // Build the rows without individual costs
+            let rowsHtml = cat.items.map(i => {
+                const lineTotal = i.typical_quantity * i.unit_cost_estimate;
+                categorySubtotal += lineTotal;
+                bundleGrandTotal += lineTotal;
+                return `<tr><td>${i.product}</td><td>${i.typical_quantity}</td></tr>`;
+            }).join('');
 
-                    catHtml += `</tbody></table></div>`;
-                    return catHtml;
-                }).join('');
-
-                card.innerHTML = `
-                    <span class="sku-label">${bundle.bundle_id}</span>
-                    <h2>${bundle.name}</h2>
-                    <div class="bundle-total-price">$${bundleTotal.toFixed(2)} <span style="font-size:0.9rem; color:#666;">Est. Total</span></div>
-                    <p><em>Goal: ${bundle.goal || 'Complete Unit Refresh'}</em></p>
-                    ${categoriesHtml}
-                    <div class="card-actions">
-                        <button class="btn-pdf" onclick="generatePDF(${index})">Save PDF</button>
-                        <a href="order-form.html" class="btn-orange">Order Now</a>
+            // Return the category block with the Subtotal in the header
+            return `
+                <div class="category-group">
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--orange); padding-bottom: 5px;">
+                        <strong style="color:var(--navy);">${cat.category}</strong>
+                        <span style="font-weight: bold; color: var(--orange);">$${categorySubtotal.toFixed(2)}</span>
                     </div>
-                `;
-                container.appendChild(card);
-            });
-        }
+                    <table class="item-table">
+                        <thead><tr><th>Product</th><th>Qty</th></tr></thead>
+                        <tbody>${rowsHtml}</tbody>
+                    </table>
+                </div>`;
+        }).join('');
+
+        card.innerHTML = `
+            <span class="sku-label">${bundle.bundle_id}</span>
+            <h2>${bundle.name}</h2>
+            <div class="bundle-total-price">$${bundleGrandTotal.toFixed(2)} <span style="font-size:0.9rem; color:#666;">Est. Bundle Total</span></div>
+            <p style="margin-bottom: 20px;"><em>Goal: ${bundle.goal || 'Complete Unit Refresh'}</em></p>
+            ${categoriesHtml}
+            <div class="card-actions">
+                <button class="btn-pdf" onclick="generatePDF(${index})">Save PDF</button>
+                <a href="order-form.html" class="btn-orange">Order Now</a>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
 
         function renderSummaryBundles(bundles) {
             container.innerHTML = "";
