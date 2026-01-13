@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bundle Comparison | Unit Turn Supply</title>
+    <link rel="stylesheet" href="newstyles.css">
+    <script src="cdnjs.cloudflare.com"></script>
+    <style>
+        /* Specific styles for the complex mini-product layout */
+        .catalog-controls { background: #001f3f; padding: 20px; text-align: center; border-bottom: 3px solid #ff6600; }
+        .catalog-controls select { padding: 10px; border-radius: 5px; font-size: 1rem; width: 300px; }
+        .category-group { margin-top: 20px; border-top: 2px solid #eee; padding-top: 10px; }
+        .item-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; }
+        .item-table th { text-align: left; background: #f8f9fa; padding: 8px; border-bottom: 2px solid #ddd; }
+        .item-table td { padding: 8px; border-bottom: 1px solid #eee; }
+        .brand-pill { background: #eef2f7; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; margin-right: 4px; display: inline-block; }
+    </style>
+</head>
+<body>
+
+    <div class="catalog-controls">
+        <label style="color: white; margin-right: 10px; font-weight: bold;">View Type:</label>
+        <select id="catalogSwitcher">
+            <option value="data/products.json">Quick Kits (Summary View)</option>
+            <option value="data/miniproductbundles.json">Detailed Inventory (Deep Dive)</option>
+        </select>
+    </div>
+
+    <div class="bundle-grid" id="bundleContainer">
+        <!-- Bundles injected here -->
+    </div>
+
+    <script>
+        const switcher = document.getElementById('catalogSwitcher');
+        const container = document.getElementById('bundleContainer');
+
+        // Main Loader
+        async function loadCatalog(filePath) {
+            container.innerHTML = "<p style='text-align:center;'>Loading Catalog...</p>";
+            try {
+                const response = await fetch(filePath);
+                const data = await response.json();
+                
+                // Determine which render logic to use
+                if (filePath.includes('miniproductbundles')) {
+                    renderDetailedBundles(data.bundles);
+                } else {
+                    renderSummaryBundles(data);
+                }
+            } catch (err) {
+                container.innerHTML = "<p style='color:red;'>Error loading file: " + filePath + "</p>";
+            }
+        }
+
+        // Logic for miniproductbundles.json (Nested Categories)
+        function renderDetailedBundles(bundles) {
+            container.innerHTML = "";
+            bundles.forEach((bundle, index) => {
+                const card = document.createElement('div');
+                card.className = 'bundle-card';
+                card.id = `bundle-${index}`;
+                
+                let categoriesHtml = bundle.categories.map(cat => `
+                    <div class="category-group">
+                        <strong style="color:#ff6600;">${cat.category}</strong>
+                        <table class="item-table">
+                            <thead><tr><th>Product</th><th>Qty</th><th>Brands</th></tr></thead>
+                            <tbody>
+                                ${cat.items.map(i => `
+                                    <tr>
+                                        <td>${i.product}</td>
+                                        <td>${i.typical_quantity}</td>
+                                        <td>${i.brands.map(b => `<span class="brand-pill">${b}</span>`).join('')}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                `).join('');
+
+                card.innerHTML = `
+                    <span class="sku-label">${bundle.bundle_id}</span>
+                    <h2>${bundle.name}</h2>
+                    <p><em>Goal: ${bundle.goal || ''}</em></p>
+                    ${categoriesHtml}
+                    <div class="card-actions">
+                        <button class="btn-pdf" onclick="generatePDF(${index})">Save PDF</button>
+                        <a href="order-form.html" class="btn-orange">Order Now</a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Logic for your previous products.json (Flat List)
+        function renderSummaryBundles(bundles) {
+            container.innerHTML = "";
+            bundles.forEach((bundle, index) => {
+                const card = document.createElement('div');
+                card.className = 'bundle-card';
+                card.id = `bundle-${index}`;
+                card.innerHTML = `
+                    <span class="sku-label">${bundle.sku}</span>
+                    <h2>${bundle.name}</h2>
+                    <div class="price-tag">$${bundle.price_usd}<span>/kit</span></div>
+                    <ul class="includes-list">
+                        ${bundle.includes.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                    <div class="card-actions">
+                        <button class="btn-pdf" onclick="generatePDF(${index})">Save PDF</button>
+                        <a href="order-form.html" class="btn-orange">Order Now</a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function generatePDF(id) {
+            const element = document.getElementById(`bundle-${id}`);
+            const opt = { margin: 0.5, filename: 'Spec-Sheet.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } };
+            html2pdf().set(opt).from(element).save();
+        }
+
+        // Event Listener for the Dropdown
+        switcher.addEventListener('change', (e) => loadCatalog(e.target.value));
+
+        // Initial Load
+        loadCatalog('data/products.json');
+    </script>
+</body>
+</html>
