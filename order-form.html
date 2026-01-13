@@ -266,6 +266,57 @@
         totalBadge.innerText = `${totalItems} Items`;
         finalInput.value = manifest.join(', '); 
     }
+       // 4. Handle Form Submission with AJAX (Prevents Redirect)
+form.addEventListener('submit', async (e) => {
+    e.preventDefault(); // This is the magic line that stops the redirect
+
+    // Validate that the cart isn't empty
+    if (Object.keys(cart).length === 0) {
+        alert("Your order is empty. Please add at least one Kit or Module.");
+        return;
+    }
+
+    const submitBtn = document.getElementById('submit-btn');
+    const successMsg = document.getElementById('success-message');
+    const orderForm = document.getElementById('orderForm');
+    const formHeader = document.getElementById('form-header');
+
+    // UI Feedback: Disable button so they don't click twice
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Sending Manifest...";
+
+    // Prepare data for Formspree
+    const formData = new FormData(orderForm);
+
+    try {
+        const response = await fetch(orderForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+            // Success! Hide the form and show your checkmark div
+            orderForm.style.display = 'none';
+            if(formHeader) formHeader.style.display = 'none';
+            successMsg.style.display = 'block';
+            
+            // Optional: Smooth scroll to the top to see the success message
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            // Server error (e.g., Formspree limit reached)
+            alert("Oops! There was a problem submitting your order. Please try again.");
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Confirm & Submit Order";
+        }
+    } catch (error) {
+        // Network error (e.g., no internet)
+        alert("Network error. Please check your connection and try again.");
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Confirm & Submit Order";
+    }
+});
+
 </script>
 
 </body>
