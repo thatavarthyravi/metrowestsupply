@@ -200,24 +200,37 @@
     let cart = {};
 
     // 1. Fetch and Render Data
-    Promise.all([
-        fetch('data/products.json').then(res => res.json()).catch(() => []),
-        fetch('data/miniproductbundles.json').then(res => res.json()).catch(() => ({ bundles: [] }))
-    ]).then(([productsData, miniData]) => {
-        fullKitsContainer.innerHTML = '';
-        productsData.forEach(kit => {
-            createItemRow(fullKitsContainer, kit.name, "Full Kit");
-        });
-
-        modulesContainer.innerHTML = '';
-        if(miniData.bundles) {
-            miniData.bundles.forEach(bundle => {
-                bundle.categories.forEach(cat => {
-                    createItemRow(modulesContainer, cat.name, "Module");
-                });
-            });
-        }
+    // LOAD DATA
+Promise.all([
+    fetch('data/products.json').then(res => res.json()).catch(() => []),
+    fetch('data/miniproductbundles.json').then(res => res.json()).catch(() => ({ bundles: [] }))
+]).then(([productsData, miniData]) => {
+    // Render Full Kits
+    fullKitsContainer.innerHTML = '';
+    productsData.forEach((kit) => {
+        // Ensure kit.name exists
+        const kitName = kit.name || "Unnamed Kit"; 
+        createItemRow(fullKitsContainer, kitName, 'Full Kit');
     });
+
+    // Render Sub-Modules
+    modulesContainer.innerHTML = '';
+    if (miniData.bundles) {
+        miniData.bundles.forEach(bundle => {
+            if (bundle.categories) {
+                bundle.categories.forEach(cat => {
+                    // FIX: Check multiple possible name fields in your JSON
+                    const moduleName = cat.name || cat.title || cat.label || "Unknown Module";
+                    createItemRow(modulesContainer, moduleName, 'Module');
+                });
+            }
+        });
+    }
+}).catch(err => {
+    console.error("Error loading product data:", err);
+    modulesContainer.innerHTML = '<p style="color:red;">Error loading modules. Check console.</p>';
+});
+
 
     // 2. Function to create the UI rows
     function createItemRow(container, name, type) {
