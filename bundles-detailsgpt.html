@@ -1,49 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UT | Catalog</title>
-  <link rel="stylesheet" href="newstyles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UT | Bundle Details</title>
+  <link rel="stylesheet" href="newstyles.css">
 
-  <!-- Page-specific styles for the horizontal product tiles -->
   <style>
-    /* Keep typography/colors consistent with newstyles.css; only layout here */
+    /* Page-specific styles only (palette comes from newstyles.css) */
 
-    .catalog-toolbar {
-      padding: 22px 40px 0;
-    }
-
+    .catalog-toolbar { padding: 22px 40px 0; }
     .catalog-toolbar .row {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      align-items: flex-end;
-      justify-content: space-between;
+      display: flex; gap: 14px; flex-wrap: wrap;
+      align-items: flex-end; justify-content: space-between;
       margin-top: 14px;
     }
-
-    .field {
-      display: grid;
-      gap: 8px;
-      min-width: 320px;
-      flex: 1;
-    }
-
-    .field label {
-      font-size: 0.85rem;
-      color: #eaf6ff;
-      opacity: 0.95;
-    }
-
+    .field { display: grid; gap: 8px; min-width: 320px; flex: 1; }
+    .field label { font-size: 0.85rem; color: #eaf6ff; opacity: 0.95; }
     .field select {
-      border-radius: 6px;
-      border: 1px solid rgba(255,255,255,0.25);
-      padding: 12px 12px;
-      font-size: 0.95rem;
-      outline: none;
-      background: rgba(255,255,255,0.95);
-      color: #123;
+      border-radius: 6px; border: 1px solid rgba(255,255,255,0.25);
+      padding: 12px 12px; font-size: 0.95rem; outline: none;
+      background: rgba(255,255,255,0.95); color: #123;
     }
 
     .bundle-meta {
@@ -57,51 +34,79 @@
     }
     .bundle-meta b { color: #ffffff; }
 
-    .status {
-      padding: 10px 40px 0;
-      font-size: 0.9rem;
-      color: #cceeff;
-    }
+    .status { padding: 10px 40px 0; font-size: 0.9rem; color: #cceeff; }
 
-    /* Sections under the hero use white background area already (feature-grid-section) */
-    .catalog-content {
+    .details-area {
       padding: 24px 40px 30px;
       background: white;
     }
 
-    .category-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .bundle-top {
+      display: grid;
       gap: 10px;
-      margin: 18px 0 10px;
+      margin-bottom: 14px;
     }
 
-    .category-header h3 {
-      margin: 0;
+    .bundle-name {
       color: var(--navy);
-      font-size: 1.05rem;
+      font-size: 1.25rem;
+      margin: 0;
     }
 
-    .pill {
-      font-size: 0.75rem;
-      background: var(--light-grey);
-      color: #444;
-      padding: 4px 10px;
-      border-radius: 999px;
+    .bundle-desc {
+      margin: 0;
+      color: #555;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .bundle-kpis {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .kpi {
+      background: white;
       border: 1px solid #e6e6e6;
+      border-radius: 10px;
+      padding: 10px 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      min-width: 160px;
+    }
+
+    .kpi .label { font-size: 0.78rem; color: #666; font-weight: 700; }
+    .kpi .value { font-size: 1.05rem; color: var(--navy); font-weight: 800; margin-top: 2px; }
+
+    .tags-row {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;
+    }
+    .tagchip {
+      font-size: 0.75rem;
+      color: #ff6600;
+      font-weight: 800;
+      background: rgba(255,102,0,0.10);
+      border: 1px solid rgba(255,102,0,0.25);
+      padding: 5px 10px;
+      border-radius: 999px;
+    }
+
+    .category-header {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 10px; margin: 18px 0 10px;
+    }
+    .category-header h3 { margin: 0; color: var(--navy); font-size: 1.05rem; }
+    .pill {
+      font-size: 0.75rem; background: var(--light-grey); color: #444;
+      padding: 4px 10px; border-radius: 999px; border: 1px solid #e6e6e6;
       white-space: nowrap;
     }
 
-    /* Horizontal tile rail */
     .rail {
-      display: flex;
-      gap: 16px;
-      overflow-x: auto;
-      padding: 8px 0 18px;
-      scroll-snap-type: x mandatory;
+      display: flex; gap: 16px; overflow-x: auto;
+      padding: 8px 0 18px; scroll-snap-type: x mandatory;
     }
-
     .rail::-webkit-scrollbar { height: 10px; }
     .rail::-webkit-scrollbar-thumb {
       background: rgba(26,42,68,0.25);
@@ -121,79 +126,30 @@
       grid-template-rows: 165px auto;
     }
 
-    .tile-media {
-      position: relative;
-      background: var(--light-grey);
-    }
+    .tile-media { position: relative; background: var(--light-grey); }
+    .tile-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    .tile-media img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .price-badge {
-      position: absolute;
-      top: 10px;
-      left: 10px;
+    .qty-badge {
+      position: absolute; top: 10px; left: 10px;
       background: rgba(26,42,68,0.92);
-      color: white;
-      padding: 6px 10px;
-      font-size: 0.78rem;
-      border-radius: 999px;
+      color: white; padding: 6px 10px;
+      font-size: 0.78rem; border-radius: 999px;
     }
 
-    .tile-body {
-      padding: 12px 12px 14px;
-      display: grid;
-      gap: 10px;
-    }
+    .tile-body { padding: 12px 12px 14px; display: grid; gap: 10px; }
+    .tile-title { font-weight: 800; color: var(--navy); line-height: 1.25; font-size: 0.98rem; }
 
-    .tile-title {
-      font-weight: 800;
-      color: var(--navy);
-      line-height: 1.25;
-      font-size: 0.98rem;
-    }
-
-    .kv {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      font-size: 0.85rem;
-      color: #555;
-    }
-
+    .kv { display: flex; justify-content: space-between; gap: 10px; font-size: 0.85rem; color: #555; }
     .kv b { color: #111; }
 
-    .label {
-      font-size: 0.8rem;
-      color: #666;
-      margin-top: 2px;
-      font-weight: 700;
-    }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; }
     .chip {
-      font-size: 0.72rem;
-      color: #444;
-      border: 1px solid #e3e3e3;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: #fff;
+      font-size: 0.72rem; color: #444;
+      border: 1px solid #e3e3e3; padding: 4px 8px;
+      border-radius: 999px; background: #fff;
     }
 
-    .actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 2px;
-    }
+    .actions { display: flex; gap: 10px; margin-top: 2px; }
 
     .btn-link {
       background-color: var(--orange);
@@ -211,7 +167,6 @@
       border: 0;
       cursor: pointer;
     }
-
     .btn-link.secondary {
       background: var(--light-grey);
       color: var(--navy);
@@ -232,7 +187,7 @@
       .catalog-toolbar { padding: 18px 20px 0; }
       .bundle-meta { padding: 0 20px 14px; }
       .status { padding: 10px 20px 0; }
-      .catalog-content { padding: 18px 20px 22px; }
+      .details-area { padding: 18px 20px 22px; }
       .field { min-width: 240px; }
     }
   </style>
@@ -240,10 +195,10 @@
 
 <body>
   <div class="container">
-    <!-- Top Navy Blue Header (same as index) -->
+    <!-- Header (matches your index) -->
     <header>
       <div class="header-left">
-        <img src="logo.png" alt="UT Logo" class="logo-small" />
+        <img src="logo.png" alt="UT Logo" class="logo-small">
         <span>Unit Turn Supply</span>
       </div>
       <nav class="nav-menu">
@@ -255,11 +210,11 @@
       </nav>
     </header>
 
-    <!-- Hero Section (same styling; content customized for Catalog) -->
+    <!-- Hero (matches your index) -->
     <div class="hero-section">
       <div class="hero-text">
-        <h1>Catalog <br><span class="orange-text">Bundle Items</span></h1>
-        <p>Select a bundle to browse all included items as tiles. Each tile links out to a product details page.</p>
+        <h1>Bundle Details <br><span class="orange-text">What’s Included</span></h1>
+        <p>Choose a kit and browse included SKUs as tiles. Each tile links to an external product detail page.</p>
 
         <div class="catalog-toolbar">
           <div class="row">
@@ -277,20 +232,18 @@
 
         <div class="bundle-meta" id="bundleMeta"></div>
       </div>
-
-      <img src="logo.png" alt="UT Main Logo" class="main-logo" />
+      <img src="logo.png" alt="UT Main Logo" class="main-logo">
     </div>
 
-    <!-- White content section -->
+    <!-- Main content -->
     <div class="feature-grid-section" style="padding: 0; background: white;">
       <div class="status" id="status"></div>
-      <div class="catalog-content" id="content"></div>
+      <div class="details-area" id="content"></div>
     </div>
 
     <div class="brand-strip">
       <p>Trusted Brands: Benjamin Moore • PPG • Leviton • Lutron • Moen • Delta • 3M • Oatey</p>
     </div>
-
   </div>
 
   <footer>
@@ -300,162 +253,196 @@
   <script src="menu.js"></script>
 
   <script>
-    // ✅ Loads your file from /data/products.json
-    const DATA_URL = "data/products.json";
+    // ✅ Root-relative so it works from any page path
+    const DATA_URL = "/data/products.json";
 
-    // External product page + image mapping (representative; swap to SKU-accurate later if needed)
-    const PRODUCT_CATALOG = {
-      "Interior wall paint (5-gal, contractor grade)": { url:"https://www.sherwin-williams.com/homeowners/products/promar-200-zero-voc-interior-latex", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Paint_can.jpg/640px-Paint_can.jpg" },
-      "Interior wall paint, 5-gal": { url:"https://www.sherwin-williams.com/homeowners/products/promar-200-zero-voc-interior-latex", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Paint_can.jpg/640px-Paint_can.jpg" },
-      "Ceiling paint, 5-gal": { url:"https://www.sherwin-williams.com/homeowners/products/premium-ceiling-paint", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/White_paint_bucket.jpg/640px-White_paint_bucket.jpg" },
-      "Lightweight drywall compound (3–3.5 gal)": { url:"https://www.usg.com/content/usgcom/en/products/walls/drywall/joint-compound/lightweight/all-purpose.html", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Joint_compound.jpg/640px-Joint_compound.jpg" },
-      "Drywall patch kit": { url:"https://www.3m.com/3M/en_US/p/d/b00037372/", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Drywall_repair_patch.jpg/640px-Drywall_repair_patch.jpg" },
-      "Acrylic latex caulk (white)": { url:"https://www.dap.com/products-projects/product-categories/caulks-sealants/latex-caulk/", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Caulk_gun.jpg/640px-Caulk_gun.jpg" },
+    // Map included-line "prefixes" to images and URLs.
+    // Matching is done by startsWith() in order.
+    const LINE_CATALOG = [
+      {
+        match: "DAP Alex Plus",
+        brand: "DAP",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Caulk_gun.jpg/640px-Caulk_gun.jpg",
+        url: "https://www.dap.com/products-projects/product-categories/caulks-sealants/latex-caulk/"
+      },
+      {
+        match: "USG Sheetrock",
+        brand: "USG",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Joint_compound.jpg/640px-Joint_compound.jpg",
+        url: "https://www.usg.com/content/usgcom/en/products/walls/drywall/joint-compound/lightweight/all-purpose.html"
+      },
+      {
+        match: "Leviton Decora white single-pole switches",
+        brand: "Leviton",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Light_switch.jpg/640px-Light_switch.jpg",
+        url: "https://leviton.com/products/5603-2w"
+      },
+      {
+        match: "Leviton white duplex receptacles",
+        brand: "Leviton",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Electrical_outlet.jpg/640px-Electrical_outlet.jpg",
+        url: "https://store.leviton.com/collections/decora-receptacles"
+      },
+      {
+        match: "Leviton Decora white self-test GFCI outlet",
+        brand: "Leviton",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/GFCI_outlet.jpg/640px-GFCI_outlet.jpg",
+        url: "https://store.leviton.com/collections/gfci-receptacles"
+      },
+      {
+        match: "Leviton Decora white wallplates",
+        brand: "Leviton",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Wall_plate.jpg/640px-Wall_plate.jpg",
+        url: "https://store.leviton.com/collections/decora-wallplates"
+      },
+      {
+        match: "Philips LED A19",
+        brand: "Philips",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/LED_bulb.jpg/640px-LED_bulb.jpg",
+        url: "https://www.usa.lighting.philips.com/consumer/bulbs/led-bulbs"
+      },
+      {
+        match: "3M Filtrete",
+        brand: "Filtrete (3M)",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Air_filter.jpg/640px-Air_filter.jpg",
+        url: "https://www.filtrete.com/3M/en_US/filtrete/products/"
+      },
+      {
+        match: "Kidde 10-year sealed smoke alarms",
+        brand: "Kidde",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Smoke_detector.jpg/640px-Smoke_detector.jpg",
+        url: "https://www.kidde.com/home-safety/en/us/products/smoke-alarms/"
+      },
+      {
+        match: "First Alert CO",
+        brand: "First Alert",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Carbon_monoxide_alarm.jpg/640px-Carbon_monoxide_alarm.jpg",
+        url: "https://www.firstalert.com/us/en/products/alarms/carbon-monoxide-alarms/"
+      },
+      {
+        match: "Kwikset Tylo",
+        brand: "Kwikset",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Door_knob.jpg/640px-Door_knob.jpg",
+        url: "https://www.kwikset.com/products"
+      },
+      {
+        match: "Moen Adler",
+        brand: "Moen",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Bathroom_faucet.jpg/640px-Bathroom_faucet.jpg",
+        url: "https://shop.moen.com/collections/bathroom-faucets"
+      }
+    ];
 
-      "Roller covers (9”, ½” nap)": { url:"https://woosterbrush.com/product-category/rollers/roller-covers/", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Paint_roller.jpg/640px-Paint_roller.jpg" },
-      "Roller covers (9\", 1/2\" nap)": { url:"https://woosterbrush.com/product-category/rollers/roller-covers/", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Paint_roller.jpg/640px-Paint_roller.jpg" },
-      "Roller frames": { url:"https://www.purdy.com/products/rollers-frames", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Paint_roller_frame.jpg/640px-Paint_roller_frame.jpg" },
-      "Paint trays + liners": { url:"https://woosterbrush.com/product-category/trays-liners/", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Paint_tray.jpg/640px-Paint_tray.jpg" },
-      "Paint trays & liners": { url:"https://woosterbrush.com/product-category/trays-liners/", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Paint_tray.jpg/640px-Paint_tray.jpg" },
-      "Contractor-grade brushes": { url:"https://www.purdy.com/products/brushes", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Paintbrush.jpg/640px-Paintbrush.jpg" },
-      "Painter’s tape (1.5”–2”)": { url:"https://www.scotchblue.com/3M/en_US/scotchblue/products/", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Masking_tape.jpg/640px-Masking_tape.jpg" },
-      "Painter’s tape (1.5\"–2\")": { url:"https://www.scotchblue.com/3M/en_US/scotchblue/products/", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Masking_tape.jpg/640px-Masking_tape.jpg" },
-
-      "LED A19 bulbs (soft white, bulk)": { url:"https://www.usa.lighting.philips.com/consumer/bulbs/led-bulbs", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/LED_bulb.jpg/640px-LED_bulb.jpg" },
-      "LED A19 bulbs (bulk pack)": { url:"https://www.usa.lighting.philips.com/consumer/bulbs/led-bulbs", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/LED_bulb.jpg/640px-LED_bulb.jpg" },
-      "Decora switches": { url:"https://leviton.com/products/5603-2w", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Light_switch.jpg/640px-Light_switch.jpg" },
-      "Decora outlets": { url:"https://store.leviton.com/collections/decora-receptacles", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Electrical_outlet.jpg/640px-Electrical_outlet.jpg" },
-      "Wall plates (1–2 gang)": { url:"https://store.leviton.com/collections/decora-wallplates", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Wall_plate.jpg/640px-Wall_plate.jpg" },
-
-      "HVAC filter (common sizes)": { url:"https://www.lowes.com/pd/Filtrete-Common-20-in-x-25-in-x-1-in-Actual-24-72-in-x-19-72-in-x-1-13-in-Electrostatic-Pleated-Air-Filter/1000420751", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Air_filter.jpg/640px-Air_filter.jpg" },
-      "HVAC filters (common sizes)": { url:"https://www.lowes.com/pd/Filtrete-Common-20-in-x-25-in-x-1-in-Actual-24-72-in-x-19-72-in-x-1-13-in-Electrostatic-Pleated-Air-Filter/1000420751", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Air_filter.jpg/640px-Air_filter.jpg" },
-      "Basic cleaning kit (broom, mop, chemicals)": { url:"https://www.rubbermaidcommercial.com/cleaning/mops/", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Mop_and_bucket.jpg/640px-Mop_and_bucket.jpg" },
-      "Basic cleaning kit": { url:"https://www.rubbermaidcommercial.com/cleaning/mops/", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Mop_and_bucket.jpg/640px-Mop_and_bucket.jpg" },
-
-      "Smoke detectors (10-year sealed battery)": { url:"https://www.firstalert.com/us/en/products/alarms/smoke-alarms/10-year-sealed-battery-smoke-alarm-with-photoelectric-sensor-pr710/", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Smoke_detector.jpg/640px-Smoke_detector.jpg" },
-      "Smoke detectors (10-year)": { url:"https://www.firstalert.com/us/en/products/alarms/smoke-alarms/10-year-sealed-battery-smoke-alarm-with-photoelectric-sensor-pr710/", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Smoke_detector.jpg/640px-Smoke_detector.jpg" },
-      "CO detectors": { url:"https://www.kidde.com/home-safety/en/us/products/smoke-co-alarms/carbon-monoxide-alarms/", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Carbon_monoxide_alarm.jpg/640px-Carbon_monoxide_alarm.jpg" },
-      "Fire extinguisher (ABC, small)": { url:"https://www.kidde.com/home-safety/en/us/products/fire-extinguishers/", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Fire_extinguisher.jpg/640px-Fire_extinguisher.jpg" },
-      "Fire extinguisher (ABC)": { url:"https://www.kidde.com/home-safety/en/us/products/fire-extinguishers/", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Fire_extinguisher.jpg/640px-Fire_extinguisher.jpg" },
-
-      "Flush-mount LED ceiling lights": { url:"https://lithonia.acuitybrands.com/products/indoor-lighting/ceiling-mount", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Ceiling_light_fixture.jpg/640px-Ceiling_light_fixture.jpg" },
-      "Flush-mount LED ceiling light": { url:"https://lithonia.acuitybrands.com/products/indoor-lighting/ceiling-mount", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Ceiling_light_fixture.jpg/640px-Ceiling_light_fixture.jpg" },
-      "GFCI outlet (bath/kitchen)": { url:"https://www.eaton.com/us/en-us/catalog/wiring-devices/gfci-receptacles.html", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/GFCI_outlet.jpg/640px-GFCI_outlet.jpg" },
-      "GFCI outlet": { url:"https://www.eaton.com/us/en-us/catalog/wiring-devices/gfci-receptacles.html", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/GFCI_outlet.jpg/640px-GFCI_outlet.jpg" },
-
-      "Universal toilet repair kit": { url:"https://www.fluidmaster.com/products/toilet/complete-toilet-repair-kits/", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Toilet_tank_internals.jpg/640px-Toilet_tank_internals.jpg" },
-      "Toilet supply line": { url:"https://www.siouxchief.com/products/supply/supply-lines", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Flexible_supply_line.jpg/640px-Flexible_supply_line.jpg" },
-      "Faucet aerators": { url:"https://www.neoperl.com/en/products/aerators/", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Faucet_aerator.jpg/640px-Faucet_aerator.jpg" },
-      "PTFE thread seal tape": { url:"https://www.oatey.com/products/oatey-ptfe-white-general-purpose-thread-seal-tape--1680494038", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Thread_seal_tape.jpg/640px-Thread_seal_tape.jpg" },
-
-      "Decorative LED ceiling fixtures": { url:"https://www.progresslighting.com/", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Pendant_light.jpg/640px-Pendant_light.jpg" },
-      "Decorative LED ceiling fixture": { url:"https://www.progresslighting.com/", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Pendant_light.jpg/640px-Pendant_light.jpg" },
-      "Bathroom faucet (mid-tier)": { url:"https://shop.moen.com/collections/bathroom-faucets", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Bathroom_faucet.jpg/640px-Bathroom_faucet.jpg" },
-      "Kitchen faucet (mid-tier)": { url:"https://www.deltafaucet.com/kitchen", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Kitchen_faucet.jpg/640px-Kitchen_faucet.jpg" },
-
-      "Sink trap kits": { url:"https://www.oatey.com/products", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/P-trap_under_sink.jpg/640px-P-trap_under_sink.jpg" },
-      "Sink trap kit": { url:"https://www.oatey.com/products", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/P-trap_under_sink.jpg/640px-P-trap_under_sink.jpg" },
-      "Silicone sealant (clear)": { url:"https://www.gesealants.com/products/silicone/", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Silicone_sealant.jpg/640px-Silicone_sealant.jpg" }
+    const FALLBACK = {
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/640px-No_image_available.svg.png"
     };
 
-    let DATA = null;
+    function parseLine(line) {
+      // Example: "DAP Alex Plus white caulk (10.1 oz) ×4"
+      // Also supports "x4" / "X4"
+      const qtyMatch = line.match(/(?:×|x|X)\s*(\d+)\s*$/);
+      const qty = qtyMatch ? Number(qtyMatch[1]) : null;
+      const title = qtyMatch ? line.replace(qtyMatch[0], "").trim() : line.trim();
 
-    function money(n, currency) {
+      const found = LINE_CATALOG.find(e => title.startsWith(e.match));
+      const url = found?.url || ("https://www.google.com/search?q=" + encodeURIComponent(title));
+      const img = found?.img || FALLBACK.img;
+      const brand = found?.brand || "—";
+
+      return { raw: line, title, qty, brand, url, img };
+    }
+
+    function moneyUSD(n) {
       if (typeof n !== "number") return "";
-      return new Intl.NumberFormat("en-US", { style: "currency", currency }).format(n);
+      return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(n);
     }
 
-    function flattenBundle(bundleId) {
-      const byId = Object.fromEntries((DATA.bundles || []).map(b => [b.bundle_id, b]));
-      const visited = new Set();
+    function safeText(v) { return (v === undefined || v === null) ? "" : String(v); }
 
-      function collect(id) {
-        if (!byId[id] || visited.has(id)) return { categories: [] };
-        visited.add(id);
+    let BUNDLES = [];
 
-        const b = byId[id];
-        const cats = [];
-
-        (b.includes || []).forEach(dep => {
-          const depData = collect(dep);
-          cats.push(...depData.categories);
-        });
-
-        cats.push(...(b.categories || []));
-        return { bundle: b, categories: cats };
-      }
-      return collect(bundleId);
-    }
-
-    function renderBundle(bundleId) {
-      const { bundle, categories } = flattenBundle(bundleId);
+    function renderBundle(sku) {
       const content = document.getElementById("content");
       const meta = document.getElementById("bundleMeta");
+      const status = document.getElementById("status");
+
+      const bundle = BUNDLES.find(b => b.sku === sku);
+      if (!bundle) {
+        content.innerHTML = "";
+        meta.innerHTML = "";
+        status.innerHTML = `<div class="error"><b>Bundle not found</b> — sku: ${safeText(sku)}</div>`;
+        return;
+      }
+
+      status.textContent = "";
 
       meta.innerHTML = [
-        bundle.target_customer ? `<span><b>Target:</b> ${bundle.target_customer}</span>` : "",
-        bundle.use_case ? `<span><b>Use case:</b> ${bundle.use_case}</span>` : "",
-        bundle.goal ? `<span><b>Goal:</b> ${bundle.goal}</span>` : "",
-        bundle.includes ? `<span><b>Includes:</b> ${(bundle.includes || []).join(", ")}</span>` : ""
+        bundle.brand ? `<span><b>Brand:</b> ${bundle.brand}</span>` : "",
+        bundle.supplier_type ? `<span><b>Supplier type:</b> ${bundle.supplier_type}</span>` : "",
+        bundle.category ? `<span><b>Category:</b> ${bundle.category}</span>` : ""
       ].filter(Boolean).join("");
 
-      content.innerHTML = "";
+      const includes = Array.isArray(bundle.includes) ? bundle.includes : [];
+      const items = includes.map(parseLine);
 
-      categories.forEach(cat => {
-        const section = document.createElement("div");
+      const tags = Array.isArray(bundle.tags) ? bundle.tags : [];
 
-        const header = document.createElement("div");
-        header.className = "category-header";
-        header.innerHTML = `<h3>${cat.category}</h3><span class="pill">${(cat.items || []).length} items</span>`;
-        section.appendChild(header);
+      content.innerHTML = `
+        <div class="bundle-top">
+          <h2 class="bundle-name">${safeText(bundle.name)}</h2>
+          <p class="bundle-desc">${safeText(bundle.short_desc)}</p>
 
-        const rail = document.createElement("div");
-        rail.className = "rail";
-
-        (cat.items || []).forEach(item => {
-          const key = item.product;
-          const catalog = PRODUCT_CATALOG[key] || {};
-          const img = catalog.img || "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/640px-No_image_available.svg.png";
-          const url = catalog.url || ("https://www.google.com/search?q=" + encodeURIComponent(key));
-
-          const tile = document.createElement("div");
-          tile.className = "tile";
-
-          tile.innerHTML = `
-            <div class="tile-media">
-              <img src="${img}" alt="${key}" loading="lazy" referrerpolicy="no-referrer" />
-              <div class="price-badge">${money(item.unit_cost_estimate, DATA.currency || "USD")} ea</div>
+          <div class="bundle-kpis">
+            <div class="kpi">
+              <div class="label">Price</div>
+              <div class="value">${moneyUSD(bundle.price_usd)} <span style="font-size:.9rem; color:#666; font-weight:700;">/ kit</span></div>
             </div>
-            <div class="tile-body">
-              <div class="tile-title">${key}</div>
-              <div class="kv"><span>Qty (typ.)</span><b>${item.typical_quantity ?? ""}</b></div>
-
-              <div class="label">Brands</div>
-              <div class="chips">
-                ${(item.brands || []).slice(0, 6).map(b => `<span class="chip">${b}</span>`).join("") || `<span class="chip">—</span>`}
-              </div>
-
-              <div class="label">Suppliers</div>
-              <div class="chips">
-                ${(item.suppliers || []).slice(0, 6).map(s => `<span class="chip">${s}</span>`).join("") || `<span class="chip">—</span>`}
-              </div>
-
-              <div class="actions">
-                <a class="btn-link" href="${url}" target="_blank" rel="noopener noreferrer">View product ↗</a>
-                <button class="btn-link secondary" type="button" data-copy="${url}">Copy link</button>
-              </div>
+            <div class="kpi">
+              <div class="label">SKU</div>
+              <div class="value">${safeText(bundle.sku)}</div>
             </div>
-          `;
+            <div class="kpi">
+              <div class="label">Type</div>
+              <div class="value">${safeText(bundle.type || "bundle")}</div>
+            </div>
+          </div>
 
-          rail.appendChild(tile);
-        });
+          ${tags.length ? `<div class="tags-row">${tags.map(t => `<span class="tagchip">${t}</span>`).join("")}</div>` : ""}
+        </div>
 
-        section.appendChild(rail);
-        content.appendChild(section);
+        <div class="category-header">
+          <h3>Included Items</h3>
+          <span class="pill">${items.length} items</span>
+        </div>
+
+        <div class="rail" id="itemsRail"></div>
+      `;
+
+      const rail = document.getElementById("itemsRail");
+      items.forEach(it => {
+        const tile = document.createElement("div");
+        tile.className = "tile";
+        tile.innerHTML = `
+          <div class="tile-media">
+            <img src="${it.img}" alt="${it.title}" loading="lazy" referrerpolicy="no-referrer" />
+            <div class="qty-badge">${it.qty ? `Qty ×${it.qty}` : "Qty —"}</div>
+          </div>
+          <div class="tile-body">
+            <div class="tile-title">${it.title}</div>
+            <div class="kv"><span>Brand</span><b>${it.brand}</b></div>
+            <div class="kv"><span>Source</span><b>External</b></div>
+
+            <div class="actions">
+              <a class="btn-link" href="${it.url}" target="_blank" rel="noopener noreferrer">View product ↗</a>
+              <button class="btn-link secondary" type="button" data-copy="${it.url}">Copy link</button>
+            </div>
+          </div>
+        `;
+        rail.appendChild(tile);
       });
 
-      // copy link buttons
-      content.querySelectorAll("button[data-copy]").forEach(btn => {
+      // copy buttons
+      rail.querySelectorAll("button[data-copy]").forEach(btn => {
         btn.addEventListener("click", async () => {
           const link = btn.getAttribute("data-copy");
           try {
@@ -472,19 +459,28 @@
 
     async function loadData() {
       const status = document.getElementById("status");
-      status.textContent = "Loading products…";
+      status.textContent = "Loading bundles…";
 
       try {
         const res = await fetch(DATA_URL, { cache: "no-store" });
         if (!res.ok) throw new Error(`Fetch failed: ${res.status} ${res.statusText}`);
-        DATA = await res.json();
+
+        const json = await res.json();
+
+        if (!Array.isArray(json)) {
+          throw new Error("products.json must be a top-level array of bundles.");
+        }
+
+        // keep only bundles (type=bundle), but allow missing type
+        BUNDLES = json.filter(x => (x && typeof x === "object")).filter(x => !x.type || x.type === "bundle");
 
         const select = document.getElementById("bundleSelect");
         select.innerHTML = "";
-        (DATA.bundles || []).forEach(b => {
+
+        BUNDLES.forEach(b => {
           const opt = document.createElement("option");
-          opt.value = b.bundle_id;
-          opt.textContent = `${b.bundle_id} — ${b.name || ""}`;
+          opt.value = b.sku;
+          opt.textContent = `${b.name} (${b.sku})`;
           select.appendChild(opt);
         });
 
@@ -492,7 +488,7 @@
         select.onchange = (e) => renderBundle(e.target.value);
 
         status.textContent = "";
-        renderBundle(DATA.bundles?.[0]?.bundle_id);
+        renderBundle(BUNDLES[0]?.sku);
       } catch (err) {
         status.innerHTML = `<div class="error"><b>Could not load:</b> ${DATA_URL}<br/>${String(err)}</div>`;
       }
