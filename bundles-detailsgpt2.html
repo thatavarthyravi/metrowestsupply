@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UT | Bundle Details</title>
+  <style>
+    :root {
+      --navy: #1a2a44;
+      --orange: #ff6600;
+      --light-grey: #f4f4f4;
+      --white: #ffffff;
+      --error-bg: rgba(255,102,0,.08);
+      --error-border: rgba(255,102,0,.35);
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    /* Toolbar & Inputs */
+    .catalog-toolbar { padding: 12px 40px 0; }
+    .catalog-toolbar .row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-top: 12px;
+    }
+    .field { display: grid; gap: 8px; min-width: 320px; flex: 1; }
+    .field label { font-size: 0.85rem; color: #eaf6ff; opacity: 0.95; }
+    .field select {
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 12px;
+      font-size: 0.95rem;
+      background: rgba(255,255,255,0.95);
+      color: #123;
+    }
+
+    /* Content Area */
+    .details-area { padding: 24px 40px; background: white; min-height: 100vh; border-radius: 20px 20px 0 0; }
+    .bundle-name { color: var(--navy); font-size: 1.5rem; margin: 0 0 8px; font-weight: 800; }
+    .bundle-desc { margin: 0; color: #555; font-size: 0.95rem; line-height: 1.5; max-width: 800px; }
+
+    /* KPI Cards */
+    .bundle-kpis { display: flex; gap: 12px; flex-wrap: wrap; margin: 20px 0; }
+    .kpi {
+      background: white;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 12px 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      min-width: 140px;
+      flex: 1;
+    }
+    .kpi .label { font-size: 0.75rem; color: #777; font-weight: 700; text-transform: uppercase; }
+    .kpi .value { font-size: 1.1rem; color: var(--navy); font-weight: 800; margin-top: 4px; }
+
+    /* Category Headers */
+    .category-header { display: flex; align-items: center; justify-content: space-between; margin: 30px 0 10px; }
+    .category-header h3 { margin: 0; color: var(--navy); font-size: 1.1rem; }
+    .pill { font-size: 0.75rem; background: var(--light-grey); color: #555; padding: 4px 12px; border-radius: 20px; border: 1px solid #ddd; }
+
+    /* Horizontal Scroller (Desktop) */
+    .rail {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding-bottom: 16px;
+      scroll-snap-type: x mandatory;
+    }
+    .rail::-webkit-scrollbar { height: 6px; }
+    .rail::-webkit-scrollbar-thumb { background: #ddd; border-radius: 10px; }
+
+    /* Cards/Tiles */
+    .tile {
+      flex: 0 0 280px;
+      scroll-snap-align: start;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      background: white;
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+    .tile:hover { transform: translateY(-4px); border-color: var(--orange); }
+    .tile-media { height: 160px; background: #f9f9f9; position: relative; }
+    .tile-media img { width: 100%; height: 100%; object-fit: cover; }
+    .qty-badge { position: absolute; top: 10px; left: 10px; background: var(--navy); color: white; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; }
+    .tile-body { padding: 15px; }
+    .tile-title { font-weight: 700; color: var(--navy); margin-bottom: 8px; min-height: 2.4em; }
+    .kv { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px; color: #666; }
+    .kv b { color: var(--navy); }
+
+    /* Actions */
+    .btn-link {
+      width: 100%;
+      background: var(--orange);
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    /* Quick View Modal */
+    .modal-backdrop {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.6); 
+      display: none; align-items: center; justify-content: center; z-index: 1000;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal { background: white; width: 90%; max-width: 600px; border-radius: 16px; overflow: hidden; }
+    .modal-header { background: var(--navy); color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+    .modal-body { padding: 20px; display: grid; grid-template-columns: 200px 1fr; gap: 20px; }
+    .modal-img { background: #eee; height: 200px; border-radius: 8px; overflow: hidden; }
+    .modal-img img { width: 100%; height: 100%; object-fit: cover; }
+    .modal-content { color: #333; }
+
+    /* Mobile Adaptations */
+    @media (max-width: 768px) {
+      .catalog-toolbar { padding: 10px 20px; }
+      .details-area { padding: 20px; }
+      .rail {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2 per row */
+        gap: 12px;
+        overflow: visible;
+      }
+      .tile { flex: none; width: auto; }
+      .modal-body { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .rail { grid-template-columns: 1fr; } /* Stack on tiny screens */
+    }
+  </style>
+</head>
+<body>
+
+  <header class="catalog-toolbar">
+    <div class="row">
+      <div class="field">
+        <label>Select Your Bundle</label>
+        <select>
+          <option>Starter Kit - Essential Hardware</option>
+          <option>Pro Suite - Advanced Setup</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main class="details-area">
+    <h1 class="bundle-name">Premium Starter Kit</h1>
+    <p class="bundle-desc">A curated collection of top-tier hardware designed for performance and reliability.</p>
+
+    <div class="bundle-kpis">
+      <div class="kpi">
+        <div class="label">Total Items</div>
+        <div class="value">12</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Est. Weight</div>
+        <div class="value">4.5 kg</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Status</div>
+        <div class="value" style="color:#28a745;">Ready</div>
+      </div>
+    </div>
+
+    <div class="category-header">
+      <h3>Essential Components</h3>
+      <span class="pill">4 Items</span>
+    </div>
+
+    <div class="rail">
+      <!-- Tile 1 -->
+      <div class="tile">
+        <div class="tile-media">
+          <span class="qty-badge">Qty: 1</span>
+          <img src="images.unsplash.com" alt="Laptop">
+        </div>
+        <div class="tile-body">
+          <div class="tile-title">Workstation Laptop Pro</div>
+          <div class="kv"><span>Model:</span> <b>UT-2024</b></div>
+          <div class="kv"><span>Color:</span> <b>Space Grey</b></div>
+          <button class="btn-link">View Specs</button>
+        </div>
+      </div>
+
+      <!-- Tile 2 -->
+      <div class="tile">
+        <div class="tile-media">
+          <span class="qty-badge">Qty: 2</span>
+          <img src="images.unsplash.com" alt="Monitor">
+        </div>
+        <div class="tile-body">
+          <div class="tile-title">27" 4K HDR Monitor</div>
+          <div class="kv"><span>Refresh:</span> <b>144Hz</b></div>
+          <div class="kv"><span>Port:</span> <b>USB-C</b></div>
+          <button class="btn-link">View Specs</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal Component -->
+  <div class="modal-backdrop" id="modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h4 style="margin:0">Item Quick View</h4>
+        <button onclick="document.getElementById('modal').classList.remove('open')" style="background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-img">
+            <img src="images.unsplash.com" alt="Product">
+        </div>
+        <div class="modal-content">
+          <h2 style="margin-top:0">Workstation Laptop Pro</h2>
+          <p style="color:#666; line-height:1.4">Complete technical specifications for the main unit in this bundle. Includes 3-year warranty and setup support.</p>
+          <button class="btn-link">Order Replacement</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
