@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Unit Turn Bundles</title>
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --card: #111827;
+      --muted: #94a3b8;
+      --text: #e5e7eb;
+      --border: rgba(148,163,184,.18);
+      --btn: #2563eb;
+      --btn2: #0ea5e9;
+    }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 500px at 20% 10%, rgba(37,99,235,.25), transparent 60%),
+                  radial-gradient(800px 500px at 80% 0%, rgba(14,165,233,.18), transparent 60%),
+                  var(--bg);
+      color: var(--text);
+    }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 28px 18px 40px; }
+    h1 { font-size: 22px; margin: 0 0 10px; letter-spacing: .2px; }
+    .sub { color: var(--muted); margin: 0 0 18px; line-height: 1.4; }
+    .topbar {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 14px 0 18px;
+      padding: 14px;
+      background: rgba(17,24,39,.7);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      backdrop-filter: blur(8px);
+    }
+    label { color: var(--muted); font-size: 13px; }
+    select {
+      background: #0f172a;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 14px;
+      outline: none;
+      min-width: 280px;
+    }
+    .meta {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .meta b { color: var(--text); font-weight: 600; }
+    .sectionTitle {
+      margin: 22px 0 10px;
+      font-size: 15px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pill {
+      font-size: 12px;
+      color: #cbd5e1;
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15,23,42,.65);
+    }
+
+    /* Horizontal tile rail */
+    .rail {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      padding: 8px 6px 14px;
+      scroll-snap-type: x mandatory;
+    }
+    .rail::-webkit-scrollbar { height: 10px; }
+    .rail::-webkit-scrollbar-thumb {
+      background: rgba(148,163,184,.25);
+      border-radius: 999px;
+      border: 2px solid rgba(11,15,23,.7);
+    }
+    .card {
+      flex: 0 0 290px;
+      scroll-snap-align: start;
+      background: rgba(17,24,39,.78);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      display: grid;
+      grid-template-rows: 160px auto;
+    }
+    .img {
+      background: #0f172a;
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+    .img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: .95;
+    }
+    .badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(15,23,42,.85);
+      border: 1px solid var(--border);
+      padding: 6px 10px;
+      font-size: 12px;
+      border-radius: 999px;
+      color: #e2e8f0;
+      backdrop-filter: blur(6px);
+    }
+    .content {
+      padding: 12px 12px 14px;
+      display: grid;
+      gap: 10px;
+    }
+    .title { font-weight: 700; line-height: 1.25; }
+    .row { display: flex; justify-content: space-between; gap: 10px; color: var(--muted); font-size: 13px; }
+    .row b { color: var(--text); font-weight: 650; }
+    .small { color: var(--muted); font-size: 12.5px; line-height: 1.35; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      font-size: 11.5px;
+      color: #cbd5e1;
+      border: 1px solid var(--border);
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15,23,42,.55);
+    }
+    .actions { display: flex; gap: 10px; margin-top: 2px; }
+    .btn {
+      appearance: none;
+      border: 0;
+      background: var(--btn);
+      color: white;
+      padding: 9px 10px;
+      border-radius: 12px;
+      font-weight: 650;
+      font-size: 13px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex: 1;
+    }
+    .btn.secondary { background: rgba(14,165,233,.2); border: 1px solid rgba(14,165,233,.35); color: #e0f2fe; }
+    .btn:hover { filter: brightness(1.05); }
+    .footerNote {
+      color: var(--muted);
+      font-size: 12.5px;
+      margin-top: 18px;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Unit Turn Bundles</h1>
+    <p class="sub">
+      Select a bundle to see all items. Tiles scroll horizontally; each includes an image and a link to an external product page.
+    </p>
+
+    <div class="topbar">
+      <div style="display:grid; gap:6px;">
+        <label for="bundleSelect">Bundle</label>
+        <select id="bundleSelect"></select>
+      </div>
+      <div class="meta" id="bundleMeta"></div>
+    </div>
+
+    <div id="content"></div>
+
+    <div class="footerNote">
+      Cost estimates are typical contractor-grade USD averages and vary by region/volume.
+      Product links are representative SKUs or official brand pages; you can swap URLs/images to match your preferred vendor/SKU list.
+    </div>
+  </div>
+
+  <script>
+    // --- Your JSON (embedded) ---
+    const DATA = {
+      "currency": "USD",
+      "pricing_notes": "Estimated contractor-grade pricing. Regional variance applies.",
+      "bundles": [
+        {
+          "bundle_id": "BUNDLE_1",
+          "name": "Basic Unit Turn (1–2 Bed)",
+          "target_customer": "PMs, handymen, small landlords",
+          "use_case": "Cosmetic refresh between tenants",
+          "goal": "Get unit rent-ready with minimal friction",
+          "categories": [
+            {
+              "category": "Paint & Wall Repair",
+              "items": [
+                { "product": "Interior wall paint, 5-gal", "typical_quantity": 1, "unit_cost_estimate": 140,
+                  "brands": ["Benjamin Moore Ultra Spec", "PPG", "Sherwin-Williams Pro"],
+                  "suppliers": ["Regional paint distributors", "Sherwin-Williams Pro"]
+                },
+                { "product": "Ceiling paint, 5-gal", "typical_quantity": 1, "unit_cost_estimate": 120,
+                  "brands": ["Benjamin Moore", "PPG", "Sherwin-Williams Pro"], "suppliers": ["Paint distributors"]
+                },
+                { "product": "Lightweight drywall compound (3–3.5 gal)", "typical_quantity": 1, "unit_cost_estimate": 25,
+                  "brands": ["USG Sheetrock"], "suppliers": ["Building supply wholesalers"]
+                },
+                { "product": "Drywall patch kit", "typical_quantity": 1, "unit_cost_estimate": 15,
+                  "brands": ["USG", "3M"], "suppliers": ["Building supply wholesalers"]
+                },
+                { "product": "Acrylic latex caulk (white)", "typical_quantity": 4, "unit_cost_estimate": 4,
+                  "brands": ["DAP", "Sika"], "suppliers": ["Paint distributors", "Building supply"]
+                }
+              ]
+            },
+            {
+              "category": "Painting Accessories",
+              "items": [
+                { "product": "Roller covers (9\", 1/2\" nap)", "typical_quantity": 6, "unit_cost_estimate": 6,
+                  "brands": ["Wooster", "Purdy"], "suppliers": ["Paint distributors"]
+                },
+                { "product": "Roller frames", "typical_quantity": 2, "unit_cost_estimate": 7,
+                  "brands": ["Wooster", "Purdy"], "suppliers": ["Paint distributors"]
+                },
+                { "product": "Paint trays & liners", "typical_quantity": 2, "unit_cost_estimate": 6,
+                  "brands": ["Wooster", "Linzer"], "suppliers": ["Paint distributors"]
+                },
+                { "product": "Contractor-grade brushes", "typical_quantity": 4, "unit_cost_estimate": 9,
+                  "brands": ["Wooster", "Purdy"], "suppliers": ["Paint distributors"]
+                },
+                { "product": "Painter’s tape (1.5\"–2\")", "typical_quantity": 3, "unit_cost_estimate": 7,
+                  "brands": ["3M ScotchBlue"], "suppliers": ["Paint distributors"]
+                }
+              ]
+            },
+            {
+              "category": "Basic Electrical Consumables",
+              "items": [
+                { "product": "LED A19 bulbs (bulk pack)", "typical_quantity": 12, "unit_cost_estimate": 2.5,
+                  "brands": ["Philips", "GE", "Sylvania"], "suppliers": ["Electrical distributors"]
+                },
+                { "product": "Decora switches", "typical_quantity": 6, "unit_cost_estimate": 4,
+                  "brands": ["Leviton", "Eaton"], "suppliers": ["Electrical distributors"]
+                },
+                { "product": "Decora outlets", "typical_quantity": 6, "unit_cost_estimate": 3,
+                  "brands": ["Leviton", "Eaton"], "suppliers": ["Electrical distributors"]
+                },
+                { "product": "Wall plates (1–2 gang)", "typical_quantity": 8, "unit_cost_estimate": 2,
+                  "brands": ["Leviton"], "suppliers": ["Electrical distributors"]
+                }
+              ]
+            },
+            {
+              "category": "HVAC & Cleanup",
+              "items": [
+                { "product": "HVAC filters (common sizes)", "typical_quantity": 2, "unit_cost_estimate": 18,
+                  "brands": ["3M Filtrete", "Honeywell Home"], "suppliers": ["HVAC supply houses"]
+                },
+                { "product": "Basic cleaning kit", "typical_quantity": 1, "unit_cost_estimate": 45,
+                  "brands": ["Clorox Pro", "Diversey"], "suppliers": ["Janitorial distributors"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "bundle_id": "BUNDLE_2",
+          "name": "Standard Turn + Safety (2–3 Bed)",
+          "includes": ["BUNDLE_1"],
+          "categories": [
+            {
+              "category": "Safety & Code Compliance",
+              "items": [
+                { "product": "Smoke detectors (10-year)", "typical_quantity": 3, "unit_cost_estimate": 22,
+                  "brands": ["First Alert", "Kidde"], "suppliers": ["Safety supply distributors"]
+                },
+                { "product": "CO detectors", "typical_quantity": 2, "unit_cost_estimate": 28,
+                  "brands": ["First Alert", "Kidde"], "suppliers": ["Safety supply distributors"]
+                },
+                { "product": "Fire extinguisher (ABC)", "typical_quantity": 1, "unit_cost_estimate": 35,
+                  "brands": ["Kidde"], "suppliers": ["Building maintenance wholesalers"]
+                }
+              ]
+            },
+            {
+              "category": "Basic Fixtures & Electrical Upgrades",
+              "items": [
+                { "product": "Flush-mount LED ceiling light", "typical_quantity": 3, "unit_cost_estimate": 45,
+                  "brands": ["Lithonia Lighting", "Halo"], "suppliers": ["Lighting wholesalers"]
+                },
+                { "product": "GFCI outlet", "typical_quantity": 2, "unit_cost_estimate": 18,
+                  "brands": ["Eaton", "Leviton"], "suppliers": ["Electrical distributors"]
+                }
+              ]
+            },
+            {
+              "category": "Plumbing Repair Essentials",
+              "items": [
+                { "product": "Universal toilet repair kit", "typical_quantity": 1, "unit_cost_estimate": 30,
+                  "brands": ["Fluidmaster"], "suppliers": ["Plumbing wholesalers"]
+                },
+                { "product": "Toilet supply line", "typical_quantity": 1, "unit_cost_estimate": 12,
+                  "brands": ["Sioux Chief"], "suppliers": ["Plumbing wholesalers"]
+                },
+                { "product": "Faucet aerators", "typical_quantity": 3, "unit_cost_estimate": 4,
+                  "brands": ["Neoperl"], "suppliers": ["Plumbing wholesalers"]
+                },
+                { "product": "PTFE thread seal tape", "typical_quantity": 2, "unit_cost_estimate": 2,
+                  "brands": ["Oatey"], "suppliers": ["Plumbing wholesalers"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "bundle_id": "BUNDLE_3",
+          "name": "Premium Turn / Light Renovation",
+          "includes": ["BUNDLE_2"],
+          "categories": [
+            {
+              "category": "Fixture Upgrades",
+              "items": [
+                { "product": "Decorative LED ceiling fixture", "typical_quantity": 2, "unit_cost_estimate": 110,
+                  "brands": ["Progress Lighting", "Kichler"], "suppliers": ["Lighting distributors"]
+                },
+                { "product": "Bathroom faucet (mid-tier)", "typical_quantity": 1, "unit_cost_estimate": 120,
+                  "brands": ["Moen", "Delta"], "suppliers": ["Plumbing wholesalers"]
+                },
+                { "product": "Kitchen faucet (mid-tier)", "typical_quantity": 1, "unit_cost_estimate": 180,
+                  "brands": ["Moen", "Delta"], "suppliers": ["Plumbing wholesalers"]
+                }
+              ]
+            },
+            {
+              "category": "Plumbing Hardware & Finish",
+              "items": [
+                { "product": "Sink trap kit", "typical_quantity": 2, "unit_cost_estimate": 15,
+                  "brands": ["Oatey"], "suppliers": ["Plumbing supply houses"]
+                },
+                { "product": "Silicone sealant (clear)", "typical_quantity": 3, "unit_cost_estimate": 7,
+                  "brands": ["GE Silicone", "DAP"], "suppliers": ["Plumbing supply houses"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+
+    /**
+     * Representative external product pages + real images.
+     * You can swap these to your preferred vendor or SKU list.
+     */
+    const PRODUCT_CATALOG = {
+      // Paint & wall repair
+      "Interior wall paint, 5-gal": {
+        url: "https://www.sherwin-williams.com/homeowners/products/promar-200-zero-voc-interior-latex",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Paint_can.jpg/640px-Paint_can.jpg"
+      },
+      "Ceiling paint, 5-gal": {
+        url: "https://www.sherwin-williams.com/homeowners/products/premium-ceiling-paint",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/White_paint_bucket.jpg/640px-White_paint_bucket.jpg"
+      },
+      "Lightweight drywall compound (3–3.5 gal)": {
+        url: "https://www.usg.com/content/usgcom/en/products/walls/drywall/joint-compound/lightweight/all-purpose.html",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Joint_compound.jpg/640px-Joint_compound.jpg"
+      },
+      "Drywall patch kit": {
+        url: "https://www.3m.com/3M/en_US/p/d/b00037372/",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Drywall_repair_patch.jpg/640px-Drywall_repair_patch.jpg"
+      },
+      "Acrylic latex caulk (white)": {
+        url: "https://www.dap.com/products-projects/product-categories/caulks-sealants/latex-caulk/",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Caulk_gun.jpg/640px-Caulk_gun.jpg"
+      },
+
+      // Painting accessories
+      "Roller covers (9\", 1/2\" nap)": {
+        url: "https://woosterbrush.com/product-category/rollers/roller-covers/",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Paint_roller.jpg/640px-Paint_roller.jpg"
+      },
+      "Roller frames": {
+        url: "https://www.purdy.com/products/rollers-frames",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Paint_roller_frame.jpg/640px-Paint_roller_frame.jpg"
+      },
+      "Paint trays & liners": {
+        url: "https://woosterbrush.com/product-category/trays-liners/",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Paint_tray.jpg/640px-Paint_tray.jpg"
+      },
+      "Contractor-grade brushes": {
+        url: "https://www.purdy.com/products/brushes",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Paintbrush.jpg/640px-Paintbrush.jpg"
+      },
+      "Painter’s tape (1.5\"–2\")": {
+        url: "https://www.scotchblue.com/3M/en_US/scotchblue/products/",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Masking_tape.jpg/640px-Masking_tape.jpg"
+      },
+
+      // Electrical consumables
+      "LED A19 bulbs (bulk pack)": {
+        url: "https://www.usa.lighting.philips.com/consumer/bulbs/led-bulbs",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/LED_bulb.jpg/640px-LED_bulb.jpg"
+      },
+      "Decora switches": {
+        // Leviton Decora rocker switch product page (example)
+        url: "https://leviton.com/products/5603-2w",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Light_switch.jpg/640px-Light_switch.jpg"
+      },
+      "Decora outlets": {
+        url: "https://store.leviton.com/collections/decora-receptacles",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Electrical_outlet.jpg/640px-Electrical_outlet.jpg"
+      },
+      "Wall plates (1–2 gang)": {
+        url: "https://store.leviton.com/collections/decora-wallplates",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Wall_plate.jpg/640px-Wall_plate.jpg"
+      },
+
+      // HVAC & cleanup
+      "HVAC filters (common sizes)": {
+        url: "https://www.lowes.com/pd/Filtrete-Common-20-in-x-25-in-x-1-in-Actual-24-72-in-x-19-72-in-x-1-13-in-Electrostatic-Pleated-Air-Filter/1000420751",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Air_filter.jpg/640px-Air_filter.jpg"
+      },
+      "Basic cleaning kit": {
+        url: "https://www.rubbermaidcommercial.com/cleaning/mops/",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Mop_and_bucket.jpg/640px-Mop_and_bucket.jpg"
+      },
+
+      // Safety & code
+      "Smoke detectors (10-year)": {
+        url: "https://www.firstalert.com/us/en/products/alarms/smoke-alarms/10-year-sealed-battery-smoke-alarm-with-photoelectric-sensor-pr710/",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Smoke_detector.jpg/640px-Smoke_detector.jpg"
+      },
+      "CO detectors": {
+        url: "https://www.kidde.com/home-safety/en/us/products/smoke-co-alarms/carbon-monoxide-alarms/",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Carbon_monoxide_alarm.jpg/640px-Carbon_monoxide_alarm.jpg"
+      },
+      "Fire extinguisher (ABC)": {
+        url: "https://www.kidde.com/home-safety/en/us/products/fire-extinguishers/",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Fire_extinguisher.jpg/640px-Fire_extinguisher.jpg"
+      },
+
+      // Fixtures & upgrades
+      "Flush-mount LED ceiling light": {
+        url: "https://lithonia.acuitybrands.com/products/indoor-lighting/ceiling-mount",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Ceiling_light_fixture.jpg/640px-Ceiling_light_fixture.jpg"
+      },
+      "GFCI outlet": {
+        url: "https://www.eaton.com/us/en-us/catalog/wiring-devices/gfci-receptacles.html",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/GFCI_outlet.jpg/640px-GFCI_outlet.jpg"
+      },
+
+      // Plumbing repair essentials
+      "Universal toilet repair kit": {
+        url: "https://www.fluidmaster.com/products/toilet/complete-toilet-repair-kits/",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Toilet_tank_internals.jpg/640px-Toilet_tank_internals.jpg"
+      },
+      "Toilet supply line": {
+        url: "https://www.siouxchief.com/products/supply/supply-lines",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Flexible_supply_line.jpg/640px-Flexible_supply_line.jpg"
+      },
+      "Faucet aerators": {
+        url: "https://www.neoperl.com/en/products/aerators/",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Faucet_aerator.jpg/640px-Faucet_aerator.jpg"
+      },
+      "PTFE thread seal tape": {
+        // Oatey official product page
+        url: "https://www.oatey.com/products/oatey-ptfe-white-general-purpose-thread-seal-tape--1680494038",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Thread_seal_tape.jpg/640px-Thread_seal_tape.jpg"
+      },
+
+      // Premium upgrades
+      "Decorative LED ceiling fixture": {
+        url: "https://www.progresslighting.com/",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Pendant_light.jpg/640px-Pendant_light.jpg"
+      },
+      "Bathroom faucet (mid-tier)": {
+        url: "https://shop.moen.com/collections/bathroom-faucets",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Bathroom_faucet.jpg/640px-Bathroom_faucet.jpg"
+      },
+      "Kitchen faucet (mid-tier)": {
+        url: "https://www.deltafaucet.com/kitchen",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Kitchen_faucet.jpg/640px-Kitchen_faucet.jpg"
+      },
+
+      // Plumbing finish
+      "Sink trap kit": {
+        url: "https://www.oatey.com/products",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/P-trap_under_sink.jpg/640px-P-trap_under_sink.jpg"
+      },
+      "Silicone sealant (clear)": {
+        url: "https://www.gesealants.com/products/silicone/",
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Silicone_sealant.jpg/640px-Silicone_sealant.jpg"
+      }
+    };
+
+    function formatMoney(n) {
+      if (typeof n !== "number") return "";
+      return new Intl.NumberFormat("en-US", { style: "currency", currency: DATA.currency }).format(n);
+    }
+
+    function flattenBundle(bundleId) {
+      const byId = Object.fromEntries(DATA.bundles.map(b => [b.bundle_id, b]));
+      const visited = new Set();
+
+      function collect(id) {
+        if (!byId[id] || visited.has(id)) return { categories: [] };
+        visited.add(id);
+
+        const b = byId[id];
+        const cats = [];
+
+        // include dependencies first
+        (b.includes || []).forEach(dep => {
+          const depData = collect(dep);
+          cats.push(...depData.categories);
+        });
+
+        // then this bundle's categories
+        cats.push(...(b.categories || []));
+        return { bundle: b, categories: cats };
+      }
+
+      return collect(bundleId);
+    }
+
+    function renderBundle(bundleId) {
+      const { bundle, categories } = flattenBundle(bundleId);
+      const contentEl = document.getElementById("content");
+      const metaEl = document.getElementById("bundleMeta");
+
+      // meta
+      metaEl.innerHTML = "";
+      const metaBits = [];
+      if (bundle.target_customer) metaBits.push(`<span><b>Target:</b> ${bundle.target_customer}</span>`);
+      if (bundle.use_case) metaBits.push(`<span><b>Use case:</b> ${bundle.use_case}</span>`);
+      if (bundle.goal) metaBits.push(`<span><b>Goal:</b> ${bundle.goal}</span>`);
+      if (bundle.includes) metaBits.push(`<span><b>Includes:</b> ${bundle.includes.join(", ")}</span>`);
+      metaEl.innerHTML = metaBits.join("");
+
+      // render sections
+      contentEl.innerHTML = "";
+      categories.forEach(cat => {
+        const section = document.createElement("section");
+
+        const title = document.createElement("div");
+        title.className = "sectionTitle";
+        title.innerHTML = `<span>${cat.category}</span><span class="pill">${(cat.items || []).length} items</span>`;
+        section.appendChild(title);
+
+        const rail = document.createElement("div");
+        rail.className = "rail";
+
+        (cat.items || []).forEach(item => {
+          const catalog = PRODUCT_CATALOG[item.product] || {};
+          const img = catalog.img || "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/640px-No_image_available.svg.png";
+          const url = catalog.url || "https://www.google.com/search?q=" + encodeURIComponent(item.product);
+
+          const card = document.createElement("div");
+          card.className = "card";
+
+          const imgWrap = document.createElement("div");
+          imgWrap.className = "img";
+          imgWrap.innerHTML = `
+            <img src="${img}" alt="${item.product}" loading="lazy" referrerpolicy="no-referrer" />
+            <div class="badge">${formatMoney(item.unit_cost_estimate)} ea</div>
+          `;
+
+          const brands = (item.brands || []).slice(0, 4).map(b => `<span class="tag">${b}</span>`).join("");
+          const suppliers = (item.suppliers || []).slice(0, 4).map(s => `<span class="tag">${s}</span>`).join("");
+
+          const body = document.createElement("div");
+          body.className = "content";
+          body.innerHTML = `
+            <div class="title">${item.product}</div>
+            <div class="row">
+              <span>Qty (typ.)</span><b>${item.typical_quantity ?? ""}</b>
+            </div>
+            <div class="small"><b style="color: var(--text); font-weight:650;">Brands</b></div>
+            <div class="tags">${brands || `<span class="tag">—</span>`}</div>
+            <div class="small"><b style="color: var(--text); font-weight:650;">Suppliers</b></div>
+            <div class="tags">${suppliers || `<span class="tag">—</span>`}</div>
+            <div class="actions">
+              <a class="btn" href="${url}" target="_blank" rel="noopener noreferrer">View product ↗</a>
+              <button class="btn secondary" type="button" data-copy="${url}">Copy link</button>
+            </div>
+          `;
+
+          card.appendChild(imgWrap);
+          card.appendChild(body);
+          rail.appendChild(card);
+        });
+
+        section.appendChild(rail);
+        contentEl.appendChild(section);
+      });
+
+      // copy link buttons
+      contentEl.querySelectorAll("button[data-copy]").forEach(btn => {
+        btn.addEventListener("click", async () => {
+          const link = btn.getAttribute("data-copy");
+          try {
+            await navigator.clipboard.writeText(link);
+            const prev = btn.textContent;
+            btn.textContent = "Copied!";
+            setTimeout(() => (btn.textContent = prev), 900);
+          } catch {
+            window.prompt("Copy this link:", link);
+          }
+        });
+      });
+    }
+
+    // init select
+    const select = document.getElementById("bundleSelect");
+    DATA.bundles.forEach(b => {
+      const opt = document.createElement("option");
+      opt.value = b.bundle_id;
+      opt.textContent = `${b.bundle_id} — ${b.name}`;
+      select.appendChild(opt);
+    });
+
+    select.addEventListener("change", (e) => renderBundle(e.target.value));
+
+    // default
+    renderBundle(DATA.bundles[0].bundle_id);
+  </script>
+</body>
+</html>
