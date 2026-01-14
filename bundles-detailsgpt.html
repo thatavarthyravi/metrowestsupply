@@ -9,26 +9,46 @@
   <style>
     /* Page-specific styles only (palette comes from newstyles.css) */
 
-    .catalog-toolbar { padding: 22px 40px 0; }
+    .catalog-toolbar { padding: 12px 40px 0; }
+
     .catalog-toolbar .row {
-      display: flex; gap: 14px; flex-wrap: wrap;
-      align-items: flex-end; justify-content: space-between;
-      margin-top: 14px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-top: 12px;
     }
-    .field { display: grid; gap: 8px; min-width: 320px; flex: 1; }
-    .field label { font-size: 0.85rem; color: #eaf6ff; opacity: 0.95; }
-    .field select {
-      border-radius: 6px; border: 1px solid rgba(255,255,255,0.25);
-      padding: 12px 12px; font-size: 0.95rem; outline: none;
-      background: rgba(255,255,255,0.95); color: #123;
+
+    .field {
+      display: grid;
+      gap: 8px;
+      min-width: 320px;
+      flex: 1;
+    }
+
+    .field label {
+      font-size: 0.85rem;
+      color: #eaf6ff;
+      opacity: 0.95;
+    }
+
+    .field select, .field input {
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 12px 12px;
+      font-size: 0.95rem;
+      outline: none;
+      background: rgba(255,255,255,0.95);
+      color: #123;
     }
 
     .bundle-meta {
-      padding: 0 40px 18px;
+      padding: 0 40px 10px;
       font-size: 0.85rem;
       color: #cceeff;
       display: flex;
-      gap: 18px;
+      gap: 16px;
       flex-wrap: wrap;
       opacity: 0.95;
     }
@@ -36,36 +56,13 @@
 
     .status { padding: 10px 40px 0; font-size: 0.9rem; color: #cceeff; }
 
-    .details-area {
-      padding: 24px 40px 30px;
-      background: white;
-    }
+    .details-area { padding: 16px 40px 30px; background: white; }
 
-    .bundle-top {
-      display: grid;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
+    .bundle-top { display: grid; gap: 10px; margin-bottom: 14px; }
+    .bundle-name { color: var(--navy); font-size: 1.25rem; margin: 0; }
+    .bundle-desc { margin: 0; color: #555; font-size: 0.95rem; line-height: 1.4; }
 
-    .bundle-name {
-      color: var(--navy);
-      font-size: 1.25rem;
-      margin: 0;
-    }
-
-    .bundle-desc {
-      margin: 0;
-      color: #555;
-      font-size: 0.95rem;
-      line-height: 1.4;
-    }
-
-    .bundle-kpis {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-top: 6px;
-    }
+    .bundle-kpis { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
 
     .kpi {
       background: white;
@@ -74,14 +71,12 @@
       padding: 10px 12px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.05);
       min-width: 160px;
+      flex: 1;
     }
-
     .kpi .label { font-size: 0.78rem; color: #666; font-weight: 700; }
     .kpi .value { font-size: 1.05rem; color: var(--navy); font-weight: 800; margin-top: 2px; }
 
-    .tags-row {
-      display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;
-    }
+    .tags-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
     .tagchip {
       font-size: 0.75rem;
       color: #ff6600;
@@ -93,19 +88,56 @@
     }
 
     .category-header {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 10px; margin: 18px 0 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 18px 0 10px;
     }
     .category-header h3 { margin: 0; color: var(--navy); font-size: 1.05rem; }
+
     .pill {
-      font-size: 0.75rem; background: var(--light-grey); color: #444;
-      padding: 4px 10px; border-radius: 999px; border: 1px solid #e6e6e6;
+      font-size: 0.75rem;
+      background: var(--light-grey);
+      color: #444;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid #e6e6e6;
       white-space: nowrap;
     }
 
+    .tools-row {
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      margin: 6px 0 10px;
+    }
+
+    .count-note { font-size: 0.85rem; color:#666; }
+
+    .btn-ghost {
+      background: var(--light-grey);
+      color: var(--navy);
+      border: 1px solid #ddd;
+      padding: 10px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.82rem;
+      transition: 0.2s;
+      white-space: nowrap;
+    }
+    .btn-ghost:hover { background:#e8e8e8; }
+
+    /* Desktop: horizontal rail */
     .rail {
-      display: flex; gap: 16px; overflow-x: auto;
-      padding: 8px 0 18px; scroll-snap-type: x mandatory;
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding: 8px 0 18px;
+      scroll-snap-type: x mandatory;
     }
     .rail::-webkit-scrollbar { height: 10px; }
     .rail::-webkit-scrollbar-thumb {
@@ -114,6 +146,7 @@
       border: 2px solid rgba(244,244,244,0.9);
     }
 
+    /* Tiles */
     .tile {
       flex: 0 0 300px;
       scroll-snap-align: start;
@@ -124,16 +157,22 @@
       background: white;
       display: grid;
       grid-template-rows: 165px auto;
+      cursor: pointer;
     }
+    .tile:focus { outline: 3px solid rgba(0,123,255,0.35); outline-offset: 2px; }
 
     .tile-media { position: relative; background: var(--light-grey); }
     .tile-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
     .qty-badge {
-      position: absolute; top: 10px; left: 10px;
+      position: absolute;
+      top: 10px;
+      left: 10px;
       background: rgba(26,42,68,0.92);
-      color: white; padding: 6px 10px;
-      font-size: 0.78rem; border-radius: 999px;
+      color: white;
+      padding: 6px 10px;
+      font-size: 0.78rem;
+      border-radius: 999px;
     }
 
     .tile-body { padding: 12px 12px 14px; display: grid; gap: 10px; }
@@ -142,15 +181,7 @@
     .kv { display: flex; justify-content: space-between; gap: 10px; font-size: 0.85rem; color: #555; }
     .kv b { color: #111; }
 
-    .chips { display: flex; flex-wrap: wrap; gap: 6px; }
-    .chip {
-      font-size: 0.72rem; color: #444;
-      border: 1px solid #e3e3e3; padding: 4px 8px;
-      border-radius: 999px; background: #fff;
-    }
-
     .actions { display: flex; gap: 10px; margin-top: 2px; }
-
     .btn-link {
       background-color: var(--orange);
       color: var(--white);
@@ -183,19 +214,132 @@
       font-size: 0.9rem;
     }
 
+    /* ✅ Mobile-first behavior */
     @media (max-width: 768px) {
-      .catalog-toolbar { padding: 18px 20px 0; }
-      .bundle-meta { padding: 0 20px 14px; }
-      .status { padding: 10px 20px 0; }
-      .details-area { padding: 18px 20px 22px; }
-      .field { min-width: 240px; }
+      .catalog-toolbar { padding: 10px 18px 0; }
+      .bundle-meta { padding: 0 18px 10px; }
+      .status { padding: 10px 18px 0; }
+      .details-area { padding: 14px 18px 22px; }
+
+      .field { min-width: 100%; }
+      .field select, .field input { width: 100%; }
+
+      .bundle-kpis { gap: 10px; }
+      .kpi { min-width: 0; }
+
+      /* Grid on mobile (no sideways scrolling) */
+      .rail {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        overflow: visible;
+        padding: 8px 0 18px;
+        scroll-snap-type: none;
+      }
+
+      /* Shorter images on mobile */
+      .tile { flex: initial; width: 100%; grid-template-rows: 110px auto; }
+      .tile-body { padding: 10px 10px 12px; gap: 8px; }
+      .tile-title { font-size: 0.92rem; }
+      .kv { font-size: 0.82rem; }
+
+      .actions { flex-direction: column; }
+      .btn-link, .btn-link.secondary { width: 100%; }
+    }
+
+    @media (max-width: 420px) {
+      .rail { grid-template-columns: 1fr; }
+      .tile { grid-template-rows: 130px auto; }
+    }
+
+    /* ---------- Modal Quick View ---------- */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 9999;
+    }
+    .modal-backdrop.open { display: flex; }
+
+    .modal {
+      width: min(720px, 100%);
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+
+    .modal-header {
+      background: var(--navy);
+      color: white;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .modal-title {
+      font-weight: 800;
+      font-size: 0.95rem;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .modal-close {
+      appearance: none;
+      border: 0;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      border-radius: 8px;
+      padding: 8px 10px;
+      cursor: pointer;
+      font-weight: 900;
+      font-size: 0.9rem;
+    }
+
+    .modal-body {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 14px;
+      padding: 14px;
+    }
+
+    .modal-img {
+      background: var(--light-grey);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #eee;
+      height: 220px;
+    }
+    .modal-img img { width: 100%; height: 100%; object-fit: cover; display:block; }
+
+    .modal-info { display: grid; gap: 10px; }
+
+    .modal-kv { display:flex; justify-content: space-between; gap: 12px; font-size: 0.9rem; color:#444; }
+    .modal-kv b { color:#111; }
+
+    .modal-actions { display:flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+
+    .modal-actions a, .modal-actions button {
+      flex: 1;
+      min-width: 160px;
+    }
+
+    @media (max-width: 640px) {
+      .modal-body { grid-template-columns: 1fr; }
+      .modal-img { height: 200px; }
     }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <!-- Header (matches your index) -->
+    <!-- Header (matches index) -->
     <header>
       <div class="header-left">
         <img src="logo.png" alt="UT Logo" class="logo-small">
@@ -210,11 +354,11 @@
       </nav>
     </header>
 
-    <!-- Hero (matches your index) -->
+    <!-- Hero -->
     <div class="hero-section">
       <div class="hero-text">
         <h1>Bundle Details <br><span class="orange-text">What’s Included</span></h1>
-        <p>Choose a kit and browse included SKUs as tiles. Each tile links to an external product detail page.</p>
+        <p>Pick a kit, then search items inside it. Tap any tile for a quick view.</p>
 
         <div class="catalog-toolbar">
           <div class="row">
@@ -223,9 +367,9 @@
               <select id="bundleSelect" disabled></select>
             </div>
 
-            <div class="hero-btns" style="margin-top: 0;">
-              <a href="order-form.html" class="btn-white-outline">Order Now</a>
-              <button class="btn-orange" id="reloadBtn" type="button">Reload JSON</button>
+            <div class="field">
+              <label for="searchInput">Search included items</label>
+              <input id="searchInput" type="search" placeholder="e.g., Leviton, Filtrete, caulk…" autocomplete="off" />
             </div>
           </div>
         </div>
@@ -235,7 +379,6 @@
       <img src="logo.png" alt="UT Main Logo" class="main-logo">
     </div>
 
-    <!-- Main content -->
     <div class="feature-grid-section" style="padding: 0; background: white;">
       <div class="status" id="status"></div>
       <div class="details-area" id="content"></div>
@@ -250,106 +393,64 @@
     <a href="privacy.html">Unit Turn Supply</a>
   </footer>
 
+  <!-- Modal -->
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal" tabindex="-1">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalTitle">Item</h3>
+        <button class="modal-close" id="modalClose" type="button" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-img"><img id="modalImg" alt=""></div>
+        <div class="modal-info">
+          <div class="modal-kv"><span>Brand</span><b id="modalBrand">—</b></div>
+          <div class="modal-kv"><span>Qty</span><b id="modalQty">—</b></div>
+          <div class="modal-kv"><span>Source</span><b>External</b></div>
+
+          <div class="modal-actions">
+            <a class="btn-link" id="modalView" href="#" target="_blank" rel="noopener noreferrer">View product ↗</a>
+            <button class="btn-link secondary" id="modalCopy" type="button">Copy link</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="menu.js"></script>
 
   <script>
-    // ✅ Root-relative so it works from any page path
     const DATA_URL = "/data/products.json";
 
-    // Map included-line "prefixes" to images and URLs.
-    // Matching is done by startsWith() in order.
     const LINE_CATALOG = [
-      {
-        match: "DAP Alex Plus",
-        brand: "DAP",
-        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Caulk_gun.jpg/640px-Caulk_gun.jpg",
-        url: "https://www.dap.com/products-projects/product-categories/caulks-sealants/latex-caulk/"
-      },
-      {
-        match: "USG Sheetrock",
-        brand: "USG",
-        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Joint_compound.jpg/640px-Joint_compound.jpg",
-        url: "https://www.usg.com/content/usgcom/en/products/walls/drywall/joint-compound/lightweight/all-purpose.html"
-      },
-      {
-        match: "Leviton Decora white single-pole switches",
-        brand: "Leviton",
-        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Light_switch.jpg/640px-Light_switch.jpg",
-        url: "https://leviton.com/products/5603-2w"
-      },
-      {
-        match: "Leviton white duplex receptacles",
-        brand: "Leviton",
-        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Electrical_outlet.jpg/640px-Electrical_outlet.jpg",
-        url: "https://store.leviton.com/collections/decora-receptacles"
-      },
-      {
-        match: "Leviton Decora white self-test GFCI outlet",
-        brand: "Leviton",
-        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/GFCI_outlet.jpg/640px-GFCI_outlet.jpg",
-        url: "https://store.leviton.com/collections/gfci-receptacles"
-      },
-      {
-        match: "Leviton Decora white wallplates",
-        brand: "Leviton",
-        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Wall_plate.jpg/640px-Wall_plate.jpg",
-        url: "https://store.leviton.com/collections/decora-wallplates"
-      },
-      {
-        match: "Philips LED A19",
-        brand: "Philips",
-        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/LED_bulb.jpg/640px-LED_bulb.jpg",
-        url: "https://www.usa.lighting.philips.com/consumer/bulbs/led-bulbs"
-      },
-      {
-        match: "3M Filtrete",
-        brand: "Filtrete (3M)",
-        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Air_filter.jpg/640px-Air_filter.jpg",
-        url: "https://www.filtrete.com/3M/en_US/filtrete/products/"
-      },
-      {
-        match: "Kidde 10-year sealed smoke alarms",
-        brand: "Kidde",
-        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Smoke_detector.jpg/640px-Smoke_detector.jpg",
-        url: "https://www.kidde.com/home-safety/en/us/products/smoke-alarms/"
-      },
-      {
-        match: "First Alert CO",
-        brand: "First Alert",
-        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Carbon_monoxide_alarm.jpg/640px-Carbon_monoxide_alarm.jpg",
-        url: "https://www.firstalert.com/us/en/products/alarms/carbon-monoxide-alarms/"
-      },
-      {
-        match: "Kwikset Tylo",
-        brand: "Kwikset",
-        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Door_knob.jpg/640px-Door_knob.jpg",
-        url: "https://www.kwikset.com/products"
-      },
-      {
-        match: "Moen Adler",
-        brand: "Moen",
-        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Bathroom_faucet.jpg/640px-Bathroom_faucet.jpg",
-        url: "https://shop.moen.com/collections/bathroom-faucets"
-      }
+      { match: "DAP Alex Plus", brand: "DAP", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Caulk_gun.jpg/640px-Caulk_gun.jpg", url: "https://www.dap.com/products-projects/product-categories/caulks-sealants/latex-caulk/" },
+      { match: "USG Sheetrock", brand: "USG", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Joint_compound.jpg/640px-Joint_compound.jpg", url: "https://www.usg.com/content/usgcom/en/products/walls/drywall/joint-compound/lightweight/all-purpose.html" },
+      { match: "Leviton Decora white single-pole switches", brand: "Leviton", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Light_switch.jpg/640px-Light_switch.jpg", url: "https://leviton.com/products/5603-2w" },
+      { match: "Leviton white duplex receptacles", brand: "Leviton", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Electrical_outlet.jpg/640px-Electrical_outlet.jpg", url: "https://store.leviton.com/collections/decora-receptacles" },
+      { match: "Leviton Decora white self-test GFCI outlet", brand: "Leviton", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/GFCI_outlet.jpg/640px-GFCI_outlet.jpg", url: "https://store.leviton.com/collections/gfci-receptacles" },
+      { match: "Leviton Decora white wallplates", brand: "Leviton", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Wall_plate.jpg/640px-Wall_plate.jpg", url: "https://store.leviton.com/collections/decora-wallplates" },
+      { match: "Philips LED A19", brand: "Philips", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/LED_bulb.jpg/640px-LED_bulb.jpg", url: "https://www.usa.lighting.philips.com/consumer/bulbs/led-bulbs" },
+      { match: "3M Filtrete", brand: "Filtrete (3M)", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Air_filter.jpg/640px-Air_filter.jpg", url: "https://www.filtrete.com/3M/en_US/filtrete/products/" },
+      { match: "Kidde 10-year sealed smoke alarms", brand: "Kidde", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Smoke_detector.jpg/640px-Smoke_detector.jpg", url: "https://www.kidde.com/home-safety/en/us/products/smoke-alarms/" },
+      { match: "First Alert CO", brand: "First Alert", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Carbon_monoxide_alarm.jpg/640px-Carbon_monoxide_alarm.jpg", url: "https://www.firstalert.com/us/en/products/alarms/carbon-monoxide-alarms/" },
+      { match: "Kwikset Tylo", brand: "Kwikset", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Door_knob.jpg/640px-Door_knob.jpg", url: "https://www.kwikset.com/products" },
+      { match: "Moen Adler", brand: "Moen", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Bathroom_faucet.jpg/640px-Bathroom_faucet.jpg", url: "https://shop.moen.com/collections/bathroom-faucets" }
     ];
 
-    const FALLBACK = {
-      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/640px-No_image_available.svg.png"
-    };
+    const FALLBACK_IMG = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/640px-No_image_available.svg.png";
 
     function parseLine(line) {
-      // Example: "DAP Alex Plus white caulk (10.1 oz) ×4"
-      // Also supports "x4" / "X4"
       const qtyMatch = line.match(/(?:×|x|X)\s*(\d+)\s*$/);
       const qty = qtyMatch ? Number(qtyMatch[1]) : null;
       const title = qtyMatch ? line.replace(qtyMatch[0], "").trim() : line.trim();
-
       const found = LINE_CATALOG.find(e => title.startsWith(e.match));
-      const url = found?.url || ("https://www.google.com/search?q=" + encodeURIComponent(title));
-      const img = found?.img || FALLBACK.img;
-      const brand = found?.brand || "—";
-
-      return { raw: line, title, qty, brand, url, img };
+      return {
+        raw: line,
+        title,
+        qty,
+        brand: found?.brand || "—",
+        url: found?.url || ("https://www.google.com/search?q=" + encodeURIComponent(title)),
+        img: found?.img || FALLBACK_IMG
+      };
     }
 
     function moneyUSD(n) {
@@ -357,71 +458,92 @@
       return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(n);
     }
 
-    function safeText(v) { return (v === undefined || v === null) ? "" : String(v); }
-
     let BUNDLES = [];
+    let CURRENT_ITEMS = [];
+    let SHOW_ALL = false;
+    const DEFAULT_VISIBLE = 6;
 
-    function renderBundle(sku) {
-      const content = document.getElementById("content");
-      const meta = document.getElementById("bundleMeta");
-      const status = document.getElementById("status");
+    // ----- Modal helpers -----
+    const modalBackdrop = document.getElementById("modalBackdrop");
+    const modalClose = document.getElementById("modalClose");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalImg = document.getElementById("modalImg");
+    const modalBrand = document.getElementById("modalBrand");
+    const modalQty = document.getElementById("modalQty");
+    const modalView = document.getElementById("modalView");
+    const modalCopy = document.getElementById("modalCopy");
 
-      const bundle = BUNDLES.find(b => b.sku === sku);
-      if (!bundle) {
-        content.innerHTML = "";
-        meta.innerHTML = "";
-        status.innerHTML = `<div class="error"><b>Bundle not found</b> — sku: ${safeText(sku)}</div>`;
-        return;
+    let lastFocusedEl = null;
+    let modalCurrentUrl = "";
+
+    function openModal(item) {
+      lastFocusedEl = document.activeElement;
+      modalTitle.textContent = item.title;
+      modalImg.src = item.img;
+      modalImg.alt = item.title;
+      modalBrand.textContent = item.brand || "—";
+      modalQty.textContent = item.qty ? `×${item.qty}` : "—";
+      modalView.href = item.url;
+      modalCurrentUrl = item.url;
+
+      modalBackdrop.classList.add("open");
+      document.body.style.overflow = "hidden";
+      modalClose.focus();
+    }
+
+    function closeModal() {
+      modalBackdrop.classList.remove("open");
+      document.body.style.overflow = "";
+      if (lastFocusedEl && typeof lastFocusedEl.focus === "function") lastFocusedEl.focus();
+    }
+
+    modalClose.addEventListener("click", closeModal);
+    modalBackdrop.addEventListener("click", (e) => {
+      if (e.target === modalBackdrop) closeModal();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modalBackdrop.classList.contains("open")) closeModal();
+    });
+
+    modalCopy.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(modalCurrentUrl);
+        const prev = modalCopy.textContent;
+        modalCopy.textContent = "Copied!";
+        setTimeout(() => (modalCopy.textContent = prev), 900);
+      } catch {
+        window.prompt("Copy this link:", modalCurrentUrl);
+      }
+    });
+
+    // ----- Rendering -----
+    function renderItems(filterText) {
+      const rail = document.getElementById("itemsRail");
+      const countNote = document.getElementById("countNote");
+      const toggleBtn = document.getElementById("toggleBtn");
+
+      const q = (filterText || "").trim().toLowerCase();
+
+      let filtered = CURRENT_ITEMS;
+      if (q) {
+        filtered = CURRENT_ITEMS.filter(it =>
+          it.title.toLowerCase().includes(q) ||
+          it.brand.toLowerCase().includes(q) ||
+          it.raw.toLowerCase().includes(q)
+        );
       }
 
-      status.textContent = "";
+      const total = filtered.length;
+      const isSearching = !!q;
+      const visible = (isSearching || SHOW_ALL) ? filtered : filtered.slice(0, DEFAULT_VISIBLE);
 
-      meta.innerHTML = [
-        bundle.brand ? `<span><b>Brand:</b> ${bundle.brand}</span>` : "",
-        bundle.supplier_type ? `<span><b>Supplier type:</b> ${bundle.supplier_type}</span>` : "",
-        bundle.category ? `<span><b>Category:</b> ${bundle.category}</span>` : ""
-      ].filter(Boolean).join("");
-
-      const includes = Array.isArray(bundle.includes) ? bundle.includes : [];
-      const items = includes.map(parseLine);
-
-      const tags = Array.isArray(bundle.tags) ? bundle.tags : [];
-
-      content.innerHTML = `
-        <div class="bundle-top">
-          <h2 class="bundle-name">${safeText(bundle.name)}</h2>
-          <p class="bundle-desc">${safeText(bundle.short_desc)}</p>
-
-          <div class="bundle-kpis">
-            <div class="kpi">
-              <div class="label">Price</div>
-              <div class="value">${moneyUSD(bundle.price_usd)} <span style="font-size:.9rem; color:#666; font-weight:700;">/ kit</span></div>
-            </div>
-            <div class="kpi">
-              <div class="label">SKU</div>
-              <div class="value">${safeText(bundle.sku)}</div>
-            </div>
-            <div class="kpi">
-              <div class="label">Type</div>
-              <div class="value">${safeText(bundle.type || "bundle")}</div>
-            </div>
-          </div>
-
-          ${tags.length ? `<div class="tags-row">${tags.map(t => `<span class="tagchip">${t}</span>`).join("")}</div>` : ""}
-        </div>
-
-        <div class="category-header">
-          <h3>Included Items</h3>
-          <span class="pill">${items.length} items</span>
-        </div>
-
-        <div class="rail" id="itemsRail"></div>
-      `;
-
-      const rail = document.getElementById("itemsRail");
-      items.forEach(it => {
+      rail.innerHTML = "";
+      visible.forEach((it) => {
         const tile = document.createElement("div");
         tile.className = "tile";
+        tile.tabIndex = 0;
+        tile.setAttribute("role", "button");
+        tile.setAttribute("aria-label", `Quick view: ${it.title}`);
         tile.innerHTML = `
           <div class="tile-media">
             <img src="${it.img}" alt="${it.title}" loading="lazy" referrerpolicy="no-referrer" />
@@ -430,18 +552,31 @@
           <div class="tile-body">
             <div class="tile-title">${it.title}</div>
             <div class="kv"><span>Brand</span><b>${it.brand}</b></div>
-            <div class="kv"><span>Source</span><b>External</b></div>
 
-            <div class="actions">
+            <div class="actions" onclick="event.stopPropagation()">
               <a class="btn-link" href="${it.url}" target="_blank" rel="noopener noreferrer">View product ↗</a>
               <button class="btn-link secondary" type="button" data-copy="${it.url}">Copy link</button>
             </div>
           </div>
         `;
+
+        // Tap/click tile for modal (except links/buttons inside actions)
+        tile.addEventListener("click", (e) => {
+          const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
+          if (tag === "a" || tag === "button") return;
+          openModal(it);
+        });
+        tile.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openModal(it);
+          }
+        });
+
         rail.appendChild(tile);
       });
 
-      // copy buttons
+      // copy link buttons (inside tiles)
       rail.querySelectorAll("button[data-copy]").forEach(btn => {
         btn.addEventListener("click", async () => {
           const link = btn.getAttribute("data-copy");
@@ -455,6 +590,88 @@
           }
         });
       });
+
+      countNote.textContent = `${total} item${total === 1 ? "" : "s"}${q ? " (filtered)" : ""}`;
+
+      if (isSearching || total <= DEFAULT_VISIBLE) {
+        toggleBtn.style.display = "none";
+      } else {
+        toggleBtn.style.display = "inline-flex";
+        toggleBtn.textContent = SHOW_ALL ? "Show less" : `Show all (${total})`;
+      }
+    }
+
+    function renderBundle(sku) {
+      const content = document.getElementById("content");
+      const meta = document.getElementById("bundleMeta");
+      const status = document.getElementById("status");
+      const searchInput = document.getElementById("searchInput");
+
+      const bundle = BUNDLES.find(b => b.sku === sku);
+      if (!bundle) {
+        content.innerHTML = "";
+        meta.innerHTML = "";
+        status.innerHTML = `<div class="error"><b>Bundle not found</b> — sku: ${sku || ""}</div>`;
+        return;
+      }
+
+      SHOW_ALL = false;
+      searchInput.value = "";
+
+      status.textContent = "";
+
+      meta.innerHTML = [
+        bundle.brand ? `<span><b>Brand:</b> ${bundle.brand}</span>` : "",
+        bundle.supplier_type ? `<span><b>Supplier type:</b> ${bundle.supplier_type}</span>` : "",
+        bundle.category ? `<span><b>Category:</b> ${bundle.category}</span>` : ""
+      ].filter(Boolean).join("");
+
+      const includes = Array.isArray(bundle.includes) ? bundle.includes : [];
+      CURRENT_ITEMS = includes.map(parseLine);
+      const tags = Array.isArray(bundle.tags) ? bundle.tags : [];
+
+      content.innerHTML = `
+        <div class="bundle-top">
+          <h2 class="bundle-name">${bundle.name || ""}</h2>
+          <p class="bundle-desc">${bundle.short_desc || ""}</p>
+
+          <div class="bundle-kpis">
+            <div class="kpi">
+              <div class="label">Price</div>
+              <div class="value">${moneyUSD(bundle.price_usd)} <span style="font-size:.9rem; color:#666; font-weight:700;">/ kit</span></div>
+            </div>
+            <div class="kpi">
+              <div class="label">SKU</div>
+              <div class="value">${bundle.sku || ""}</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Type</div>
+              <div class="value">${bundle.type || "bundle"}</div>
+            </div>
+          </div>
+
+          ${tags.length ? `<div class="tags-row">${tags.map(t => `<span class="tagchip">${t}</span>`).join("")}</div>` : ""}
+        </div>
+
+        <div class="category-header">
+          <h3>Included Items</h3>
+          <span class="pill">${CURRENT_ITEMS.length} items</span>
+        </div>
+
+        <div class="tools-row">
+          <div class="count-note" id="countNote"></div>
+          <button class="btn-ghost" id="toggleBtn" type="button">Show all</button>
+        </div>
+
+        <div class="rail" id="itemsRail"></div>
+      `;
+
+      document.getElementById("toggleBtn").addEventListener("click", () => {
+        SHOW_ALL = !SHOW_ALL;
+        renderItems(searchInput.value);
+      });
+
+      renderItems("");
     }
 
     async function loadData() {
@@ -466,13 +683,11 @@
         if (!res.ok) throw new Error(`Fetch failed: ${res.status} ${res.statusText}`);
 
         const json = await res.json();
+        if (!Array.isArray(json)) throw new Error("products.json must be a top-level array.");
 
-        if (!Array.isArray(json)) {
-          throw new Error("products.json must be a top-level array of bundles.");
-        }
-
-        // keep only bundles (type=bundle), but allow missing type
-        BUNDLES = json.filter(x => (x && typeof x === "object")).filter(x => !x.type || x.type === "bundle");
+        BUNDLES = json
+          .filter(x => x && typeof x === "object")
+          .filter(x => !x.type || x.type === "bundle");
 
         const select = document.getElementById("bundleSelect");
         select.innerHTML = "";
@@ -494,7 +709,10 @@
       }
     }
 
-    document.getElementById("reloadBtn").addEventListener("click", loadData);
+    document.getElementById("searchInput").addEventListener("input", (e) => {
+      renderItems(e.target.value);
+    });
+
     loadData();
   </script>
 </body>
