@@ -9,111 +9,88 @@
 <body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
 
     <header class="bg-slate-900 text-white py-12 px-6 text-center shadow-lg">
-        <h1 id="page-title" class="text-4xl font-bold tracking-tight"></h1>
-        <p id="page-subtitle" class="mt-2 text-slate-400"></p>
+        <h1 class="text-4xl font-bold tracking-tight">Contractor Supply Catalog</h1>
+        <p class="mt-2 text-slate-400">All Bundles & Professional Inventory</p>
     </header>
 
-    <main id="catalog-container" class="max-w-5xl mx-auto py-12 px-6">
-        <!-- Dynamic sections will be injected here -->
+    <!-- Main Container for All Bundles -->
+    <main id="master-catalog" class="max-w-5xl mx-auto py-12 px-6 space-y-20">
+        <!-- Everything is injected here -->
     </main>
 
-    <footer class="bg-gray-100 py-8 text-center border-t border-gray-200">
-        <p class="text-gray-500 text-sm">© 2024 Contractor Supply Catalog</p>
-    </footer>
-
     <script>
+        // FULL JSON DATA
         const catalogData = {
-          "currency": "USD",
-          "bundles": [
-            {
-              "name": "Basic Unit Turn (1–2 Bed)",
-              "goal": "Get unit rent-ready with minimal friction",
-              "categories": [
+            "bundles": [
                 {
-                  "category": "Paint & Wall Repair",
-                  "why": "Every turn touches walls. Efficiency starts with surface prep.",
-                  "items": [
-                    {
-                      "product": "Interior wall paint, 5-gal",
-                      "typical_quantity": 1,
-                      "brands": ["Benjamin Moore", "Sherwin-Williams"],
-                      "image": "images/paint-bucket.jpg",
-                      "url": "https://example.com/paint"
-                    },
-                    {
-                      "product": "Drywall patch kit",
-                      "typical_quantity": 1,
-                      "brands": ["USG", "3M"],
-                      "image": "images/patch-kit.jpg",
-                      "url": "https://example.com/drywall"
-                    }
-                  ]
+                    "name": "Basic Unit Turn (1–2 Bed)",
+                    "categories": [
+                        {
+                            "category": "Paint & Wall Repair",
+                            "items": [
+                                { "product": "Interior wall paint, 5-gal", "brands": ["PPG", "Sherwin-Williams"], "image": "images/wall-paint.jpg", "url": "#", "qty": 1 },
+                                { "product": "Ceiling paint, 5-gal", "brands": ["Benjamin Moore"], "image": "images/ceiling-paint.jpg", "url": "#", "qty": 1 }
+                            ]
+                        }
+                    ]
                 },
                 {
-                  "category": "Painting Accessories",
-                  "why": "Consumables should be stocked in bulk to save crew time.",
-                  "items": [
-                    {
-                      "product": "Roller covers (9 inch)",
-                      "typical_quantity": 6,
-                      "brands": ["Wooster", "Purdy"],
-                      "image": "images/rollers.jpg",
-                      "url": "https://example.com/rollers"
-                    }
-                  ]
+                    "name": "Standard Turn + Safety (2–3 Bed)",
+                    "categories": [
+                        {
+                            "category": "Safety & Code Compliance",
+                            "items": [
+                                { "product": "Smoke detectors (10-year)", "brands": ["First Alert", "Kidde"], "image": "images/smoke-detector.jpg", "url": "#", "qty": 3 },
+                                { "product": "Fire extinguisher (ABC)", "brands": ["Kidde"], "image": "images/fire-ext.jpg", "url": "#", "qty": 1 }
+                            ]
+                        }
+                    ]
                 }
-              ]
-            }
-          ]
+                // Add more bundles here...
+            ]
         };
 
-        const container = document.getElementById('catalog-container');
-        const bundle = catalogData.bundles[0];
+        const masterContainer = document.getElementById('master-catalog');
 
-        // 1. Set Header Info
-        document.getElementById('page-title').textContent = bundle.name;
-        document.getElementById('page-subtitle').textContent = bundle.goal;
+        // RECURSIVE RENDERER: Loops through BUNDLES -> CATEGORIES -> ITEMS
+        catalogData.bundles.forEach(bundle => {
+            const bundleSection = document.createElement('div');
+            bundleSection.innerHTML = `<h2 class="text-2xl font-black text-blue-900 border-b-4 border-blue-200 pb-2 mb-8">${bundle.name}</h2>`;
 
-        // 2. Iterate through Categories
-        bundle.categories.forEach((cat, index) => {
-            const section = document.createElement('section');
-            section.className = "mb-16";
-
-            // Generate items HTML
-            const itemsHtml = cat.items.map(item => `
-                <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-gray-100 py-6 hover:bg-white transition-colors px-4 rounded-lg">
-                    <div class="flex items-center space-x-6">
-                        <div class="w-20 h-20 bg-gray-200 rounded shadow-inner overflow-hidden flex-shrink-0">
-                            <img src="${item.image}" alt="${item.product}" class="w-full h-full object-cover" onerror="this.src='placehold.co'">
+            bundle.categories.forEach((cat, index) => {
+                const catHtml = `
+                    <section class="mb-12">
+                        <div class="flex items-center mb-4">
+                            <span class="bg-slate-700 text-white font-bold px-3 py-1 rounded-md mr-3">${index + 1}</span>
+                            <h3 class="text-xl font-bold text-slate-800">${cat.category}</h3>
                         </div>
-                        <div>
-                            <h4 class="text-lg font-bold text-gray-900">${item.product}</h4>
-                            <p class="text-sm text-gray-500 italic mb-1">${item.brands.join(" • ")}</p>
-                            <span class="inline-block bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">Qty: ${item.typical_quantity}</span>
+                        <div class="grid gap-4">
+                            ${cat.items.map(item => `
+                                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0 border">
+                                            <!-- FALLBACK: If image doesn't exist in folder, it shows a label -->
+                                            <img src="${item.image}" 
+                                                 alt="${item.product}" 
+                                                 class="w-full h-full object-cover"
+                                                 onerror="this.onerror=null; this.src='placehold.co';">
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-gray-900">${item.product}</h4>
+                                            <p class="text-sm text-gray-500">${item.brands.join(", ")}</p>
+                                            <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded mt-1 inline-block">Qty: ${item.qty}</span>
+                                        </div>
+                                    </div>
+                                    <a href="${item.url}" class="bg-slate-800 text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-slate-700 transition">View Details</a>
+                                </div>
+                            `).join('')}
                         </div>
-                    </div>
-                    <div class="mt-4 md:mt-0">
-                        <a href="${item.url}" target="_blank" class="inline-block bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 shadow-md">
-                            View Product
-                        </a>
-                    </div>
-                </div>
-            `).join('');
+                    </section>
+                `;
+                bundleSection.innerHTML += catHtml;
+            });
 
-            // Inject full category structure
-            section.innerHTML = `
-                <div class="flex items-center mb-6">
-                    <span class="bg-slate-800 text-white text-2xl font-bold px-4 py-1 rounded mr-4">${index + 1}</span>
-                    <h2 class="text-3xl font-bold uppercase tracking-wide text-slate-800">${cat.category}</h2>
-                </div>
-                <div class="bg-amber-50 border-l-4 border-amber-400 p-4 mb-8 text-amber-900 shadow-sm">
-                    <strong>Strategy:</strong> ${cat.why}
-                </div>
-                <div class="space-y-4">
-                    ${itemsHtml}
-                </div>
-            `;
-            container.appendChild(section);
+            masterContainer.appendChild(bundleSection);
         });
     </script>
 </body>
