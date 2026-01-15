@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contractor Essentials Catalog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
+
+    <header class="bg-slate-900 text-white py-12 px-6 text-center shadow-lg">
+        <h1 class="text-4xl font-bold tracking-tight">Contractor Essentials Catalog</h1>
+        <p class="mt-2 text-slate-400">Bulk procurement for high-turnover restoration projects</p>
+    </header>
+
+    <main id="catalog-container" class="max-w-5xl mx-auto py-12 px-6">
+        <!-- Content will be injected here by JavaScript -->
+    </main>
+
+    <footer class="bg-gray-100 py-8 text-center border-t border-gray-200">
+        <p class="text-gray-500 text-sm">© 2024 Contractor Supply Catalog</p>
+    </footer>
+
+    <script>
+        // Your JSON Data
+        const data = {
+            "bundles": [
+                {
+                    "bundle_id": "BUNDLE_1",
+                    "name": "Basic Unit Turn (1–2 Bed)",
+                    "use_case": "Cosmetic refresh between tenants",
+                    "categories": [
+                        {
+                            "category": "Paint & Wall Repair",
+                            "why": "Every turn touches walls. Efficiency starts with high-volume surface prep.",
+                            "color": "blue",
+                            "items": [
+                                { "product": "Interior wall paint, 5-gal", "typical_quantity": 1, "brands": ["Benjamin Moore", "PPG"], "image": "images/paint.jpg", "url": "#" },
+                                { "product": "Lightweight drywall compound", "typical_quantity": 1, "brands": ["USG Sheetrock"], "image": "images/drywall.jpg", "url": "#" },
+                                { "product": "Acrylic latex caulk", "typical_quantity": 4, "brands": ["DAP", "Sika"], "image": "images/caulk.jpg", "url": "#" }
+                            ]
+                        },
+                        {
+                            "category": "Painting Accessories",
+                            "why": "Crews lose time re-buying basics. Consumables should be stocked in bulk.",
+                            "color": "orange",
+                            "items": [
+                                { "product": "Roller covers (9 inch)", "typical_quantity": 6, "brands": ["Wooster", "Purdy"], "image": "images/rollers.jpg", "url": "#" },
+                                { "product": "Contractor-grade brushes", "typical_quantity": 4, "brands": ["Wooster", "Purdy"], "image": "images/brushes.jpg", "url": "#" }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+
+        const container = document.getElementById('catalog-container');
+
+        data.bundles.forEach(bundle => {
+            bundle.categories.forEach((cat, index) => {
+                const colorClass = cat.color === 'orange' ? 'bg-orange-500' : 'bg-blue-600';
+                const lightColorClass = cat.color === 'orange' ? 'bg-orange-50 border-orange-500' : 'bg-blue-50 border-blue-600';
+
+                let itemsHtml = cat.items.map(item => `
+                    <div class="flex items-center justify-between border-b border-gray-100 py-4 group">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-16 h-16 bg-gray-200 rounded overflow-hidden flex-shrink-0">
+                                <img src="${item.image}" alt="${item.product}" class="w-full h-full object-cover onerror="this.style.display='none'">
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">${item.product}</h4>
+                                <p class="text-xs text-gray-500 uppercase">${item.brands.join(", ")}</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <a href="${item.url}" class="text-blue-600 hover:text-blue-800 text-sm font-medium underline">View Product &rarr;</a>
+                            <p class="text-xs text-gray-400 mt-1">Qty: ${item.typical_quantity}</p>
+                        </div>
+                    </div>
+                `).join('');
+
+                const section = `
+                    <section class="mb-16">
+                        <div class="flex items-center mb-6">
+                            <span class="${colorClass} text-white text-2xl font-bold px-4 py-1 rounded mr-4">${index + 1}</span>
+                            <h2 class="text-3xl font-bold uppercase tracking-wide">${cat.category}</h2>
+                        </div>
+                        
+                        <div class="${lightColorClass} border-l-4 p-4 mb-8 italic">
+                            <strong>The "Why":</strong> ${cat.why || "Standard turnover essential."}
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-4 border-b-2 border-gray-100 pb-2">Included Items</h3>
+                                <div class="space-y-2">
+                                    ${itemsHtml}
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                `;
+                container.innerHTML += section;
+            });
+        });
+    </script>
+</body>
+</html>
