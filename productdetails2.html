@@ -96,7 +96,7 @@
                                     const rawImage = item.image ?? item.image_path_placeholder ?? '';
                                     const fileName = rawImage.split('/').pop();
                                     const image = fileName
-                                        ? `./image/${fileName}`
+                                        ? `./images/${fileName}`
                                         : 'https://placehold.co/80x80?text=No+Image';
 
                                     return `
