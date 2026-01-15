@@ -92,18 +92,21 @@
                                     const qty = item.qty ?? item.typical_quantity ?? '';
                                     const url = item.url ?? item.url_placeholder ?? '#';
 
-                                    // ✅ FORCE images to load from /image/filename
-                                    //const rawImage = item.image ?? item.image_path_placeholder ?? '';
+                                    // ✅ Corrected logic to match your "images" folder
                                     const rawImage = item.image ?? item.image_path_placeholder ?? '';
-                                    
-                                    //const fileName = rawImage; //rawImage.split('/').pop();
+
+                                    // Extract only the filename (e.g., "interiorpaint.png")
                                     const fileName = rawImage.split('/').pop();
-                                    //const image = fileName
-                                      //  ? `images/${fileName}`
-                                        //: 'https://placehold.co/80x80?text=No+Image';
+
+                                    // Construct the path using your actual folder name: "images"
+                                    // We use a relative path that works for most local environments
                                     const imagePath = fileName 
                                         ? `images/${fileName}` 
-                                        : 'https://placehold.co/80x80?text=No+Image';
+                                    : 'https://placehold.co/80x80?text=No+Image';
+
+                                    // In your HTML template string, use the 'imagePath' variable:
+                                    // <img src="${imagePath}" onerror="this.src='placehold.co'">
+
 
 
                                     return `
