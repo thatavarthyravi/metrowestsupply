@@ -19,79 +19,96 @@
     </main>
 
     <script>
-        // FULL JSON DATA
-        const catalogData = {
-            "bundles": [
-                {
-                    "name": "Basic Unit Turn (1–2 Bed)",
-                    "categories": [
-                        {
-                            "category": "Paint & Wall Repair",
-                            "items": [
-                                { "product": "Interior wall paint, 5-gal", "brands": ["PPG", "Sherwin-Williams"], "image": "images/wall-paint.jpg", "url": "#", "qty": 1 },
-                                { "product": "Ceiling paint, 5-gal", "brands": ["Benjamin Moore"], "image": "images/ceiling-paint.jpg", "url": "#", "qty": 1 }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "name": "Standard Turn + Safety (2–3 Bed)",
-                    "categories": [
-                        {
-                            "category": "Safety & Code Compliance",
-                            "items": [
-                                { "product": "Smoke detectors (10-year)", "brands": ["First Alert", "Kidde"], "image": "images/smoke-detector.jpg", "url": "#", "qty": 3 },
-                                { "product": "Fire extinguisher (ABC)", "brands": ["Kidde"], "image": "images/fire-ext.jpg", "url": "#", "qty": 1 }
-                            ]
-                        }
-                    ]
-                }
-                // Add more bundles here...
-            ]
-        };
-
         const masterContainer = document.getElementById('master-catalog');
 
-        // RECURSIVE RENDERER: Loops through BUNDLES -> CATEGORIES -> ITEMS
-        catalogData.bundles.forEach(bundle => {
-            const bundleSection = document.createElement('div');
-            bundleSection.innerHTML = `<h2 class="text-2xl font-black text-blue-900 border-b-4 border-blue-200 pb-2 mb-8">${bundle.name}</h2>`;
+        // Render function (same HTML structure/format you already had)
+        function renderCatalog(catalogData) {
+            masterContainer.innerHTML = '';
 
-            bundle.categories.forEach((cat, index) => {
-                const catHtml = `
-                    <section class="mb-12">
-                        <div class="flex items-center mb-4">
-                            <span class="bg-slate-700 text-white font-bold px-3 py-1 rounded-md mr-3">${index + 1}</span>
-                            <h3 class="text-xl font-bold text-slate-800">${cat.category}</h3>
-                        </div>
-                        <div class="grid gap-4">
-                            ${cat.items.map(item => `
-                                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
-                                    <div class="flex items-center space-x-4">
-                                        <div class="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0 border">
-                                            <!-- FALLBACK: If image doesn't exist in folder, it shows a label -->
-                                            <img src="${item.image}" 
-                                                 alt="${item.product}" 
-                                                 class="w-full h-full object-cover"
-                                                 onerror="this.onerror=null; this.src='placehold.co';">
-                                        </div>
-                                        <div>
-                                            <h4 class="font-bold text-gray-900">${item.product}</h4>
-                                            <p class="text-sm text-gray-500">${item.brands.join(", ")}</p>
-                                            <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded mt-1 inline-block">Qty: ${item.qty}</span>
-                                        </div>
-                                    </div>
-                                    <a href="${item.url}" class="bg-slate-800 text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-slate-700 transition">View Details</a>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </section>
+            const bundles = Array.isArray(catalogData?.bundles) ? catalogData.bundles : [];
+
+            bundles.forEach(bundle => {
+                const bundleSection = document.createElement('div');
+                bundleSection.innerHTML = `
+                    <h2 class="text-2xl font-black text-blue-900 border-b-4 border-blue-200 pb-2 mb-8">
+                        ${bundle.name ?? ''}
+                    </h2>
                 `;
-                bundleSection.innerHTML += catHtml;
-            });
 
-            masterContainer.appendChild(bundleSection);
-        });
+                const categories = Array.isArray(bundle?.categories) ? bundle.categories : [];
+                categories.forEach((cat, index) => {
+                    const items = Array.isArray(cat?.items) ? cat.items : [];
+
+                    const catHtml = `
+                        <section class="mb-12">
+                            <div class="flex items-center mb-4">
+                                <span class="bg-slate-700 text-white font-bold px-3 py-1 rounded-md mr-3">${index + 1}</span>
+                                <h3 class="text-xl font-bold text-slate-800">${cat.category ?? ''}</h3>
+                            </div>
+                            <div class="grid gap-4">
+                                ${items.map(item => {
+                                    // Supports BOTH your original inline JSON structure and your external JSON structure
+                                    const product = item.product ?? '';
+                                    const brands = Array.isArray(item.brands) ? item.brands : [];
+                                    const qty = item.qty ?? item.typical_quantity ?? '';
+                                    const image = item.image ?? item.image_path_placeholder ?? 'https://placehold.co/80x80?text=No+Image';
+                                    const url = item.url ?? item.url_placeholder ?? '#';
+
+                                    return `
+                                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
+                                            <div class="flex items-center space-x-4">
+                                                <div class="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0 border">
+                                                    <!-- FALLBACK: If image doesn't exist in folder, it shows a placeholder image -->
+                                                    <img src="${image}"
+                                                         alt="${product}"
+                                                         class="w-full h-full object-cover"
+                                                         onerror="this.onerror=null; this.src='https://placehold.co/80x80?text=No+Image';">
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-bold text-gray-900">${product}</h4>
+                                                    <p class="text-sm text-gray-500">${brands.join(", ")}</p>
+                                                    <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded mt-1 inline-block">
+                                                        Qty: ${qty}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <a href="${url}" class="bg-slate-800 text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-slate-700 transition">
+                                                View Details
+                                            </a>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </section>
+                    `;
+
+                    bundleSection.innerHTML += catHtml;
+                });
+
+                masterContainer.appendChild(bundleSection);
+            });
+        }
+
+        // Load JSON externally (your file is in the /data folder)
+        fetch('data/miniproductbundles.json')
+            .then(res => {
+                if (!res.ok) throw new Error(`Failed to load JSON: ${res.status} ${res.statusText}`);
+                return res.json();
+            })
+            .then(data => renderCatalog(data))
+            .catch(err => {
+                console.error(err);
+                masterContainer.innerHTML = `
+                    <div class="bg-white p-6 rounded-xl border border-red-200 shadow-sm">
+                        <h2 class="text-xl font-bold text-red-700">Could not load catalog JSON</h2>
+                        <p class="mt-2 text-sm text-gray-600">
+                            Make sure you're running this via a local server (not file://), and that
+                            <code class="bg-gray-100 px-1 rounded">/data/miniproductbundles.json</code> exists.
+                        </p>
+                        <p class="mt-2 text-xs text-gray-500">${String(err.message).replaceAll('<','&lt;').replaceAll('>','&gt;')}</p>
+                    </div>
+                `;
+            });
     </script>
 </body>
 </html>
