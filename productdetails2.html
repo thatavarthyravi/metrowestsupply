@@ -9,12 +9,12 @@
 <body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
 
     <header class="bg-slate-900 text-white py-12 px-6 text-center shadow-lg">
-        <h1 class="text-4xl font-bold tracking-tight">Contractor Essentials Catalog</h1>
-        <p class="mt-2 text-slate-400">Bulk procurement for high-turnover restoration projects</p>
+        <h1 id="page-title" class="text-4xl font-bold tracking-tight"></h1>
+        <p id="page-subtitle" class="mt-2 text-slate-400"></p>
     </header>
 
     <main id="catalog-container" class="max-w-5xl mx-auto py-12 px-6">
-        <!-- Content will be injected here by JavaScript -->
+        <!-- Dynamic sections will be injected here -->
     </main>
 
     <footer class="bg-gray-100 py-8 text-center border-t border-gray-200">
@@ -22,86 +22,98 @@
     </footer>
 
     <script>
-        // Your JSON Data
-        const data = {
-            "bundles": [
+        const catalogData = {
+          "currency": "USD",
+          "bundles": [
+            {
+              "name": "Basic Unit Turn (1–2 Bed)",
+              "goal": "Get unit rent-ready with minimal friction",
+              "categories": [
                 {
-                    "bundle_id": "BUNDLE_1",
-                    "name": "Basic Unit Turn (1–2 Bed)",
-                    "use_case": "Cosmetic refresh between tenants",
-                    "categories": [
-                        {
-                            "category": "Paint & Wall Repair",
-                            "why": "Every turn touches walls. Efficiency starts with high-volume surface prep.",
-                            "color": "blue",
-                            "items": [
-                                { "product": "Interior wall paint, 5-gal", "typical_quantity": 1, "brands": ["Benjamin Moore", "PPG"], "image": "images/paint.jpg", "url": "#" },
-                                { "product": "Lightweight drywall compound", "typical_quantity": 1, "brands": ["USG Sheetrock"], "image": "images/drywall.jpg", "url": "#" },
-                                { "product": "Acrylic latex caulk", "typical_quantity": 4, "brands": ["DAP", "Sika"], "image": "images/caulk.jpg", "url": "#" }
-                            ]
-                        },
-                        {
-                            "category": "Painting Accessories",
-                            "why": "Crews lose time re-buying basics. Consumables should be stocked in bulk.",
-                            "color": "orange",
-                            "items": [
-                                { "product": "Roller covers (9 inch)", "typical_quantity": 6, "brands": ["Wooster", "Purdy"], "image": "images/rollers.jpg", "url": "#" },
-                                { "product": "Contractor-grade brushes", "typical_quantity": 4, "brands": ["Wooster", "Purdy"], "image": "images/brushes.jpg", "url": "#" }
-                            ]
-                        }
-                    ]
+                  "category": "Paint & Wall Repair",
+                  "why": "Every turn touches walls. Efficiency starts with surface prep.",
+                  "items": [
+                    {
+                      "product": "Interior wall paint, 5-gal",
+                      "typical_quantity": 1,
+                      "brands": ["Benjamin Moore", "Sherwin-Williams"],
+                      "image": "images/paint-bucket.jpg",
+                      "url": "https://example.com/paint"
+                    },
+                    {
+                      "product": "Drywall patch kit",
+                      "typical_quantity": 1,
+                      "brands": ["USG", "3M"],
+                      "image": "images/patch-kit.jpg",
+                      "url": "https://example.com/drywall"
+                    }
+                  ]
+                },
+                {
+                  "category": "Painting Accessories",
+                  "why": "Consumables should be stocked in bulk to save crew time.",
+                  "items": [
+                    {
+                      "product": "Roller covers (9 inch)",
+                      "typical_quantity": 6,
+                      "brands": ["Wooster", "Purdy"],
+                      "image": "images/rollers.jpg",
+                      "url": "https://example.com/rollers"
+                    }
+                  ]
                 }
-            ]
+              ]
+            }
+          ]
         };
 
         const container = document.getElementById('catalog-container');
+        const bundle = catalogData.bundles[0];
 
-        data.bundles.forEach(bundle => {
-            bundle.categories.forEach((cat, index) => {
-                const colorClass = cat.color === 'orange' ? 'bg-orange-500' : 'bg-blue-600';
-                const lightColorClass = cat.color === 'orange' ? 'bg-orange-50 border-orange-500' : 'bg-blue-50 border-blue-600';
+        // 1. Set Header Info
+        document.getElementById('page-title').textContent = bundle.name;
+        document.getElementById('page-subtitle').textContent = bundle.goal;
 
-                let itemsHtml = cat.items.map(item => `
-                    <div class="flex items-center justify-between border-b border-gray-100 py-4 group">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-16 h-16 bg-gray-200 rounded overflow-hidden flex-shrink-0">
-                                <img src="${item.image}" alt="${item.product}" class="w-full h-full object-cover onerror="this.style.display='none'">
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-900">${item.product}</h4>
-                                <p class="text-xs text-gray-500 uppercase">${item.brands.join(", ")}</p>
-                            </div>
+        // 2. Iterate through Categories
+        bundle.categories.forEach((cat, index) => {
+            const section = document.createElement('section');
+            section.className = "mb-16";
+
+            // Generate items HTML
+            const itemsHtml = cat.items.map(item => `
+                <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-gray-100 py-6 hover:bg-white transition-colors px-4 rounded-lg">
+                    <div class="flex items-center space-x-6">
+                        <div class="w-20 h-20 bg-gray-200 rounded shadow-inner overflow-hidden flex-shrink-0">
+                            <img src="${item.image}" alt="${item.product}" class="w-full h-full object-cover" onerror="this.src='placehold.co'">
                         </div>
-                        <div class="text-right">
-                            <a href="${item.url}" class="text-blue-600 hover:text-blue-800 text-sm font-medium underline">View Product &rarr;</a>
-                            <p class="text-xs text-gray-400 mt-1">Qty: ${item.typical_quantity}</p>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-900">${item.product}</h4>
+                            <p class="text-sm text-gray-500 italic mb-1">${item.brands.join(" • ")}</p>
+                            <span class="inline-block bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">Qty: ${item.typical_quantity}</span>
                         </div>
                     </div>
-                `).join('');
+                    <div class="mt-4 md:mt-0">
+                        <a href="${item.url}" target="_blank" class="inline-block bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 shadow-md">
+                            View Product
+                        </a>
+                    </div>
+                </div>
+            `).join('');
 
-                const section = `
-                    <section class="mb-16">
-                        <div class="flex items-center mb-6">
-                            <span class="${colorClass} text-white text-2xl font-bold px-4 py-1 rounded mr-4">${index + 1}</span>
-                            <h2 class="text-3xl font-bold uppercase tracking-wide">${cat.category}</h2>
-                        </div>
-                        
-                        <div class="${lightColorClass} border-l-4 p-4 mb-8 italic">
-                            <strong>The "Why":</strong> ${cat.why || "Standard turnover essential."}
-                        </div>
-
-                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                            <div class="p-6">
-                                <h3 class="text-xl font-semibold mb-4 border-b-2 border-gray-100 pb-2">Included Items</h3>
-                                <div class="space-y-2">
-                                    ${itemsHtml}
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                `;
-                container.innerHTML += section;
-            });
+            // Inject full category structure
+            section.innerHTML = `
+                <div class="flex items-center mb-6">
+                    <span class="bg-slate-800 text-white text-2xl font-bold px-4 py-1 rounded mr-4">${index + 1}</span>
+                    <h2 class="text-3xl font-bold uppercase tracking-wide text-slate-800">${cat.category}</h2>
+                </div>
+                <div class="bg-amber-50 border-l-4 border-amber-400 p-4 mb-8 text-amber-900 shadow-sm">
+                    <strong>Strategy:</strong> ${cat.why}
+                </div>
+                <div class="space-y-4">
+                    ${itemsHtml}
+                </div>
+            `;
+            container.appendChild(section);
         });
     </script>
 </body>
