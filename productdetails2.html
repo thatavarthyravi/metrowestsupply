@@ -94,7 +94,7 @@
 
                                     // ✅ FORCE images to load from /image/filename
                                     const rawImage = item.image ?? item.image_path_placeholder ?? '';
-                                    const fileName = "";//rawImage.split('/').pop();
+                                    const fileName = rawImage; //rawImage.split('/').pop();
                                     const image = fileName
                                         ? `images/${fileName}`
                                         : 'https://placehold.co/80x80?text=No+Image';
