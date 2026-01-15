@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contractor Essentials Catalog | Unit Turn Supply</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Experimental Soft Brand Variables */
+        :root {
+            --navy: #0f172a;
+            --orange: #ea580c;
+            --navy-tint: #f1f5f9;
+            --navy-muted: #334155;
+            --orange-tint: #fff7ed;
+        }
+
+        /* Smoothing transition for hover effects */
+        .product-card {
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans flex flex-col min-h-screen">
+
+    <!-- STANDARD HEADER: Soft Look -->
+    <header class="sticky top-0 z-50 bg-white border-b-2 border-[var(--navy-tint)] shadow-sm">
+        <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-[var(--navy)] p-1.5 rounded">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                    </svg>
+                </div>
+                <span class="text-xl font-bold text-[var(--navy)] tracking-tight">Unit Turn<span class="text-[var(--orange)] ml-1">Supply</span></span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-bold text-[var(--navy-muted)] uppercase tracking-wider">
+                <a href="index.html" class="hover:text-[var(--orange)] transition">Home</a>
+                <a href="catalog.html" class="text-[var(--navy)] border-b-2 border-[var(--orange)]">Bundles</a>
+                <a href="order-form.html" class="hover:text-[var(--orange)] transition">Order Now</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- PAGE HERO -->
+    <div class="bg-[var(--navy-tint)] py-12 border-b border-gray-200">
+        <div class="max-w-5xl mx-auto px-6">
+            <h1 class="text-3xl font-black text-[var(--navy)]">Essential Material Bundles</h1>
+            <p class="text-[var(--navy-muted)] mt-2">Standardized procurement for high-turnover unit renovations.</p>
+        </div>
+    </div>
+
+    <!-- MAIN DYNAMIC CONTENT -->
+    <main id="master-catalog" class="max-w-5xl mx-auto py-12 px-6 flex-grow space-y-16">
+        <!-- JS will inject bundles here -->
+        <div class="text-center py-20 text-gray-400 font-medium">Loading catalog inventory...</div>
+    </main>
+
+    <!-- STANDARD FOOTER -->
+    <footer class="bg-white border-t border-slate-200 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div class="md:col-span-1">
+                <span class="text-xl font-bold text-[var(--navy)]">Unit Turn Supply</span>
+                <p class="mt-4 text-sm text-slate-500 leading-relaxed">Fulfillment experts for restoration and property management turnover materials.</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-slate-900 mb-4">Bundles</h4>
+                <ul class="text-sm text-slate-600 space-y-2">
+                    <li><a href="#" class="hover:text-[var(--orange)]">Basic Turn</a></li>
+                    <li><a href="#" class="hover:text-[var(--orange)]">Standard Safety</a></li>
+                    <li><a href="#" class="hover:text-[var(--orange)]">Premium Renovations</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-slate-900 mb-4">Support</h4>
+                <ul class="text-sm text-slate-600 space-y-2">
+                    <li><a href="#" class="hover:text-[var(--orange)]">Contact Sales</a></li>
+                    <li><a href="#" class="hover:text-[var(--orange)]">Project Tracking</a></li>
+                    <li><a href="#" class="hover:text-[var(--orange)]">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-slate-900 mb-4">Newsletter</h4>
+                <div class="flex">
+                    <input type="text" placeholder="Project Email" class="bg-slate-100 border-none rounded-l-lg px-3 py-2 text-sm w-full outline-none">
+                    <button class="bg-[var(--orange)] text-white px-4 py-2 rounded-r-lg text-sm font-bold">Join</button>
+                </div>
+            </div>
+        </div>
+        <div class="text-center pt-8 border-t border-slate-100 text-xs text-slate-400">
+            &copy; 2025 Unit Turn Supply. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // 1. YOUR JSON DATA
+        const catalogData = {
+            "bundles": [
+                {
+                    "name": "Basic Unit Turn (1–2 Bed)",
+                    "categories": [
+                        {
+                            "category": "Paint & Wall Repair",
+                            "items": [
+                                { "product": "Interior wall paint, 5-gal", "brands": ["PPG", "Sherwin-Williams Pro"], "image_path_placeholder": "images/interiorpaint.png", "url_placeholder": "#", "qty": 1 },
+                                { "product": "Ceiling paint, 5-gal", "brands": ["Benjamin Moore", "PPG"], "image_path_placeholder": "images/ceilingpaint.png", "url_placeholder": "#", "qty": 1 },
+                                { "product": "Acrylic latex caulk (white)", "brands": ["DAP", "Sika"], "image_path_placeholder": "images/caulk.png", "url_placeholder": "#", "qty": 4 }
+                            ]
+                        },
+                        {
+                            "category": "Painting Accessories",
+                            "items": [
+                                { "product": "Roller covers (9\", 1/2\" nap)", "brands": ["Wooster", "Purdy"], "image_path_placeholder": "images/rollercovers.png", "url_placeholder": "#", "qty": 6 },
+                                { "product": "Contractor-grade brushes", "brands": ["Wooster", "Purdy"], "image_path_placeholder": "images/brushes.png", "url_placeholder": "#", "qty": 4 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Standard Turn + Safety (2–3 Bed)",
+                    "categories": [
+                        {
+                            "category": "Safety & Code Compliance",
+                            "items": [
+                                { "product": "Smoke detectors (10-year)", "brands": ["First Alert", "Kidde"], "image_path_placeholder": "images/smoke.png", "url_placeholder": "#", "qty": 3 },
+                                { "product": "CO detectors", "brands": ["First Alert", "Kidde"], "image_path_placeholder": "images/co.png", "url_placeholder": "#", "qty": 2 }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+
+        const masterContainer = document.getElementById('master-catalog');
+
+        function renderCatalog(data) {
+            if (!data || !data.bundles) return;
+            masterContainer.innerHTML = '';
+
+            data.bundles.forEach(bundle => {
+                const bundleDiv = document.createElement('div');
+                bundleDiv.className = "mb-20";
+
+                // Generate Category HTML
+                const categoriesHtml = (bundle.categories || []).map((cat, idx) => {
+                    const itemsHtml = (cat.items || []).map(item => {
+                        // RESOLVE IMAGE PATH
+                        const rawImage = item.image ?? item.image_path_placeholder ?? '';
+                        const fileName = rawImage.split('/').pop();
+                        // ✅ This ensures we look specifically in your 'images' folder
+                        const finalImagePath = fileName ? `images/${fileName}` : 'https://placehold.co';
+                        
+                        const product = item.product || 'Unknown Product';
+                        const brands = Array.isArray(item.brands) ? item.brands.join(", ") : "Generic";
+                        const url = item.url ?? item.url_placeholder ?? "#";
+                        const qty = item.qty ?? item.typical_quantity ?? 1;
+
+                        return `
+                            <div class="product-card bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between hover:border-[var(--orange)]">
+                                <div class="flex items-center space-x-5">
+                                    <div class="w-20 h-20 bg-gray-50 rounded-lg overflow-hidden border border-gray-100 flex-shrink-0">
+                                        <img src="${finalImagePath}" 
+                                             alt="${product}" 
+                                             class="w-full h-full object-cover"
+                                             onerror="this.onerror=null; this.src='https://placehold.co';">
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-[var(--navy)] text-lg leading-tight">${product}</h4>
+                                        <p class="text-xs text-slate-400 uppercase font-semibold mt-1 tracking-wider">${brands}</p>
+                                        <span class="inline-block mt-2 bg-[var(--orange-tint)] text-[var(--orange)] text-xs font-bold px-2 py-0.5 rounded">QTY: ${qty}</span>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <a href="${url}" class="bg-[var(--navy)] text-white px-5 py-2 rounded-lg text-sm font-bold hover:bg-[var(--navy-muted)] transition shadow-sm block text-center">
+                                        Details
+                                    </a>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+
+                    return `
+                        <div class="mb-10">
+                            <div class="flex items-center mb-5">
+                                <span class="bg-slate-200 text-slate-600 font-black px-3 py-1 rounded text-sm mr-3">${idx + 1}</span>
+                                <h3 class="text-xl font-bold text-slate-800 tracking-tight">${cat.category}</h3>
+                            </div>
+                            <div class="grid gap-4">
+                                ${itemsHtml}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                bundleDiv.innerHTML = `
+                    <h2 class="text-2xl font-black text-[var(--navy)] border-b-4 border-[var(--navy-tint)] pb-3 mb-10 uppercase tracking-tight">
+                        ${bundle.name}
+                    </h2>
+                    ${categoriesHtml}
+                `;
+                masterContainer.appendChild(bundleDiv);
+            });
+        }
+
+        // Initialize the Render
+        renderCatalog(catalogData);
+
+    </script>
+</body>
+</html>
