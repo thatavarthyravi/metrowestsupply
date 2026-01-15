@@ -6,6 +6,14 @@
     --white: #ffffff;
     --text-color: #333;
     --light-grey: #f4f4f4;
+    
+    /* NEW EXPERIMENTAL "SOFT" VARIABLES */
+    /* Use for backgrounds to make Navy/Orange feel less aggressive */
+    --navy-tint: #f1f5f9;    /* Light Slate (Cool) */
+    --navy-muted: #334155;   /* Gray-Blue for secondary text */
+    --orange-tint: #fff7ed;  /* Very Light Peach (Warm) */
+    --orange-muted: #fdba74; /* Soft Orange for borders */
+
 }
 
 body {
