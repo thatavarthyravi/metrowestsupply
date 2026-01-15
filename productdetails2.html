@@ -47,18 +47,21 @@
                             </div>
                             <div class="grid gap-4">
                                 ${items.map(item => {
-                                    // Supports BOTH your original inline JSON structure and your external JSON structure
                                     const product = item.product ?? '';
                                     const brands = Array.isArray(item.brands) ? item.brands : [];
                                     const qty = item.qty ?? item.typical_quantity ?? '';
-                                    const image = item.image ?? item.image_path_placeholder ?? 'https://placehold.co/80x80?text=No+Image';
                                     const url = item.url ?? item.url_placeholder ?? '#';
+
+                                    // ✅ Normalize image paths so "images/..." resolves correctly from the HTML page
+                                    const rawImage = item.image ?? item.image_path_placeholder ?? '';
+                                    const image = rawImage
+                                        ? (rawImage.startsWith('http') || rawImage.startsWith('/') ? rawImage : `./${rawImage}`)
+                                        : 'https://placehold.co/80x80?text=No+Image';
 
                                     return `
                                         <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
                                             <div class="flex items-center space-x-4">
                                                 <div class="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0 border">
-                                                    <!-- FALLBACK: If image doesn't exist in folder, it shows a placeholder image -->
                                                     <img src="${image}"
                                                          alt="${product}"
                                                          class="w-full h-full object-cover"
@@ -90,7 +93,7 @@
         }
 
         // Load JSON externally (your file is in the /data folder)
-        fetch('data/miniproductbundles.json')
+        fetch('./data/miniproductbundles.json')
             .then(res => {
                 if (!res.ok) throw new Error(`Failed to load JSON: ${res.status} ${res.statusText}`);
                 return res.json();
