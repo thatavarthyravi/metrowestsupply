@@ -9,22 +9,60 @@
 </head>
 
     <!-- Standard Header -->
-    <header>
-        <div class="header-left">
-            <img src="logo.png" alt="UT Logo" class="logo-small">
-            <span>Unit Turn Supply</span>
-        </div>
-        <h1 class="text-4xl font-bold tracking-tight">Contractor Supply Catalog</h1>
-        <p class="mt-2 text-slate-400">All Bundles & Professional Inventory</p>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="catalog.html">Bundles</a>
-            <a href="order-form.html">Order Now</a>
+    <header class="sticky top-0 z-50 bg-slate-900 text-white shadow-lg">
+        <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-orange-600 p-1.5 rounded">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                </div>
+                <span class="text-xl font-bold tracking-tight">Unit Turn<span class="text-orange-400 text-sm font-normal ml-1">Supply</span></span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
+                <a href="index.html" class="hover:text-white transition">Home</a>
+                <a href="catalog.html" class="hover:text-white transition font-bold text-white">Bundles</a>
+                <a href="order-form.html" class="hover:text-white transition">Order Now</a>
+            </div>
+            <a href="order-form.html" class="bg-orange-600 hover:bg-orange-700 px-4 py-2 rounded-lg text-sm font-bold transition">New Project</a>
         </nav>
     </header>
 
     <main id="master-catalog" class="max-w-5xl mx-auto py-12 px-6 space-y-20"></main>
 
+    <!-- STANDARD MULTI-COLUMN FOOTER -->
+    <footer class="bg-white border-t border-slate-200 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div class="md:col-span-1">
+                <span class="text-xl font-bold text-slate-900">Unit Turn Supply</span>
+                <p class="mt-4 text-sm text-slate-500 leading-relaxed">High-volume material fulfillment for restoration and tenant turn projects across North America.</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-slate-900 mb-4">Resources</h4>
+                <ul class="text-sm text-slate-600 space-y-2">
+                    <li><a href="#" class="hover:text-orange-600">Spec Sheets</a></li>
+                    <li><a href="#" class="hover:text-orange-600">Material Guides</a></li>
+                    <li><a href="#" class="hover:text-orange-600">Bulk Discounts</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-slate-900 mb-4">Support</h4>
+                <ul class="text-sm text-slate-600 space-y-2">
+                    <li><a href="#" class="hover:text-orange-600">Contact Us</a></li>
+                    <li><a href="privacy.html" class="hover:text-orange-600">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-orange-600">Terms of Sale</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-slate-900 mb-4">Project Updates</h4>
+                <div class="flex">
+                    <input type="text" placeholder="Email" class="bg-slate-100 border-none rounded-l-lg px-3 py-2 text-sm w-full outline-none">
+                    <button class="bg-orange-600 text-white px-4 py-2 rounded-r-lg text-sm font-bold">Join</button>
+                </div>
+            </div>
+        </div>
+        <div class="text-center pt-8 border-t border-slate-100 text-xs text-slate-400">
+            &copy; 2025 Unit Turn Supply. Material Management Specialists.
+        </div>
+    </footer>
     <script>
         const masterContainer = document.getElementById('master-catalog');
 
