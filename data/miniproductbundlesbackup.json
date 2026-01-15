@@ -1,0 +1,284 @@
+{
+  "currency": "USD",
+  "pricing_notes": "Estimated contractor-grade pricing. Regional variance applies.",
+  "bundles": [
+    {
+      "bundle_id": "BUNDLE_1",
+      "name": "Basic Unit Turn (1–2 Bed)",
+      "target_customer": "PMs, handymen, small landlords",
+      "use_case": "Cosmetic refresh between tenants",
+      "goal": "Get unit rent-ready with minimal friction",
+      "categories": [
+        {
+          "category": "Paint & Wall Repair",
+          "items": [
+            {
+              "product": "Interior wall paint, 5-gal",
+              "typical_quantity": 1,
+              "unit_cost_estimate": 140,
+              "brands": ["Benjamin Moore Ultra Spec", "PPG", "Sherwin-Williams Pro"],
+              "suppliers": ["Regional paint distributors", "Sherwin-Williams Pro"]
+            },
+            {
+              "product": "Ceiling paint, 5-gal",
+              "typical_quantity": 1,
+              "unit_cost_estimate": 120,
+              "brands": ["Benjamin Moore", "PPG", "Sherwin-Williams Pro"],
+              "suppliers": ["Paint distributors"]
+            },
+            {
+              "product": "Lightweight drywall compound (3–3.5 gal)",
+              "typical_quantity": 1,
+              "unit_cost_estimate": 25,
+              "brands": ["USG Sheetrock"],
+              "suppliers": ["Building supply wholesalers"]
+            },
+            {
+              "product": "Drywall patch kit",
+              "typical_quantity": 1,
+              "unit_cost_estimate": 15,
+              "brands": ["USG", "3M"],
+              "suppliers": ["Building supply wholesalers"]
+            },
+            {
+              "product": "Acrylic latex caulk (white)",
+              "typical_quantity": 4,
+              "unit_cost_estimate": 4,
+              "brands": ["DAP", "Sika"],
+              "suppliers": ["Paint distributors", "Building supply"]
+            }
+          ]
+        },
+        {
+          "category": "Painting Accessories",
+          "items": [
+            {
+              "product": "Roller covers (9\", 1/2\" nap)",
+              "typical_quantity": 6,
+              "unit_cost_estimate": 6,
+              "brands": ["Wooster", "Purdy"],
+              "suppliers": ["Paint distributors"]
+            },
+            {
+              "product": "Roller frames",
+              "typical_quantity": 2,
+              "unit_cost_estimate": 7,
+              "brands": ["Wooster", "Purdy"],
+              "suppliers": ["Paint distributors"]
+            },
+            {
+              "product": "Paint trays & liners",
+              "typical_quantity": 2,
+              "unit_cost_estimate": 6,
+              "brands": ["Wooster", "Linzer"],
+              "suppliers": ["Paint distributors"]
+            },
+            {
+              "product": "Contractor-grade brushes",
+              "typical_quantity": 4,
+              "unit_cost_estimate": 9,
+              "brands": ["Wooster", "Purdy"],
+              "suppliers": ["Paint distributors"]
+            },
+            {
+              "product": "Painter’s tape (1.5\"–2\")",
+              "typical_quantity": 3,
+              "unit_cost_estimate": 7,
+              "brands": ["3M ScotchBlue"],
+              "suppliers": ["Paint distributors"]
+            }
+          ]
+        },
+        {
+          "category": "Basic Electrical Consumables",
+          "items": [
+            {
+              "product": "LED A19 bulbs (bulk pack)",
+              "typical_quantity": 12,
+              "unit_cost_estimate": 2.5,
+              "brands": ["Philips", "GE", "Sylvania"],
+              "suppliers": ["Electrical distributors"]
+            },
+            {
+              "product": "Decora switches",
+              "typical_quantity": 6,
+              "unit_cost_estimate": 4,
+              "brands": ["Leviton", "Eaton"],
+              "suppliers": ["Electrical distributors"]
+            },
+            {
+              "product": "Decora outlets",
+              "typical_quantity": 6,
+              "unit_cost_estimate": 3,
+              "brands": ["Leviton", "Eaton"],
+              "suppliers": ["Electrical distributors"]
+            },
+            {
+              "product": "Wall plates (1–2 gang)",
+              "typical_quantity": 8,
+              "unit_cost_estimate": 2,
+              "brands": ["Leviton"],
+              "suppliers": ["Electrical distributors"]
+            }
+          ]
+        },
+        {
+          "category": "HVAC & Cleanup",
+          "items": [
+            {
+              "product": "HVAC filters (common sizes)",
+              "typical_quantity": 2,
+              "unit_cost_estimate": 18,
+              "brands": ["3M Filtrete", "Honeywell Home"],
+              "suppliers": ["HVAC supply houses"]
+            },
+            {
+              "product": "Basic cleaning kit",
+              "typical_quantity": 1,
+              "unit_cost_estimate": 45,
+              "brands": ["Clorox Pro", "Diversey"],
+              "suppliers": ["Janitorial distributors"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bundle_id": "BUNDLE_2",
+      "name": "Standard Turn + Safety (2–3 Bed)",
+      "includes": ["BUNDLE_1"],
+      "categories": [
+        {
+          "category": "Safety & Code Compliance",
+          "items": [
+            {
+              "product": "Smoke detectors (10-year)",
+              "typical_quantity": 3,
+              "unit_cost_estimate": 22,
+              "brands": ["First Alert", "Kidde"],
+              "suppliers": ["Safety supply distributors"]
+            },
+            {
+              "product": "CO detectors",
+              "typical_quantity": 2,
+              "unit_cost_estimate": 28,
+              "brands": ["First Alert", "Kidde"],
+              "suppliers": ["Safety supply distributors"]
+            },
+            {
+              "product": "Fire extinguisher (ABC)",
+              "typical_quantity": 1,
+              "unit_cost_estimate": 35,
+              "brands": ["Kidde"],
+              "suppliers": ["Building maintenance wholesalers"]
+            }
+          ]
+        },
+        {
+          "category": "Basic Fixtures & Electrical Upgrades",
+          "items": [
+            {
+              "product": "Flush-mount LED ceiling light",
+              "typical_quantity": 3,
+              "unit_cost_estimate": 45,
+              "brands": ["Lithonia Lighting", "Halo"],
+              "suppliers": ["Lighting wholesalers"]
+            },
+            {
+              "product": "GFCI outlet",
+              "typical_quantity": 2,
+              "unit_cost_estimate": 18,
+              "brands": ["Eaton", "Leviton"],
+              "suppliers": ["Electrical distributors"]
+            }
+          ]
+        },
+        {
+          "category": "Plumbing Repair Essentials",
+          "items": [
+            {
+              "product": "Universal toilet repair kit",
+              "typical_quantity": 1,
+              "unit_cost_estimate": 30,
+              "brands": ["Fluidmaster"],
+              "suppliers": ["Plumbing wholesalers"]
+            },
+            {
+              "product": "Toilet supply line",
+              "typical_quantity": 1,
+              "unit_cost_estimate": 12,
+              "brands": ["Sioux Chief"],
+              "suppliers": ["Plumbing wholesalers"]
+            },
+            {
+              "product": "Faucet aerators",
+              "typical_quantity": 3,
+              "unit_cost_estimate": 4,
+              "brands": ["Neoperl"],
+              "suppliers": ["Plumbing wholesalers"]
+            },
+            {
+              "product": "PTFE thread seal tape",
+              "typical_quantity": 2,
+              "unit_cost_estimate": 2,
+              "brands": ["Oatey"],
+              "suppliers": ["Plumbing wholesalers"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bundle_id": "BUNDLE_3",
+      "name": "Premium Turn / Light Renovation",
+      "includes": ["BUNDLE_2"],
+      "categories": [
+        {
+          "category": "Fixture Upgrades",
+          "items": [
+            {
+              "product": "Decorative LED ceiling fixture",
+              "typical_quantity": 2,
+              "unit_cost_estimate": 110,
+              "brands": ["Progress Lighting", "Kichler"],
+              "suppliers": ["Lighting distributors"]
+            },
+            {
+              "product": "Bathroom faucet (mid-tier)",
+              "typical_quantity": 1,
+              "unit_cost_estimate": 120,
+              "brands": ["Moen", "Delta"],
+              "suppliers": ["Plumbing wholesalers"]
+            },
+            {
+              "product": "Kitchen faucet (mid-tier)",
+              "typical_quantity": 1,
+              "unit_cost_estimate": 180,
+              "brands": ["Moen", "Delta"],
+              "suppliers": ["Plumbing wholesalers"]
+            }
+          ]
+        },
+        {
+          "category": "Plumbing Hardware & Finish",
+          "items": [
+            {
+              "product": "Sink trap kit",
+              "typical_quantity": 2,
+              "unit_cost_estimate": 15,
+              "brands": ["Oatey"],
+              "suppliers": ["Plumbing supply houses"]
+            },
+            {
+              "product": "Silicone sealant (clear)",
+              "typical_quantity": 3,
+              "unit_cost_estimate": 7,
+              "brands": ["GE Silicone", "DAP"],
+              "suppliers": ["Plumbing supply houses"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
