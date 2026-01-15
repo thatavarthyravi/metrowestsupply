@@ -18,8 +18,8 @@
               "unit_cost_estimate": 140,
               "brands": ["Benjamin Moore Ultra Spec", "PPG", "Sherwin-Williams Pro"],
               "suppliers": ["Regional paint distributors", "Sherwin-Williams Pro"],
-              "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "image_path_placeholder": "images/interiorpaint.png",
+              "url_placeholder": "https://www.benjaminmoore.com/en-us/product/ultra-spec-500-interior-paint-eggshell/T538"
             },
             {
               "product": "Ceiling paint, 5-gal",
@@ -27,8 +27,8 @@
               "unit_cost_estimate": 120,
               "brands": ["Benjamin Moore", "PPG", "Sherwin-Williams Pro"],
               "suppliers": ["Paint distributors"],
-              "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "image_path_placeholder": "images/ceilingpaint.png",
+              "url_placeholder": "https://www.benjaminmoore.com/en-us/product/muresco-ceiling-paint-flat-1-gallon/0258"
             },
             {
               "product": "Lightweight drywall compound (3–3.5 gal)",
@@ -36,8 +36,8 @@
               "unit_cost_estimate": 25,
               "brands": ["USG Sheetrock"],
               "suppliers": ["Building supply wholesalers"],
-              "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "image_path_placeholder": "images/drywallcompound.png",
+              "url_placeholder": "https://www.sherwin-williams.com/painting-contractors/products/usg-sheetrock-plus-3-joint-compound"
             },
             {
               "product": "Drywall patch kit",
@@ -45,8 +45,8 @@
               "unit_cost_estimate": 15,
               "brands": ["USG", "3M"],
               "suppliers": ["Building supply wholesalers"],
-              "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "image_path_placeholder": "images/drywallpatchkit.png",
+              "url_placeholder": "https://www.homedepot.com/p/DAP-DryDex-8-oz-Dry-Time-Indicator-Wall-Repair-Patch-Kit-12345/100493601"
             },
             {
               "product": "Acrylic latex caulk (white)",
@@ -54,8 +54,8 @@
               "unit_cost_estimate": 4,
               "brands": ["DAP", "Sika"],
               "suppliers": ["Paint distributors", "Building supply"],
-              "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "image_path_placeholder": "images/caulk.jpg",
+              "url_placeholder": "https://www.homedepot.com/p/DAP-Alex-Plus-10-1-oz-White-All-Purpose-Acrylic-Latex-Caulk-4-Pack-7079818103/323958462"
             }
           ]
         },
@@ -68,8 +68,8 @@
               "unit_cost_estimate": 6,
               "brands": ["Wooster", "Purdy"],
               "suppliers": ["Paint distributors"],
-              "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "image_path_placeholder": "images/rollercovers.png",
+              "url_placeholder": "https://www.lowes.com/pd/Purdy-White-Dove-3-Pack-9-in-x-1-2-in-Woven-Acrylic-Fiber-Paint-Roller-Cover/1000231461"
             },
             {
               "product": "Roller frames",
@@ -77,8 +77,8 @@
               "unit_cost_estimate": 7,
               "brands": ["Wooster", "Purdy"],
               "suppliers": ["Paint distributors"],
-              "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "image_path_placeholder": "images/rollerframe.png",
+              "url_placeholder": "https://www.sherwin-williams.com/painting-contractors/products/purdy-woodpro-9-roller-frame"
             },
             {
               "product": "Paint trays & liners",
@@ -86,8 +86,8 @@
               "unit_cost_estimate": 6,
               "brands": ["Wooster", "Linzer"],
               "suppliers": ["Paint distributors"],
-              "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "image_path_placeholder": "images/tray.png",
+              "url_placeholder": "https://www.homedepot.com/pep/Wooster-11-in-Plastic-Tray-Liner-For-Metal-Deluxe-Roller-Tray-00R4060110/203150882?g_store=&source=shoppingads&locale=en-US&fp=ggl&pla&utm_source=google&utm_medium=vantage&utm_campaign=52978&utm_content=55266&mtc=SHOPPING-RM-RMP-GGL-D24-Multi-NA-WOOSTER-NA-PMAX-NA-NA-MK895849001-52978-NBR-3135-NA-VNT-NA&cm_mmc=SHOPPING-RM-RMP-GGL-D24-Multi-NA-WOOSTER-NA-PMAX-NA-NA-MK895849001-52978-NBR-3135-NA-VNT-NA-22259464294--&gclsrc=aw.ds&gad_source=1&gad_campaignid=22259470921&gbraid=0AAAAAolLu98zkcAOWdAUHtabkWvipk7Wa&gclid=CjwKCAiAmp3LBhAkEiwAJM2JUMBiQa3pVlVEmdJTNUT2cX3aQSWBkmJkStKLLXnnba_Rrr3JY6Fs1BoC4bAQAvD_BwE"
             },
             {
               "product": "Contractor-grade brushes",
@@ -95,8 +95,8 @@
               "unit_cost_estimate": 9,
               "brands": ["Wooster", "Purdy"],
               "suppliers": ["Paint distributors"],
-              "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "image_path_placeholder": "images/brush.png",
+              "url_placeholder": "https://www.homedepot.com/pep/Wooster-2-1-2-in-Silver-Tip-Polyester-Angle-Sash-Brush-0052210024/304270574?g_store=&source=shoppingads&locale=en-US&fp=ggl&pla&utm_source=google&utm_medium=vantage&utm_campaign=52978&utm_content=55266&mtc=SHOPPING-RM-RMP-GGL-D24-Multi-NA-WOOSTER-NA-PMAX-NA-NA-MK895849001-52978-NBR-3135-NA-VNT-NA&cm_mmc=SHOPPING-RM-RMP-GGL-D24-Multi-NA-WOOSTER-NA-PMAX-NA-NA-MK895849001-52978-NBR-3135-NA-VNT-NA-22259464294--&gclsrc=aw.ds&gad_source=1&gad_campaignid=22259470921&gbraid=0AAAAAolLu98zkcAOWdAUHtabkWvipk7Wa&gclid=CjwKCAiAmp3LBhAkEiwAJM2JUPaCLAdXUS7aAErQyB0mhhyClX2hT-7Bd1qKN4hJ7OvwzdpTvGKGNxoC-owQAvD_BwE"
             },
             {
               "product": "Painter’s tape (1.5\"–2\")",
@@ -104,8 +104,8 @@
               "unit_cost_estimate": 7,
               "brands": ["3M ScotchBlue"],
               "suppliers": ["Paint distributors"],
-              "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "image_path_placeholder": "images/painterstape.png",
+              "url_placeholder": "https://www.homedepot.com/p/3M-ScotchBlue-1-41-in-x-60-yds-PROSharp-Painter-s-Tape-3-Rolls-2093-36AC3/333884370?MERCH=REC-_-pipsem-_-202077779-_-2-_-n/a-_-n/a-_-n/a-_-n/a-_-n/a"
             }
           ]
         },
