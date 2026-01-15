@@ -13,49 +13,41 @@
         <p class="mt-2 text-slate-400">All Bundles & Professional Inventory</p>
     </header>
 
-    <!-- Main Container for All Bundles -->
-    <main id="master-catalog" class="max-w-5xl mx-auto py-12 px-6 space-y-20">
-        <!-- Everything is injected here -->
-    </main>
+    <main id="master-catalog" class="max-w-5xl mx-auto py-12 px-6 space-y-20"></main>
 
     <script>
         const masterContainer = document.getElementById('master-catalog');
 
-        // Render function (same HTML structure/format you already had)
         function renderCatalog(catalogData) {
             masterContainer.innerHTML = '';
 
-            const bundles = Array.isArray(catalogData?.bundles) ? catalogData.bundles : [];
-
-            bundles.forEach(bundle => {
+            (catalogData.bundles || []).forEach(bundle => {
                 const bundleSection = document.createElement('div');
                 bundleSection.innerHTML = `
                     <h2 class="text-2xl font-black text-blue-900 border-b-4 border-blue-200 pb-2 mb-8">
-                        ${bundle.name ?? ''}
+                        ${bundle.name || ''}
                     </h2>
                 `;
 
-                const categories = Array.isArray(bundle?.categories) ? bundle.categories : [];
-                categories.forEach((cat, index) => {
-                    const items = Array.isArray(cat?.items) ? cat.items : [];
-
+                (bundle.categories || []).forEach((cat, index) => {
                     const catHtml = `
                         <section class="mb-12">
                             <div class="flex items-center mb-4">
                                 <span class="bg-slate-700 text-white font-bold px-3 py-1 rounded-md mr-3">${index + 1}</span>
-                                <h3 class="text-xl font-bold text-slate-800">${cat.category ?? ''}</h3>
+                                <h3 class="text-xl font-bold text-slate-800">${cat.category || ''}</h3>
                             </div>
                             <div class="grid gap-4">
-                                ${items.map(item => {
-                                    const product = item.product ?? '';
+                                ${(cat.items || []).map(item => {
+                                    const product = item.product || '';
                                     const brands = Array.isArray(item.brands) ? item.brands : [];
                                     const qty = item.qty ?? item.typical_quantity ?? '';
                                     const url = item.url ?? item.url_placeholder ?? '#';
 
-                                    // ✅ Normalize image paths so "images/..." resolves correctly from the HTML page
+                                    // ✅ FORCE images to load from /image/filename
                                     const rawImage = item.image ?? item.image_path_placeholder ?? '';
-                                    const image = rawImage
-                                        ? (rawImage.startsWith('http') || rawImage.startsWith('/') ? rawImage : `./${rawImage}`)
+                                    const fileName = rawImage.split('/').pop();
+                                    const image = fileName
+                                        ? `./image/${fileName}`
                                         : 'https://placehold.co/80x80?text=No+Image';
 
                                     return `
@@ -92,23 +84,14 @@
             });
         }
 
-        // Load JSON externally (your file is in the /data folder)
         fetch('./data/miniproductbundles.json')
-            .then(res => {
-                if (!res.ok) throw new Error(`Failed to load JSON: ${res.status} ${res.statusText}`);
-                return res.json();
-            })
-            .then(data => renderCatalog(data))
+            .then(res => res.json())
+            .then(renderCatalog)
             .catch(err => {
                 console.error(err);
                 masterContainer.innerHTML = `
-                    <div class="bg-white p-6 rounded-xl border border-red-200 shadow-sm">
-                        <h2 class="text-xl font-bold text-red-700">Could not load catalog JSON</h2>
-                        <p class="mt-2 text-sm text-gray-600">
-                            Make sure you're running this via a local server (not file://), and that
-                            <code class="bg-gray-100 px-1 rounded">/data/miniproductbundles.json</code> exists.
-                        </p>
-                        <p class="mt-2 text-xs text-gray-500">${String(err.message).replaceAll('<','&lt;').replaceAll('>','&gt;')}</p>
+                    <div class="bg-white p-6 rounded-xl border border-red-200">
+                        <h2 class="text-xl font-bold text-red-700">Failed to load catalog</h2>
                     </div>
                 `;
             });
