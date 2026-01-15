@@ -54,7 +54,7 @@
               "unit_cost_estimate": 4,
               "brands": ["DAP", "Sika"],
               "suppliers": ["Paint distributors", "Building supply"],
-              "image_path_placeholder": "images/caulk.jpg",
+              "image_path_placeholder": "images/caulk.png",
               "url_placeholder": "https://www.homedepot.com/p/DAP-Alex-Plus-10-1-oz-White-All-Purpose-Acrylic-Latex-Caulk-4-Pack-7079818103/323958462"
             }
           ]
