@@ -18,7 +18,7 @@
               "unit_cost_estimate": 140,
               "brands": ["Benjamin Moore Ultra Spec", "PPG", "Sherwin-Williams Pro"],
               "suppliers": ["Regional paint distributors", "Sherwin-Williams Pro"],
-              "image_path_placeholder": "images/interiorpaint.png",
+              "image_path_placeholder": "interiorpaint.png",
               "url_placeholder": "https://www.benjaminmoore.com/en-us/product/ultra-spec-500-interior-paint-eggshell/T538"
             },
             {
