@@ -119,7 +119,7 @@
               "brands": ["Philips", "GE", "Sylvania"],
               "suppliers": ["Electrical distributors"],
               "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "url_placeholder": "https://www.homedepot.com/p/Sylvania-8-5-Watt-60-Watt-Equivalent-A19-LED-Light-Bulb-in-2700K-Soft-White-Color-Temperature-24-Pack-74765/303629965"
             },
             {
               "product": "Decora switches",
@@ -128,7 +128,7 @@
               "brands": ["Leviton", "Eaton"],
               "suppliers": ["Electrical distributors"],
               "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "url_placeholder": "https://www.homedepot.com/p/Leviton-Decora-15-Amp-Single-Pole-AC-Quiet-Switch-Gray-5601-2GS-R67-05601-2GS/100211263"
             },
             {
               "product": "Decora outlets",
@@ -137,7 +137,7 @@
               "brands": ["Leviton", "Eaton"],
               "suppliers": ["Electrical distributors"],
               "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "url_placeholder": "https://www.homedepot.com/p/Leviton-Decora-15-Amp-125-V-Duplex-Outlet-Receptacle-White-10-Pack-5325-WMP-M24-05325-WMP/100357041"
             },
             {
               "product": "Wall plates (1–2 gang)",
@@ -146,7 +146,7 @@
               "brands": ["Leviton"],
               "suppliers": ["Electrical distributors"],
               "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "url_placeholder": "https://www.homedepot.com/p/Leviton-2-Gang-White-Decora-Rocker-Plastic-Standard-Wall-Plate-1-Pack-80409-W-R52-80409-00W/100048406"
             }
           ]
         },
