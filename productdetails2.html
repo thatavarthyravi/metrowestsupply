@@ -93,7 +93,7 @@
                                     const url = item.url ?? item.url_placeholder ?? '#';
 
                                     // ✅ Corrected logic to match your "images" folder
-                                    const rawImage = item.image ?? item.image_path_placeholder ?? '';
+                                    const rawImage = item.image ?? item.image_path_placeholder ?? '#';
 
                                     // Extract only the filename (e.g., "interiorpaint.png")
                                     const fileName = rawImage.split('/').pop();
@@ -113,7 +113,7 @@
                                         <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
                                             <div class="flex items-center space-x-4">
                                                 <div class="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0 border">
-                                                    <img src="${image}"
+                                                    <img src="${rawImage}"
                                                          alt="${product}"
                                                          class="w-full h-full object-cover"
                                                          onerror="this.onerror=null; this.src='https://placehold.co/80x80?text=No+Image';">
