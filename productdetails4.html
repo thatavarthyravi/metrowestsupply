@@ -12,23 +12,30 @@
 
   <!-- Standard Header -->
   <header class="sticky top-0 z-50 bg-white border-b-2 border-[var(--navy-tint)] shadow-sm">
-    <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <div class="flex items-center space-x-3">
-        <div class="bg-[var(--navy)] p-1.5 rounded">
-          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-          </svg>
-        </div>
-        <span class="text-xl font-bold text-[var(--navy)]">Unit Turn<span class="text-[var(--orange)] ml-1">Supply</span></span>
+  <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center">
+    
+    <!-- Logo (left) -->
+    <div class="flex items-center space-x-3">
+      <div class="bg-[var(--navy)] p-1.5 rounded">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+        </svg>
       </div>
+      <span class="text-xl font-bold text-[var(--navy)]">
+        Unit Turn<span class="text-[var(--orange)] ml-1">Supply</span>
+      </span>
+    </div>
 
-      <div class="hidden md:flex space-x-8 text-sm font-bold text-[var(--navy-muted)] uppercase tracking-wider">
-        <a href="index.html" class="hover:text-[var(--orange)] transition">Home</a>
-        <a href="catalog.html" class="text-[var(--navy)] border-b-2 border-[var(--orange)]">Bundles</a>
-        <a href="order-form.html" class="hover:text-[var(--orange)] transition">Order Now</a>
-      </div>
-    </nav>
-  </header>
+    <!-- Navigation (right) -->
+    <div class="hidden md:flex ml-auto space-x-8 text-sm font-bold text-[var(--navy-muted)] uppercase tracking-wider">
+      <a href="index.html" class="hover:text-[var(--orange)] transition">Home</a>
+      <a href="catalog.html" class="text-[var(--navy)] border-b-2 border-[var(--orange)]">Bundles</a>
+      <a href="order-form.html" class="hover:text-[var(--orange)] transition">Order Now</a>
+    </div>
+
+  </nav>
+</header>
+
 
   <main id="master-catalog" class="max-w-5xl mx-auto py-12 px-6 space-y-20"></main>
 
