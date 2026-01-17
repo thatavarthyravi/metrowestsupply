@@ -11,10 +11,12 @@
 <body class="bg-white text-slate-900">
 
   <!-- Standard Header -->
-  <header class="sticky top-0 z-50 bg-white border-b-2 border-slate-200 shadow-sm">
-  <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center">
+  <!-- Standard Header -->
+<header class="sticky top-0 z-50 bg-white border-b-2 border-slate-200 shadow-sm">
+  <!-- justify-between pushes the logo and nav to opposite sides -->
+  <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
-    <!-- Logo -->
+    <!-- Logo (Left) -->
     <div class="flex items-center space-x-3">
       <div class="bg-slate-900 p-1.5 rounded">
         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -26,15 +28,17 @@
       </span>
     </div>
 
-    <!-- Nav -->
-    <div class="flex ml-auto space-x-6 md:space-x-8 text-sm font-bold text-slate-700 uppercase tracking-wider">
-      <a href="index.html" class="hover:text-orange-600 transition">Home</a>
-      <a href="catalog.html" class="hover:text-orange-600 transition">Bundles</a>
-      <a href="order-form.html" class="hover:text-orange-600 transition">Order Now</a>
+    <!-- Nav (Right) -->
+    <!-- Changed text-slate-700 to text-slate-900 for better visibility -->
+    <div class="flex space-x-6 md:space-x-8 text-sm font-bold text-slate-900 uppercase tracking-wider">
+      <a href="index.html" class="text-slate-900 hover:text-orange-600 transition">Home</a>
+      <a href="catalog.html" class="text-slate-900 hover:text-orange-600 transition">Bundles</a>
+      <a href="order-form.html" class="text-slate-900 hover:text-orange-600 transition">Order Now</a>
     </div>
 
   </nav>
 </header>
+
 
 
   <main id="master-catalog" class="max-w-5xl mx-auto py-12 px-6 space-y-20"></main>
