@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="newstyles.css">
 </head>
 
-<body class="bg-white">
+<body class="bg-white text-slate-900">
 
   <!-- Standard Header -->
   <header class="sticky top-0 z-50 bg-white border-b-2 border-[var(--navy-tint)] shadow-sm">
@@ -32,14 +32,12 @@
 
   <main id="master-catalog" class="max-w-5xl mx-auto py-12 px-6 space-y-20"></main>
 
-  <!-- STANDARD MULTI-COLUMN FOOTER -->
+  <!-- Footer -->
   <footer class="bg-white border-t border-slate-200 pt-16 pb-8">
     <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
       <div class="md:col-span-1">
         <span class="text-xl font-bold text-slate-900">Unit Turn Supply</span>
-        <p class="mt-4 text-sm text-slate-500 leading-relaxed">
-          High-volume material fulfillment for restoration and tenant turn projects across North America.
-        </p>
+        <p class="mt-4 text-sm text-slate-500 leading-relaxed">High-volume material fulfillment for restoration and tenant turn projects across North America.</p>
       </div>
       <div>
         <h4 class="font-bold text-slate-900 mb-4">Resources</h4>
@@ -82,7 +80,7 @@
         .replaceAll("'", '&#039;');
     }
 
-    // Attach ONE tab handler (no once:true)
+    // ONE tab click handler for everything
     masterContainer.addEventListener('click', (e) => {
       const btn = e.target.closest('[data-tab-btn="true"]');
       if (!btn) return;
@@ -90,7 +88,6 @@
       const bundleId = btn.getAttribute('data-bundle');
       const panelId = btn.getAttribute('data-panel');
 
-      // Update buttons (same bundle only)
       const allBtns = masterContainer.querySelectorAll(`[data-tab-btn="true"][data-bundle="${bundleId}"]`);
       allBtns.forEach(b => {
         const active = b === btn;
@@ -100,7 +97,6 @@
           : 'px-4 py-2 rounded-t-lg text-sm font-bold bg-slate-50 text-slate-600 border border-transparent hover:bg-white hover:border-slate-200';
       });
 
-      // Update panels
       const allPanels = masterContainer.querySelectorAll(`[data-tab-panel="true"][data-bundle="${bundleId}"]`);
       allPanels.forEach(p => p.classList.add('hidden'));
 
@@ -108,45 +104,44 @@
       if (activePanel) activePanel.classList.remove('hidden');
     });
 
+    function hasItems(cat) {
+      return Array.isArray(cat?.items) && cat.items.length > 0;
+    }
+
     function renderCatalog(catalogData) {
       masterContainer.innerHTML = '';
 
       (catalogData.bundles || []).forEach((bundle, bundleIndex) => {
         const bundleId = `bundle-${bundleIndex}`;
 
+        // ✅ Only keep categories that actually have items
+        const categoriesWithItems = (bundle.categories || []).filter(hasItems);
+
+        // If bundle has no categories with items, skip rendering bundle entirely
+        if (!categoriesWithItems.length) return;
+
         const wrapper = document.createElement('div');
 
-        // Bundle title (forced readable)
+        // ✅ Bundle title: force high-contrast, always visible
         wrapper.innerHTML = `
-          <h2 class="text-2xl font-black text-slate-900 border-b-4 border-slate-200 pb-2 mb-6">
+          <h2 class="text-3xl font-black text-slate-900 tracking-tight border-b-4 border-slate-200 pb-3 mb-6">
             ${escapeHtml(bundle.name || '')}
           </h2>
         `;
-
-        const categories = bundle.categories || [];
-        if (!categories.length) {
-          wrapper.innerHTML += `
-            <div class="bg-white p-6 rounded-xl border border-gray-100 text-slate-600">
-              No categories found for this bundle.
-            </div>
-          `;
-          masterContainer.appendChild(wrapper);
-          return;
-        }
 
         // Tabs bar
         const tabsBar = document.createElement('div');
         tabsBar.className = 'flex flex-wrap gap-2 border-b border-slate-200 pb-3';
         tabsBar.setAttribute('role', 'tablist');
 
-        // Panels
         const panelsWrap = document.createElement('div');
 
-        categories.forEach((cat, catIndex) => {
+        categoriesWithItems.forEach((cat, catIndex) => {
           const tabId = `${bundleId}-tab-${catIndex}`;
           const panelId = `${bundleId}-panel-${catIndex}`;
           const isActive = catIndex === 0;
 
+          // Tab button
           const btn = document.createElement('button');
           btn.type = 'button';
           btn.id = tabId;
@@ -170,6 +165,7 @@
 
           tabsBar.appendChild(btn);
 
+          // Panel
           const panel = document.createElement('section');
           panel.id = panelId;
           panel.setAttribute('role', 'tabpanel');
@@ -186,7 +182,6 @@
                 const qty = escapeHtml(item.qty ?? item.typical_quantity ?? '');
                 const url = escapeHtml(item.url ?? item.url_placeholder ?? '#');
 
-                // Use your images folder + filename
                 const rawImage = item.image ?? item.image_path_placeholder ?? '';
                 const fileName = String(rawImage).split('/').pop();
                 const imagePath = fileName ? `images/${escapeHtml(fileName)}` : 'https://placehold.co/80x80?text=No+Image';
