@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contractor Essentials Catalog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="newstyles.css">
+</head>
+
+<header class="sticky top-0 z-50 bg-white border-b-2 border-[var(--navy-tint)] shadow-sm">
+    <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+            <div class="bg-[var(--navy)] p-1.5 rounded">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+            </div>
+            <span class="text-xl font-bold text-[var(--navy)]">Unit Turn<span class="text-[var(--orange)] ml-1">Supply</span></span>
+        </div>
+        <div class="hidden md:flex space-x-8 text-sm font-bold text-[var(--navy-muted)] uppercase tracking-wider">
+            <a href="index.html" class="hover:text-[var(--orange)] transition">Home</a>
+            <a href="catalog.html" class="text-[var(--navy)] border-b-2 border-[var(--orange)]">Bundles</a>
+            <a href="order-form.html" class="hover:text-[var(--orange)] transition">Order Now</a>
+        </div>
+    </nav>
+</header>
+
+<main id="master-catalog" class="max-w-5xl mx-auto py-12 px-6 space-y-20"></main>
+
+<footer class="bg-white border-t border-slate-200 pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        <div class="md:col-span-1">
+            <span class="text-xl font-bold text-slate-900">Unit Turn Supply</span>
+            <p class="mt-4 text-sm text-slate-500 leading-relaxed">High-volume material fulfillment for restoration and tenant turn projects across North America.</p>
+        </div>
+        <div>
+            <h4 class="font-bold text-slate-900 mb-4">Resources</h4>
+            <ul class="text-sm text-slate-600 space-y-2">
+                <li><a href="#" class="hover:text-orange-600">Spec Sheets</a></li>
+                <li><a href="#" class="hover:text-orange-600">Material Guides</a></li>
+                <li><a href="#" class="hover:text-orange-600">Bulk Discounts</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="font-bold text-slate-900 mb-4">Support</h4>
+            <ul class="text-sm text-slate-600 space-y-2">
+                <li><a href="#" class="hover:text-orange-600">Contact Us</a></li>
+                <li><a href="privacy.html" class="hover:text-orange-600">Privacy Policy</a></li>
+                <li><a href="#" class="hover:text-orange-600">Terms of Sale</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="font-bold text-slate-900 mb-4">Project Updates</h4>
+            <div class="flex">
+                <input type="text" placeholder="Email" class="bg-slate-100 border-none rounded-l-lg px-3 py-2 text-sm w-full outline-none">
+                <button class="bg-orange-600 text-white px-4 py-2 rounded-r-lg text-sm font-bold">Join</button>
+            </div>
+        </div>
+    </div>
+    <div class="text-center pt-8 border-t border-slate-100 text-xs text-slate-400">
+        &copy; 2025 Unit Turn Supply. Material Management Specialists.
+    </div>
+</footer>
+
+<script>
+    const masterContainer = document.getElementById('master-catalog');
+
+    function escapeHtml(str) {
+        return String(str ?? '')
+            .replaceAll('&', '&amp;')
+            .replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;')
+            .replaceAll('"', '&quot;')
+            .replaceAll("'", '&#039;');
+    }
+
+    function renderCatalog(catalogData) {
+        masterContainer.innerHTML = '';
+
+        (catalogData.bundles || []).forEach((bundle, bundleIndex) => {
+            const bundleId = `bundle-${bundleIndex}`;
+            const bundleSection = document.createElement('div');
+
+            // Bundle title (unchanged)
+            bundleSection.innerHTML = `
+                <h2 class="text-2xl font-black text-blue-900 border-b-4 border-blue-200 pb-2 mb-8">
+                    ${escapeHtml(bundle.name || '')}
+                </h2>
+            `;
+
+            const categories = bundle.categories || [];
+            if (!categories.length) {
+                bundleSection.innerHTML += `
+                    <div class="bg-white p-6 rounded-xl border border-gray-100 text-slate-600">
+                        No categories found for this bundle.
+                    </div>
+                `;
+                masterContainer.appendChild(bundleSection);
+                return;
+            }
+
+            // Tabs header
+            const tabsWrap = document.createElement('div');
+            tabsWrap.className = 'mb-6';
+
+            const tabsBar = document.createElement('div');
+            tabsBar.className = 'flex flex-wrap gap-2 border-b border-slate-200 pb-3';
+
+            // Panels container
+            const panels = document.createElement('div');
+
+            categories.forEach((cat, catIndex) => {
+                const tabId = `${bundleId}-tab-${catIndex}`;
+                const panelId = `${bundleId}-panel-${catIndex}`;
+                const isActive = catIndex === 0;
+
+                // Tab button
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.id = tabId;
+                btn.setAttribute('data-bundle', bundleId);
+                btn.setAttribute('data-panel', panelId);
+                btn.setAttribute('aria-controls', panelId);
+                btn.setAttribute('aria-selected', String(isActive));
+                btn.className = [
+                    'tab-btn',
+                    'px-4 py-2 rounded-t-lg text-sm font-bold transition',
+                    isActive
+                        ? 'bg-white text-[var(--navy)] border border-slate-200 border-b-white'
+                        : 'bg-slate-50 text-slate-600 border border-transparent hover:bg-white hover:border-slate-200'
+                ].join(' ');
+
+                btn.innerHTML = `
+                    <span class="mr-2 inline-flex items-center justify-center text-xs font-extrabold px-2 py-0.5 rounded bg-[var(--navy-tint)] text-[var(--navy)] border border-[var(--navy)]/10">
+                        ${catIndex + 1}
+                    </span>
+                    ${escapeHtml(cat.category || '')}
+                `;
+
+                tabsBar.appendChild(btn);
+
+                // Panel content (same cards/grid, just moved into a tab panel)
+                const panel = document.createElement('section');
+                panel.id = panelId;
+                panel.setAttribute('role', 'tabpanel');
+                panel.setAttribute('aria-labelledby', tabId);
+                panel.className = isActive ? 'tab-panel' : 'tab-panel hidden';
+
+                panel.innerHTML = `
+                    <div class="grid gap-4 mt-6">
+                        ${(cat.items || []).map(item => {
+                            const product = escapeHtml(item.product || '');
+                            const brands = Array.isArray(item.brands) ? item.brands.map(escapeHtml) : [];
+                            const qty = escapeHtml(item.qty ?? item.typical_quantity ?? '');
+                            const url = escapeHtml(item.url ?? item.url_placeholder ?? '#');
+
+                            const rawImage = item.image ?? item.image_path_placeholder ?? '';
+                            const fileName = String(rawImage).split('/').pop();
+                            const imagePath = fileName ? `images/${escapeHtml(fileName)}` : 'https://placehold.co/80x80?text=No+Image';
+
+                            return `
+                                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0 border">
+                                            <img src="${imagePath}"
+                                                 alt="${product}"
+                                                 class="w-full h-full object-cover"
+                                                 onerror="this.onerror=null; this.src='https://placehold.co/80x80?text=No+Image';">
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-gray-900">${product}</h4>
+                                            <p class="text-sm text-gray-500">${brands.join(", ")}</p>
+                                            <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded mt-1 inline-block">
+                                                Minimum Qty: ${qty}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <a href="${url}" class="bg-slate-800 text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-slate-700 transition">
+                                        View Details
+                                    </a>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+
+                panels.appendChild(panel);
+            });
+
+            tabsWrap.appendChild(tabsBar);
+            bundleSection.appendChild(tabsWrap);
+            bundleSection.appendChild(panels);
+
+            masterContainer.appendChild(bundleSection);
+        });
+
+        // Tab click handling (per bundle)
+        masterContainer.addEventListener('click', (e) => {
+            const btn = e.target.closest('.tab-btn');
+            if (!btn) return;
+
+            const bundleId = btn.getAttribute('data-bundle');
+            const panelId = btn.getAttribute('data-panel');
+
+            // Update buttons (same bundle only)
+            const allBtns = masterContainer.querySelectorAll(`button.tab-btn[data-bundle="${bundleId}"]`);
+            allBtns.forEach(b => {
+                const active = b === btn;
+                b.setAttribute('aria-selected', String(active));
+                b.className = [
+                    'tab-btn',
+                    'px-4 py-2 rounded-t-lg text-sm font-bold transition',
+                    active
+                        ? 'bg-white text-[var(--navy)] border border-slate-200 border-b-white'
+                        : 'bg-slate-50 text-slate-600 border border-transparent hover:bg-white hover:border-slate-200'
+                ].join(' ');
+            });
+
+            // Update panels
+            const allPanels = masterContainer.querySelectorAll(`.tab-panel[id^="${bundleId}-panel-"]`);
+            allPanels.forEach(p => p.classList.add('hidden'));
+
+            const activePanel = document.getElementById(panelId);
+            if (activePanel) activePanel.classList.remove('hidden');
+        }, { once: true }); // attach once after render
+    }
+
+    fetch('./data/miniproductbundles.json')
+        .then(res => res.json())
+        .then(renderCatalog)
+        .catch(err => {
+            console.error(err);
+            masterContainer.innerHTML = `
+                <div class="bg-white p-6 rounded-xl border border-red-200">
+                    <h2 class="text-xl font-bold text-red-700">Failed to load catalog</h2>
+                </div>
+            `;
+        });
+</script>
+</body>
+</html>
