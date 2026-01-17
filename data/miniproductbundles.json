@@ -18,7 +18,7 @@
               "unit_cost_estimate": 140,
               "brands": ["Benjamin Moore Ultra Spec", "PPG", "Sherwin-Williams Pro"],
               "suppliers": ["Regional paint distributors", "Sherwin-Williams Pro"],
-              "image_path_placeholder": "interiorpaint.png",
+              "image_path_placeholder": "images/interiorpaint.png",
               "url_placeholder": "https://www.benjaminmoore.com/en-us/product/ultra-spec-500-interior-paint-eggshell/T538"
             },
             {
@@ -118,7 +118,7 @@
               "unit_cost_estimate": 2.5,
               "brands": ["Philips", "GE", "Sylvania"],
               "suppliers": ["Electrical distributors"],
-              "image_path_placeholder": "path/to/your/image.jpg",
+              "image_path_placeholder": "images/led.png",
               "url_placeholder": "https://www.homedepot.com/p/Sylvania-8-5-Watt-60-Watt-Equivalent-A19-LED-Light-Bulb-in-2700K-Soft-White-Color-Temperature-24-Pack-74765/303629965"
             },
             {
@@ -127,7 +127,7 @@
               "unit_cost_estimate": 4,
               "brands": ["Leviton", "Eaton"],
               "suppliers": ["Electrical distributors"],
-              "image_path_placeholder": "path/to/your/image.jpg",
+              "image_path_placeholder": "images/decoraswitch.png",
               "url_placeholder": "https://www.homedepot.com/p/Leviton-Decora-15-Amp-Single-Pole-AC-Quiet-Switch-Gray-5601-2GS-R67-05601-2GS/100211263"
             },
             {
@@ -136,7 +136,7 @@
               "unit_cost_estimate": 3,
               "brands": ["Leviton", "Eaton"],
               "suppliers": ["Electrical distributors"],
-              "image_path_placeholder": "path/to/your/image.jpg",
+              "image_path_placeholder": "images/decoraoutlet.png",
               "url_placeholder": "https://www.homedepot.com/p/Leviton-Decora-15-Amp-125-V-Duplex-Outlet-Receptacle-White-10-Pack-5325-WMP-M24-05325-WMP/100357041"
             },
             {
@@ -145,7 +145,7 @@
               "unit_cost_estimate": 2,
               "brands": ["Leviton"],
               "suppliers": ["Electrical distributors"],
-              "image_path_placeholder": "path/to/your/image.jpg",
+              "image_path_placeholder": "images/wallplates.png",
               "url_placeholder": "https://www.homedepot.com/p/Leviton-2-Gang-White-Decora-Rocker-Plastic-Standard-Wall-Plate-1-Pack-80409-W-R52-80409-00W/100048406"
             }
           ]
@@ -159,7 +159,7 @@
               "unit_cost_estimate": 18,
               "brands": ["3M Filtrete", "Honeywell Home"],
               "suppliers": ["HVAC supply houses"],
-              "image_path_placeholder": "path/to/your/image.jpg",
+              "image_path_placeholder": "images/filters.png",
               "url_placeholder": "https://www.lowes.com/pd/Filtrete-20-in-W-x-20-in-L-x-1-in-5-MERV-300-MPR-Basic-Dust-and-Lint-Electrostatic-Air-Filter-3-Pack/5014737939"
             },
             {
@@ -168,7 +168,7 @@
               "unit_cost_estimate": 45,
               "brands": ["Clorox Pro", "Diversey"],
               "suppliers": ["Janitorial distributors"],
-              "image_path_placeholder": "path/to/your/image.jpg",
+              "image_path_placeholder": "images/cleaning.png",
               "url_placeholder": "https://www.zoro.com/diversey-floor-cleaner-neutral-1-gal-jug-concentrated-citrus-101109753/i/G3748376/"
             }
           ]
@@ -189,7 +189,7 @@
               "unit_cost_estimate": 22,
               "brands": ["First Alert", "Kidde"],
               "suppliers": ["Safety supply distributors"],
-              "image_path_placeholder": "path/to/your/image.jpg",
+              "image_path_placeholder": "images/smoke.png",
               "url_placeholder": "https://www.homedepot.com/p/Kidde-10-Year-Battery-Powered-Smoke-Detector-with-Photoelectric-Sensor-3-Pack-21031468-21031468/328119796"
             },
             {
@@ -198,7 +198,7 @@
               "unit_cost_estimate": 28,
               "brands": ["First Alert", "Kidde"],
               "suppliers": ["Safety supply distributors"],
-              "image_path_placeholder": "path/to/your/image.jpg",
+              "image_path_placeholder": "images/codetector.png",
               "url_placeholder": "https://www.homedepot.com/p/Kidde-Firex-Carbon-Monoxide-Detector-Battery-Operated-CO-Detector-21030863/202756110"
             },
             {
@@ -207,7 +207,7 @@
               "unit_cost_estimate": 35,
               "brands": ["Kidde"],
               "suppliers": ["Building maintenance wholesalers"],
-              "image_path_placeholder": "path/to/your/image.jpg",
+              "image_path_placeholder": "images/fire.png",
               "url_placeholder": "https://www.kidde.com/products/fire-extinguishers/basic-110-fire-extinguisher"
             }
           ]
@@ -221,7 +221,7 @@
               "unit_cost_estimate": 45,
               "brands": ["Lithonia Lighting", "Halo"],
               "suppliers": ["Lighting wholesalers"],
-              "image_path_placeholder": "path/to/your/image.jpg",
+              "image_path_placeholder": "images/flushled.png",
               "url_placeholder": "https://www.lowes.com/pd/Lithonia-Lighting-Low-profile-round-11-in-White-Modern-Contemporary-LED-Flush-Mount-Light-ENERGY-STAR/5001842205"
             },
             {
@@ -230,7 +230,7 @@
               "unit_cost_estimate": 18,
               "brands": ["Eaton", "Leviton"],
               "suppliers": ["Electrical distributors"],
-              "image_path_placeholder": "path/to/your/image.jpg",
+              "image_path_placeholder": "images/gfci.png",
               "url_placeholder": "https://www.homedepot.com/p/Leviton-15-Amp-Self-Test-SmartlockPro-Slim-Duplex-GFCI-Outlet-White-GFNT1-KW-R12-GFNT1-0KW/206001533"
             }
           ]
@@ -244,7 +244,7 @@
               "unit_cost_estimate": 30,
               "brands": ["Fluidmaster"],
               "suppliers": ["Plumbing wholesalers"],
-              "image_path_placeholder": "path/to/your/image.jpg",
+              "image_path_placeholder": "images/toiletkit.png",
               "url_placeholder": "https://www.homedepot.com/p/Fluidmaster-PerforMAX-Universal-2-in-High-Performance-Everything-Toilet-Tank-Repair-Kit-with-Install-Tools-K-400H-021-P8/312549423?source=shoppingads&locale=en-US&fp=ggl&srsltid=AfmBOorXkX2qvhCgV0yoBmLYt5BU14w1TSOjG0gRq1SwsjDYOXE7EiXli1A"
             },
             {
@@ -262,7 +262,7 @@
               "unit_cost_estimate": 4,
               "brands": ["Neoperl"],
               "suppliers": ["Plumbing wholesalers"],
-              "image_path_placeholder": "path/to/your/image.jpg",
+              "image_path_placeholder": "images/aerator.png",
               "url_placeholder": "https://www.ferguson.com/product/neoperl-replacement-cache-aerator-kit-with-1.5-gpm-junior-perlator-aerator%2C-key-and-washer-for-delta-in-dark-grey-n1304810/7628387.html?searchIndex=18"
             },
             {
@@ -271,8 +271,8 @@
               "unit_cost_estimate": 2,
               "brands": ["Oatey"],
               "suppliers": ["Plumbing wholesalers"],
-              "image_path_placeholder": "https://www.lowes.com/pd/Oatey-0-6-in-x-43-ft-Plumber-s-Tape/4751313?store=2384&cm_mmc=shp-_-c-_-prd-_-plb-_-ggl-_-PMAX_PLB_000_Priority_Item-_-4751313-_-local-_-0-_-0&gclsrc=aw.ds&gad_source=1&gad_campaignid=22585284696&gbraid=0AAAAAD2B2W-2q8fJXSHtASpsDt7ttli7a&gclid=CjwKCAiA4KfLBhB0EiwAUY7GASjWtsgDRo5n1qkZ5u-VNcN5CDWGBT6R12hm8ePEdXOvBWopO9GdWhoC9YAQAvD_BwE",
-              "url_placeholder": ""
+              "image_path_placeholder": "",
+              "url_placeholder": "https://www.lowes.com/pd/Oatey-0-6-in-x-43-ft-Plumber-s-Tape/4751313?store=2384&cm_mmc=shp-_-c-_-prd-_-plb-_-ggl-_-PMAX_PLB_000_Priority_Item-_-4751313-_-local-_-0-_-0&gclsrc=aw.ds&gad_source=1&gad_campaignid=22585284696&gbraid=0AAAAAD2B2W-2q8fJXSHtASpsDt7ttli7a&gclid=CjwKCAiA4KfLBhB0EiwAUY7GASjWtsgDRo5n1qkZ5u-VNcN5CDWGBT6R12hm8ePEdXOvBWopO9GdWhoC9YAQAvD_BwE"
             }
           ]
         }
@@ -288,7 +288,7 @@
           "items": [
             {
               "product": "Decorative LED ceiling fixture",
-              "image_path_placeholder": "path/to/your/image.jpg",
+              "image_path_placeholder": "images/ledhighendfixtures.png",
               "url_placeholder": "https://www.fergusonhome.com/maxim-10220/s1511220?uid=3543678"
             }
           ]
