@@ -160,7 +160,7 @@
               "brands": ["3M Filtrete", "Honeywell Home"],
               "suppliers": ["HVAC supply houses"],
               "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "url_placeholder": "https://www.lowes.com/pd/Filtrete-20-in-W-x-20-in-L-x-1-in-5-MERV-300-MPR-Basic-Dust-and-Lint-Electrostatic-Air-Filter-3-Pack/5014737939"
             },
             {
               "product": "Basic cleaning kit",
@@ -169,7 +169,7 @@
               "brands": ["Clorox Pro", "Diversey"],
               "suppliers": ["Janitorial distributors"],
               "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "url_placeholder": "https://www.zoro.com/diversey-floor-cleaner-neutral-1-gal-jug-concentrated-citrus-101109753/i/G3748376/"
             }
           ]
         }
@@ -190,7 +190,7 @@
               "brands": ["First Alert", "Kidde"],
               "suppliers": ["Safety supply distributors"],
               "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "url_placeholder": "https://www.homedepot.com/p/Kidde-10-Year-Battery-Powered-Smoke-Detector-with-Photoelectric-Sensor-3-Pack-21031468-21031468/328119796"
             },
             {
               "product": "CO detectors",
@@ -199,7 +199,7 @@
               "brands": ["First Alert", "Kidde"],
               "suppliers": ["Safety supply distributors"],
               "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "url_placeholder": "https://www.homedepot.com/p/Kidde-Firex-Carbon-Monoxide-Detector-Battery-Operated-CO-Detector-21030863/202756110"
             },
             {
               "product": "Fire extinguisher (ABC)",
@@ -208,7 +208,7 @@
               "brands": ["Kidde"],
               "suppliers": ["Building maintenance wholesalers"],
               "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "url_placeholder": "https://www.kidde.com/products/fire-extinguishers/basic-110-fire-extinguisher"
             }
           ]
         },
@@ -222,7 +222,7 @@
               "brands": ["Lithonia Lighting", "Halo"],
               "suppliers": ["Lighting wholesalers"],
               "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "url_placeholder": "https://www.lowes.com/pd/Lithonia-Lighting-Low-profile-round-11-in-White-Modern-Contemporary-LED-Flush-Mount-Light-ENERGY-STAR/5001842205"
             },
             {
               "product": "GFCI outlet",
@@ -231,7 +231,7 @@
               "brands": ["Eaton", "Leviton"],
               "suppliers": ["Electrical distributors"],
               "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "url_placeholder": "https://www.homedepot.com/p/Leviton-15-Amp-Self-Test-SmartlockPro-Slim-Duplex-GFCI-Outlet-White-GFNT1-KW-R12-GFNT1-0KW/206001533"
             }
           ]
         },
@@ -245,7 +245,7 @@
               "brands": ["Fluidmaster"],
               "suppliers": ["Plumbing wholesalers"],
               "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "url_placeholder": "https://www.homedepot.com/p/Fluidmaster-PerforMAX-Universal-2-in-High-Performance-Everything-Toilet-Tank-Repair-Kit-with-Install-Tools-K-400H-021-P8/312549423?source=shoppingads&locale=en-US&fp=ggl&srsltid=AfmBOorXkX2qvhCgV0yoBmLYt5BU14w1TSOjG0gRq1SwsjDYOXE7EiXli1A"
             },
             {
               "product": "Toilet supply line",
@@ -263,7 +263,7 @@
               "brands": ["Neoperl"],
               "suppliers": ["Plumbing wholesalers"],
               "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "url_placeholder": "https://www.ferguson.com/product/neoperl-replacement-cache-aerator-kit-with-1.5-gpm-junior-perlator-aerator%2C-key-and-washer-for-delta-in-dark-grey-n1304810/7628387.html?searchIndex=18"
             },
             {
               "product": "PTFE thread seal tape",
@@ -271,8 +271,8 @@
               "unit_cost_estimate": 2,
               "brands": ["Oatey"],
               "suppliers": ["Plumbing wholesalers"],
-              "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "image_path_placeholder": "https://www.lowes.com/pd/Oatey-0-6-in-x-43-ft-Plumber-s-Tape/4751313?store=2384&cm_mmc=shp-_-c-_-prd-_-plb-_-ggl-_-PMAX_PLB_000_Priority_Item-_-4751313-_-local-_-0-_-0&gclsrc=aw.ds&gad_source=1&gad_campaignid=22585284696&gbraid=0AAAAAD2B2W-2q8fJXSHtASpsDt7ttli7a&gclid=CjwKCAiA4KfLBhB0EiwAUY7GASjWtsgDRo5n1qkZ5u-VNcN5CDWGBT6R12hm8ePEdXOvBWopO9GdWhoC9YAQAvD_BwE",
+              "url_placeholder": ""
             }
           ]
         }
@@ -289,7 +289,7 @@
             {
               "product": "Decorative LED ceiling fixture",
               "image_path_placeholder": "path/to/your/image.jpg",
-              "url_placeholder": "http://example.com/product_url"
+              "url_placeholder": "https://www.fergusonhome.com/maxim-10220/s1511220?uid=3543678"
             }
           ]
         }
