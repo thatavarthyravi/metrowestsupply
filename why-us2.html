@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why Us | Unit Turn Supply</title>
+
+  <!-- Use the same stylesheet as the rest of your site -->
+  <link rel="stylesheet" href="newstyles.css" />
+
+  <style>
+    /* Page-specific polish (keeps your brand + matches your header/footer) */
+    .why-hero {
+      padding: 70px 20px 40px;
+      color: var(--white);
+    }
+    .why-hero-inner {
+      max-width: 1050px;
+      margin: 0 auto;
+    }
+    .why-kicker {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .why-hero h1 {
+      margin: 18px 0 10px;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.5px;
+      color: var(--white);
+    }
+    .why-hero p {
+      max-width: 780px;
+      margin: 10px 0 0;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.88);
+    }
+    .why-hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+      align-items: center;
+    }
+    .btn-orange.large {
+      padding: 12px 22px;
+      font-size: 0.9rem;
+      border-radius: 6px;
+    }
+    .btn-white-outline {
+      border: 2px solid rgba(255,255,255,0.85);
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 800;
+      display: inline-block;
+      font-size: 0.85rem;
+      background: transparent;
+    }
+    .btn-white-outline:hover { background: rgba(255,255,255,0.12); }
+
+    .proof-strip {
+      max-width: 1050px;
+      margin: 25px auto 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .proof-card {
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 12px;
+      padding: 16px 16px;
+      backdrop-filter: blur(6px);
+    }
+    .proof-card strong {
+      display: block;
+      font-size: 1.25rem;
+      letter-spacing: -0.2px;
+      color: var(--white);
+    }
+    .proof-card span {
+      display: block;
+      margin-top: 4px;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* White container sections */
+    .section-title {
+      color: var(--navy);
+      font-size: 1.4rem;
+      margin: 0;
+      padding: 26px 40px 0;
+    }
+    .section-subtitle {
+      padding: 8px 40px 0;
+      margin: 0;
+      color: #667085;
+      font-size: 0.95rem;
+      max-width: 760px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      padding: 22px 40px 40px;
+    }
+    .card {
+      background: white;
+      border: 1px solid #e9edf3;
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    }
+    .card .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--orange-tint);
+      border: 1px solid #ffd7bd;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+    .card h3 {
+      margin: 0 0 6px;
+      color: var(--navy);
+      font-size: 1rem;
+    }
+    .card p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.45;
+    }
+
+    .how-it-works {
+      padding: 0 40px 40px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .step {
+      border-radius: 12px;
+      border: 1px solid #e9edf3;
+      background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+      padding: 18px;
+    }
+    .step-badge {
+      display: inline-block;
+      font-weight: 900;
+      font-size: 0.8rem;
+      color: var(--orange);
+      background: var(--orange-tint);
+      border: 1px solid #ffd7bd;
+      padding: 5px 10px;
+      border-radius: 999px;
+    }
+    .step h4 {
+      margin: 10px 0 6px;
+      color: var(--navy);
+      font-size: 1rem;
+    }
+    .step p { margin: 0; color: #555; font-size: 0.9rem; }
+
+    .brand-row {
+      padding: 8px 40px 35px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .brand-pill {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #334155;
+      background: var(--navy-tint);
+      border: 1px solid #dbe3ee;
+      padding: 8px 12px;
+      border-radius: 999px;
+    }
+
+    .bottom-cta {
+      margin: 0 40px 40px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(255,102,0,0.12) 0%, rgba(0,123,255,0.10) 100%);
+      border: 1px solid #e9edf3;
+      padding: 22px;
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 18px;
+      align-items: center;
+    }
+    .bottom-cta h3 {
+      margin: 0 0 6px;
+      color: var(--navy);
+      font-size: 1.2rem;
+    }
+    .bottom-cta p { margin: 0; color: #555; font-size: 0.9rem; }
+
+    .cta-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; }
+
+    /* Make the header match across pages (your existing header rules apply) */
+    header nav a.active {
+      border-bottom: 2px solid var(--orange);
+      padding-bottom: 2px;
+    }
+
+    @media (max-width: 900px) {
+      .proof-strip { grid-template-columns: 1fr; }
+      .card-grid { grid-template-columns: 1fr; }
+      .how-it-works { grid-template-columns: 1fr; }
+      .bottom-cta { grid-template-columns: 1fr; }
+      .cta-actions { justify-content: flex-start; }
+      .section-title, .section-subtitle, .card-grid, .how-it-works, .brand-row { padding-left: 20px; padding-right: 20px; }
+      .bottom-cta { margin-left: 20px; margin-right: 20px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Standard Header (matches your site exactly) -->
+  <header>
+    <div class="header-left">
+      <img src="logo.png" alt="UT Logo" class="logo-small">
+      <span>Unit Turn Supply</span>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="faq.html">FAQ</a>
+      <a href="bundles.html">Bundles</a>
+      <a href="order-form.html">Order Now</a>
+    </nav>
+  </header>
+
+  <!-- HERO (full-bleed on your existing gradient background) -->
+  <section class="why-hero">
+    <div class="why-hero-inner">
+      <span class="why-kicker">Procurement built for turns • bundles • jobsite delivery</span>
+
+      <h1>
+        Stop Managing Vendors.<br />
+        <span class="orange-text">Start Finishing Units.</span>
+      </h1>
+
+      <p class="hero-subtext">
+        Unit Turn Supply is a high-velocity materials program for property ops teams.
+        We reduce sourcing time, minimize substitutions, and standardize what your crews install—so you
+        can turn units faster with fewer headaches.
+      </p>
+
+      <div class="why-hero-cta">
+        <a href="order-form.html" class="btn-orange large">Open a Professional Account</a>
+        <a href="bundles.html" class="btn-white-outline">View Bundles</a>
+        <a href="faq.html" class="btn-white-outline">Shipping & Returns FAQs</a>
+      </div>
+
+      <div class="proof-strip">
+        <div class="proof-card">
+          <strong>One vendor</strong>
+          <span>Replace fragmented ordering & invoicing</span>
+        </div>
+        <div class="proof-card">
+          <strong>Turn-ready bundles</strong>
+          <span>Built from proven scopes + minimums</span>
+        </div>
+        <div class="proof-card">
+          <strong>Speed-first delivery</strong>
+          <span>Designed for urgent make-readies</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT WRAPPED IN YOUR WHITE CONTAINER -->
+  <div class="container">
+
+    <h2 class="section-title">Why teams switch to Unit Turn Supply</h2>
+    <p class="section-subtitle">
+      We win on speed, consistency, and zero friction—because your competitive edge is finishing units fast.
+    </p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="icon">📦</div>
+        <h3>Bundles that match real scopes</h3>
+        <p>
+          Pre-built material lists aligned to common turn work. Start with the minimums, then adjust quantities per unit.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🚚</div>
+        <h3>Next-day jobsite delivery (when possible)</h3>
+        <p>
+          Order by <strong>3 PM</strong> and we’ll target next-day delivery. Need <strong>9 AM</strong>? Request expedited delivery in the order form.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🧾</div>
+        <h3>One invoice across sites</h3>
+        <p>
+          Consolidate spend. Reduce reconciliation. Track programs by property, region, or turn type with fewer vendor touchpoints.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🧠</div>
+        <h3>Fewer SKUs, fewer mistakes</h3>
+        <p>
+          Less choice = faster decisions. The catalog stays focused on what crews use every day for repeat turns.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🔁</div>
+        <h3>Controlled substitutions</h3>
+        <p>
+          Brands shown can be used interchangeably based on availability. Equivalent options keep your schedule intact.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">💸</div>
+        <h3>Bundled pricing for repeat programs</h3>
+        <p>
+          Recurring orders qualify for bundled discounts—standardize your program and we’ll optimize sourcing and cost.
+        </p>
+      </div>
+    </div>
+
+    <h2 class="section-title">How it works</h2>
+    <p class="section-subtitle">
+      A simple workflow your team can repeat across every property—without procurement chaos.
+    </p>
+
+    <div class="how-it-works">
+      <div class="step">
+        <span class="step-badge">Step 1</span>
+        <h4>Select a bundle</h4>
+        <p>Pick a turn scope (Basic, Standard, Safety & Code) and adjust quantities per unit condition.</p>
+      </div>
+      <div class="step">
+        <span class="step-badge">Step 2</span>
+        <h4>Add brand notes (optional)</h4>
+        <p>If you need a specific brand for a specific item, add it in the order notes. Next-day delivery may not be guaranteed.</p>
+      </div>
+      <div class="step">
+        <span class="step-badge">Step 3</span>
+        <h4>Deliver + finish the unit</h4>
+        <p>We coordinate fulfillment and delivery options so materials arrive where the work happens—fast.</p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Our operating principles</h2>
+    <p class="section-subtitle">
+      We’re built for repeat turns, not one-off retail carts.
+    </p>
+
+    <div class="card-grid" style="padding-top: 14px;">
+      <div class="card">
+        <h3>High-velocity essentials</h3>
+        <p>We focus on the repeat-purchase items that keep turns moving—paint prep, electrical, plumbing, hardware, consumables.</p>
+      </div>
+      <div class="card">
+        <h3>Catalog items are reference points</h3>
+        <p>Individual catalog items are for reference; brands and exact SKUs can vary by region while meeting the same spec.</p>
+      </div>
+      <div class="card">
+        <h3>Bundle-first minimums</h3>
+        <p>Minimum orders should be in bundles so quantities stay aligned to scopes and reduce shortages, overages, and returns.</p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Reliable brands. Zero guesswork.</h2>
+    <p class="section-subtitle">
+      Trusted brands are shown wherever possible. Equivalent substitutions may be used based on market availability.
+    </p>
+
+    <div class="brand-row">
+      <span class="brand-pill">Benjamin Moore</span>
+      <span class="brand-pill">PPG</span>
+      <span class="brand-pill">Leviton</span>
+      <span class="brand-pill">Lutron</span>
+      <span class="brand-pill">Moen</span>
+      <span class="brand-pill">Delta</span>
+      <span class="brand-pill">3M</span>
+      <span class="brand-pill">Oatey</span>
+    </div>
+
+    <div class="bottom-cta" id="contact">
+      <div>
+        <h3>Ready to standardize your turnover?</h3>
+        <p>
+          Set up a professional account and we’ll help you define bundles and catalog views by property or portfolio.
+          Your team gets speed and consistency—without daily vendor management.
+        </p>
+      </div>
+      <div class="cta-actions">
+        <a href="order-form.html" class="btn-orange large">Open a Professional Account</a>
+        <a href="bundles.html" class="btn-white-outline" style="color: var(--navy); border-color: #dbe3ee;">
+          View Bundles
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SITE FOOTER (matches your site exactly) -->
+  <footer>
+    <div class="container" style="background: none; box-shadow: none; text-align: center; color: white;">
+      <p>&copy; 2025 Unit Turn Supply. All rights reserved.</p>
+      <nav style="justify-content: center; display: flex; gap: 20px; margin-top: 10px;">
+        <a href="index.html" style="color: white;">Home</a>
+        <a href="faq.html" style="color: white;">FAQ</a>
+        <a href="privacy.html" style="color: white;">Privacy Policy</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>
